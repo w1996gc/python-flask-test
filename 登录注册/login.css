@@ -1,0 +1,311 @@
+body{
+    background: url(./img/src=http___pic1.win4000.com_wallpaper_2020-10-12_5f83b7c13d0b9.jpg&refer=http___pic1.win4000.webp);
+    background-size: 110% ,110%;
+}
+.background{
+     width: 900px;
+     height: 400px;
+     position: absolute;
+     left: 50%;
+     top: 50%;
+     transform: translate(-50%,-50%);
+     background-color: rgba(10, 10, 10, 0.598);
+}
+/* 登录框 */
+.login{
+    position: absolute;
+    top: -12%;
+    left: 60px;
+    width: 600px;
+    height: 500px;
+    background-color: rgb(249, 249, 249);
+    z-index: 10;
+    box-shadow: 0 0 12px 0.6px rgb(106, 106, 106);
+    /* display: none; */
+}
+.login-value{
+    width: 600px;
+    font-size: 40px;
+    font-weight: bold;
+    color: rgb(255, 108, 108);
+    padding-left: 60px;
+    margin-top: 90px;
+}
+.login-num{
+    width: 485px;
+    height: 50px;
+    outline: none;
+    margin-top: -5px;
+    margin-left: 60px;
+    box-sizing: border-box;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid rgb(182, 182, 182);
+    background-color: transparent;
+    font-size: 20px;
+    color: grey;
+}
+.login-pwd{
+    width: 485px;
+    height: 50px;
+    outline: none;
+    margin-top: 30px;
+    margin-left: 60px;
+    box-sizing: border-box;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid rgb(182, 182, 182);
+    background-color: transparent;
+    font-size: 20px;
+    color: grey;
+}
+.forget{
+    position: absolute;
+    bottom: 90px;
+    left: 60px;
+     width: 220px;
+     height: 60px;
+     border: 1.5px solid rgb(151, 151, 151);
+     background-color:transparent;
+     font-size: 18px ;
+     font-weight: bold;
+     letter-spacing: 2px;
+     color: rgb(113, 113, 113);
+}
+.forget:hover{
+    background-color: rgb(235, 235, 235);
+}
+.login-button{
+    position: absolute;
+    bottom: 90px;
+    right: 60px;
+     width: 220px;
+     height: 60px;
+     border: none;
+     background-color:  rgb(222, 59, 59);;
+     font-size: 20px ;
+     font-weight: bold;
+     letter-spacing: 10px;
+     color: rgb(255, 255, 255);
+     text-shadow: 1px 1px 1px rgb(138, 138, 138);
+}
+.login-button:hover{
+    background-color: rgb(199, 38, 38);
+}
+/* 切换注册框的盒子 */
+.change-register-box{
+    position: absolute;
+    right: 0px;
+    width: 240px;
+    height: 400px;
+    background-color: transparent;
+    /* display: none; */
+}
+.a{
+    position: absolute;
+    top: 90px;
+    left: 62px;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.846);
+    letter-spacing: 2px;
+}
+.b{
+    position: absolute;
+    top: 140px;
+    left: 46px;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.858);
+    letter-spacing: 2px;
+}
+.change-register-button{
+      position: absolute;
+      left: 46px;
+      bottom: 120px;
+      width: 140px;
+      height: 50px;
+      border: 1.5px solid #fff;
+      background-color: transparent;
+      letter-spacing: 2px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+}
+.change-register-button:hover{
+    border: 1.5px solid rgb(217, 217, 217);
+    color: rgb(217, 217, 217);
+}
+/* 注册框 */
+.register{
+    position: absolute;
+    top: -12%;
+    right: 60px;
+    width: 600px;
+    height: 500px;
+    background-color: rgb(249, 249, 249);
+    display: none;
+    z-index: 10;
+    box-shadow: 0 0 12px 0.6px rgb(106, 106, 106);
+}
+
+.change-login-box{
+    position: absolute;
+    left: 0;
+    width: 240px;
+    height: 400px;
+    background-color: transparent;
+    display: none;
+}
+.signup-value{
+    width: 600px;
+    font-size: 40px;
+    font-weight: bold;
+    color: rgb(255, 108, 108);
+    padding-left: 40px;
+    margin-top: 30px;
+}
+.signup-num{
+    width: 485px;
+    height: 50px;
+    outline: none;
+    margin-top: -18px;
+    margin-left: 60px;
+    box-sizing: border-box;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid rgb(182, 182, 182);
+    background-color: transparent;
+    font-size: 20px;
+    color: grey;
+}
+.signup-pwd{
+    width: 485px;
+    height: 50px;
+    outline: none;
+    margin-top: 15px;
+    margin-left: 60px;
+    box-sizing: border-box;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid rgb(182, 182, 182);
+    background-color: transparent;
+    font-size: 20px;
+    color: grey;
+}
+.signup-repwd{
+    width: 485px;
+    height: 50px;
+    outline: none;
+    margin-top: 15px;
+    margin-left: 60px;
+    box-sizing: border-box;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid rgb(182, 182, 182);
+    background-color: transparent;
+    font-size: 20px;
+    color: grey;
+}
+.random{
+    position: absolute;
+    top: 305px;
+    left: 60px;
+    width: 110px;
+    height: 47px;
+    border: 1px solid black;
+    line-height :47px; 
+    text-align: center;
+    font-size: 27px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    background-color: rgb(221, 246, 255);
+    color: grey;
+}
+.reset{
+    position: absolute;
+    top: 305px;
+    left: 186px;
+    width: 150px;
+    height: 47px;
+    border: 1px solid black;
+    line-height :47px; 
+    text-align: center;
+    font-size: 16px;
+    font-weight:600;
+    letter-spacing: 3px;
+    background-color: rgb(255, 224, 146);
+    border-radius: 6px;
+    color: rgb(92, 92, 92);
+    /* text-shadow: 2px 1px 1px grey; */
+}
+.write{
+    position: absolute;
+    top: 305px;
+     right: 58px;
+    width: 180px;
+    height: 47px;
+    border: 1px solid black;
+    outline: none;
+    font-size: 22px;
+    padding-left: 10px;
+}
+.signup-button{
+    position: absolute;
+    bottom: 50px;
+    right: 60px;
+     width: 482px;
+     height: 60px;
+     border: none;
+     background-color:  rgb(222, 59, 59);;
+     font-size: 20px ;
+     font-weight: bold;
+     letter-spacing: 15px;
+     color: rgb(255, 255, 255);
+     text-shadow: 1px 1px 1px rgb(138, 138, 138);
+}
+.signup-button:hover{
+    background-color: rgb(199, 38, 38);
+}
+.c{
+    position: absolute;
+    top: 90px;
+    left: 79px;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.846);
+    letter-spacing: 2px;
+}
+.d{
+    position: absolute;
+    top: 140px;
+    left: 46px;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.858);
+    letter-spacing: 2px;
+}
+.change-login-button{
+      position: absolute;
+      left: 46px;
+      bottom: 120px;
+      width: 140px;
+      height: 50px;
+      border: 1.5px solid #fff;
+      background-color: transparent;
+      letter-spacing: 2px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+}
+.change-login-button:hover{
+    border: 1.5px solid rgb(217, 217, 217);
+    color: rgb(217, 217, 217);
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+               <head>
+                              <meta charset="UTF-8">
+                              <title>ListenToNovels</title>
+               </head>
+<form  action="/listen">
+    请输入英文单词:
+    <input type="text" name="keyword">
+    <input type="submit" value="提交" name="submit">
+</form>
+               <div style="width: 800px; margin: 20px auto;">请输入内容:
+
+                           <ul>
+            <li>
+                <a href="/">主页</a>
+            </li>
+            <li>
+                <a href="/listen">查看</a>
+            </li>
+            <li>
+                <a href="/playlisten">听书</a>
+            </li>
+        </ul>
+                              <br /><br />
+                              <div id="page" class="site">
+                                  {{ state }}
+                                             <header id="masthead" class="site-header" role="banner">
+                                                            <div id="novel-name">{{ novel_name }}</div>
+                                                            <br>
+                                                            <div class="site-branding">
+                                                                           <img src="https://uploadfile.huiyi8.com/2018/af/6c/0e/06/374563.jpg">
+                                                                            <h1 class="site-title"><a href="https://www.bbiquge.net" rel="home">ListenToNovels</a></h1>
+
+                                                                            <h2 class="site-description">{{ title_name }}</h2>
+
+                                                            </div>
+                                             </header>
+                                             <div id="pega" class="site">
+                                                            <div id="content">{{ listen_text }}</div>
+                                             </div>
+                              </div>
+               </div>
+               </body>
+
+
+</html>

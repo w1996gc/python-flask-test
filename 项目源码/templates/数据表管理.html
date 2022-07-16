@@ -1,0 +1,116 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>数据库MySQL管理系统后台</title>
+  <meta name="description" content="这是一个 index 页面">
+  <meta name="keywords" content="index">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="icon" type="image/png" href="../static/assets/i/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="../static/assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link rel="stylesheet" href="../static/assets/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="../static/assets/css/admin.css">
+
+    <link rel="stylesheet" href="../../static/css/font.css">
+    <link rel="stylesheet" href="../../static/css/xadmin.css">
+    <script src="../../static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../static/js/xadmin.js"></script>
+    <script type="text/javascript" src="../../static/js/user.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>-->
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+</head>
+<body>
+<div class="am-cf admin-main">
+      <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> / <small>一些常用功能</small></div>
+    </div>
+
+    <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+      <li><a href="/sql/details" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>新增数据表<br/>details</a></li>
+      <li><a href="/sql/history" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>新增数据表<br/>history</a></li>
+      <li><a href="/sql/hotsearch" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>新增数据表<br/>hotsearch</a></li>
+      <li><a href="/sql/sys_user" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>新增数据表<br/>sys_user</a></li>
+      <!--<li><a href="#" class="am-text-warning"><span class="am-icon-btn am-icon-briefcase"></span><br/>成交订单<br/></a></li>
+      <li><a href="#" class="am-text-danger"><span class="am-icon-btn am-icon-recycle"></span><br/>昨日访问<br/></a></li>
+      <li><a href="#" class="am-text-secondary"><span class="am-icon-btn am-icon-user-md"></span><br/>在线用户<br/></a></li>-->
+    </ul>
+        <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+      <li><a href="/sql/thyssenkrupp" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>新增数据表<br/>thyssenkrupp</a></li>
+      <li><a href="/sql/hitachi_mca" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>新增数据表<br/>hitachi_mca</a></li>
+
+    </ul>
+      </div>
+    </div>
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            {% for i in labels %}
+                                <td>{{ i }}</td>
+                            {% endfor %}
+                        <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in content %}
+                            <tr>
+                                {% for j in i %}
+                                    <td>{{ j }}</td>
+                                {% endfor %}
+                            <td class="td_manage">
+            <!--<a title="编辑" onclick="user_edit('编辑','2022-06-08',3178526,80224,0,0,294871,214,17988,159)" href="javascript:;">
+                <i class="layui-icon"></i>
+            </a>
+            <a title="删除" onclick="user_del(this,'2022-06-08')" href="javascript:;">  <i class="layui-icon"></i>
+            </a>-->
+        </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!--[if lt IE 9]>
+<script src="../static/assets/js/jquery1.11.1.min.js"></script>
+<script src="../static/assets/js/modernizr.js"></script>
+<script src="../static/assets/js/polyfill/rem.min.js"></script>
+<script src="../static/assets/js/polyfill/respond.min.js"></script>
+<script src="../static/assets/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../static/assets/js/jquery.min.js"></script>
+<script src="../static/assets/js/amazeui.min.js"></script>
+<!--<![endif]-->
+<script src="../static/assets/js/app.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+</html>

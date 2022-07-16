@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="width: 800px; margin: 20px auto;">
+    <div style="width: 200px;float: left;">
+        <ul>
+            <li>
+                <a href="/left">主页</a>
+            </li>
+            <li>
+                <a href="/zh">中译英</a>
+            </li>
+            <li>
+                <a href="/eg">英译中</a>
+            </li>
+            <li>
+                <a href="/main">普翻</a>
+            </li>
+        </ul>
+    </div>
+<form method="post" action="/eg">
+    请输入英文单词:
+    <input type="text" name="keyword">
+    <input type="submit" value="提交" name="submit">
+</form>
+    <br />
+    {{ result }}
+    <br />
+    {{ appdate }}
+        <br>
+    <br>
+    <br>
+            <div id="page" class="site">
+    <div class="site-branding">
+<img src="https://uploadfile.huiyi8.com/2018/af/6c/0e/06/374563.jpg">
+    </div>
+</div>
+</div>
+</body>
+</html>

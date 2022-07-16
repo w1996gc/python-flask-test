@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>ListenToBook</title>
+</head>
+
+<div style="border: #0b2e13;margin-right: fill;background: green;width:-moz-max-content;height: 200px">
+            <ul>
+            <li>
+                <a href="/">主页</a>
+            </li>
+            <li>
+                <a href="/listen">查看</a>
+            </li>
+            <li>
+                <a href="/playlisten">听书</a>
+            </li>
+            <li>
+                <a href="/speech">朗读</a>
+            </li>
+        </ul>
+    <ul>
+    <li><h1>ListenToBook</h1></li>
+        <li><h2>欢迎来到听书的世界</h2></li>
+        <!--<form action="/sourch" method="post"target="_top">-->
+        <form action="https://www.bbiquge.net" method="post"target="_top">
+            <input type="text" name="bookname" placeholder="请输入书名">
+            <input type="submit" value="搜索"></form>
+
+    <!--<li><input type="text"name="name"></li>         -->
+    <!--<li><input type="submit"name="wordname"></li>-->
+        </ul>
+</div>
+<div style="border: #0b2e13;margin-right: auto;background: green;width: content-box">
+    <br>
+    <br>
+    <div class="site" id="content">
+    {{ content_text }}</div>
+</div>
+</body>
+  <script type="text/javascript">
+       $(function () {
+           $("#wordname").click(function () {
+           var cmd='hello world';
+           alert(cmd);
+       };
+  </script>
+</html>

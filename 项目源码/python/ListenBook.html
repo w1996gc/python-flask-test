@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ListenToBook</title>
+</head>
+<body>
+<div style="border: #0b2e13;margin-right: fill;background: green;width:-moz-max-content;height: 200px">
+            <ul>
+            <li>
+                <a href="/">主页</a>
+            </li>
+            <li>
+                <a href="/listen">查看</a>
+            </li>
+            <li>
+                <a href="/playlisten">听书</a>
+            </li>
+        </ul>
+    <ul>
+    <li><h1>ListenToBook</h1></li>
+    <li><input type="text"name="name"></li>
+    <li><input type="submit"name="wordname"></li>
+        </ul>
+</div>
+<div style="border: #0b2e13;margin-right: auto;background: green;width: content-box">
+    <li><ul><input type="submit"name="wordname"value="play"onclick="function tsd() {var cmd=document.getElementById('conent').play();alert(cmd)}"></ul></li>
+    <br>
+    <div class="site" id="content">
+    {{ content_text }}</div>
+</div>
+</body>
+  <script type="text/javascript" src="D:/Users/Administrator/OneDrive/Desktop/编程/fanyi/templates/js/eel.js"></script>
+  <script type="text/javascript">
+       ell.novel_book();  // 调用Python函数
+  </script>
+</html>

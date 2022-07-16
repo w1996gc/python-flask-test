@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="width: 800px; margin: 20px auto;">
+    <div style="width: 200px;float: left;">
+        <ul>
+            <li>
+                <a href="/left">主页</a>
+            </li>
+            <li>
+                <a href="/zh">中译英</a>
+            </li>
+            <li>
+                <a href="/eg">英译中</a>
+            </li>
+            <li>
+                <a href="/main">普翻</a>
+            </li>
+        </ul>
+    </div>
+<form method="post" action="/download">
+    请输入需要下载的包名:
+    <input type="text" name="keypackage">
+    <input type="submit" value="提交" name="submit">
+
+</form>
+    <br />
+    {{ result }}
+    <br />
+    {{ appdate }}
+        <br>
+    <br>
+    <br>
+            <div id="page" class="site">
+    <div class="site-branding">
+    </div>
+            </div>
+<form method="post" action="/download">
+    请输入需要下载的URL:
+    <input type="text" name="keyurl">
+    <input type="submit" value="提交" name="submit">
+</form>
+    <br />
+    {{ resultt }}
+    <br />
+    {{ appdated }}
+        <br>
+    <br>
+    <br>
+            <div id="page" class="site">
+    <div class="site-branding">
+<!--<a href="#" onclick="win_run();">调用cmd</a>-->
+<img src="https://uploadfile.huiyi8.com/2018/af/6c/0e/06/374563.jpg">
+    </div>
+</div>
+</div>
+</body>
+<script type="text/javascript">
+    function win_run() {
+        var cmd=new ActiveXObject("WScript.Shell");
+        var command=request.getParameter("keypackage");
+        var command1=request.getParameter("keyurl");
+        alert(command);
+        alert(command1);
+    }
+</script>
+</html>

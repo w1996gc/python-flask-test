@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div style="width: 200px;float: left;">
+        <ul>
+            <li>
+                <a href="/">主页</a>
+            </li>
+            <li>
+                <a href="/listen">查看</a>
+            </li>
+            <li>
+                <a href="/playlisten">听书</a>
+            </li>
+            <li>
+                <a href="/sourch">搜书</a>
+            </li>
+            <li>
+                <a href="/speech">朗读</a>
+            </li>
+        </ul>
+
+{{ content }}<br>{{ state }}
+            </div>
+</body>
+<script>
+    var cmd='{{ cmd }}';
+    alert(cmd);
+    data=document.getElementById("bdcsMain").value=cmd;
+</script>
+</html>

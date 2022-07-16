@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>吴迪专用在线朗读器</title>
+    <style>
+        * {margin: 0;padding: 0;}
+    </style>
+</head>
+<body>
+<div style="width: 800px; margin: 20px auto;">
+    <div style="width: 200px;float: left;">
+        <ul>
+            <li>
+                <a href="/">主页</a>
+            </li>
+            <li>
+                <a href="/listen">查看</a>
+            </li>
+            <li>
+                <a href="/playlisten">听书</a>
+            </li>
+            <li>
+                <a href="/sourch">搜书</a>
+            </li>
+            <li>
+                <a href="/speech">朗读</a>
+            </li>
+        </ul>
+    </div>
+<div id="container" style="float: left">
+<form method="post" action="/speech">
+    请输入内容:
+    <input type="text" name="keyword">
+    <input type="submit" value="提交" name="submit">
+</form>
+    <br />
+</div>
+
+    <br />
+    <br />
+    <br />
+    <h1>{{ state }}</h1>
+    <h1>{{ novelname }}</h1>
+    <div>
+        <label for="lang">
+            你可以选择语言和朗读人员：
+            <select name="lang" id="lang"></select>
+        </label>
+    </div>
+    <div>
+        <label for="pitch">
+            你可以设置音高【范围在0 - 2之间】：
+            <input type="number" value="1" name="pitch" id="pitch" />
+        </label>
+    </div>
+    <div>
+        <label for="rate">
+            你可以设置朗读速度【范围在0 - 10之间】：
+            <input type="number" value="5" name="rate" id="rate" />
+        </label>
+    </div>
+    <div>
+        <label for="volume">
+            你可以设置声音大小【范围在0 - 1之间】：
+            <input type="number" value="5.5" name="volume" id="volume" />
+        </label>
+    </div>
+
+    <textarea name="" id="readText"  cols="90"rows="12"readonly >{{ content_text }}</textarea>
+    <br />
+
+    <button onclick="startRead()">开始朗读</button>
+    <button onclick="pause()">暂停</button>
+    <button onclick="continueSpeak()">继续</button>
+    <button onclick="Speak()">停止</button>
+    <button onclick="flush()">刷新</button>
+    <script>
+        const synth = window.speechSynthesis;
+        const voiceSelect = document.querySelector('#lang'); // 语言选择框
+        const pitchInput = document.querySelector('#pitch'); // 音高输入框
+        const rateInput = document.querySelector('#rate'); // 音速输入框
+        const volumeInput = document.querySelector('#volume'); // 声音大小输入框
+        const readText = document.querySelector('#readText').textContent; // 读取的文本
+        const text = document.getElementById('readText'); // 朗读内容区域
+
+
+        // 将可选的语言填入到选择框中
+        setTimeout(() => {
+            const selectChild = synth.getVoices().reduce((res, ite) => {
+                return res += `<option value="${ite.lang}" data-name="${ite.name}">${ite.lang} - ${ite.name}</option>`
+            }, '');
+            voiceSelect.innerHTML = selectChild;
+        }, 50);
+
+        // 限制值的公共函数
+        function limitVal({ ele, min, max }) {
+            if (ele.value > max) {
+                ele.value = max;
+            } else if (ele.value < min) {
+                ele.value = min;
+            }
+        }
+
+        // 当音高输入框的内容大于2或小于0的时候进行处理
+        pitchInput.onblur = () => {
+            limitVal({ ele: pitchInput, min: 0, max: 2 });
+        };
+        // 当音速输入框的内容大于10或小于0的时候进行处理
+        rateInput.onblur = () => {
+            limitVal({ ele: rateInput, min: 0, max: 10 });
+        };
+        // 当声音输入框的内容大于1或小于0的时候进行处理
+        volumeInput.onblur = () => {
+            limitVal({ ele: volumeInput, min: 0, max: 1 });
+        };
+        const utterThis = new window.SpeechSynthesisUtterance(text.value);
+        // 开始朗读
+        function startRead() {
+            //alert(readText);
+            const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+            const voices = synth.getVoices();
+            for(let i = 0; i < voices.length ; i++) {
+                if(voices[i].name === selectedOption) {
+                    utterThis.voice = voices[i];
+                }
+            }
+            utterThis.pitch = pitchInput.value; // 设置音高
+            utterThis.rate = rateInput.value; // 设置音速
+            utterThis.volume = volumeInput.value; // 设置声音大小
+            synth.speak(utterThis);
+        }
+        function pause() { // 暂停
+            synth.pause();
+        }
+        function continueSpeak() { // 继续播放
+            synth.resume();
+        }
+        function Speak() { // 停止播放
+            synth.cancel();
+        }
+        function flush() { // 刷新
+            text.value = readText;
+        }
+    </script>
+    </div>
+</body>
+</html>
