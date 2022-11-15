@@ -1,0 +1,7 @@
+pymysql
+flask
+jieba
+selenium
+requests
+pandas
+bs4

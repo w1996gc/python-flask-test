@@ -9,15 +9,14 @@ from selenium.webdriver import Chrome,Firefox, FirefoxOptions,ChromeOptions
 import pandas as pd
 from bs4 import BeautifulSoup
 import re
-import Conn
 
-# def get_conn():
-#     # 建立数据库连接
-#     conn = pymysql.connect(host="121.62.21.198", user="root", password="", db="test", charset="utf8")
-#     # 创建游标
-#     cursor = conn.cursor()
-#     Conn.connect()
-#     return conn, cursor
+
+def get_conn():
+    # 建立数据库连接
+    conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="test", charset="utf8")
+    # 创建游标
+    cursor = conn.cursor()
+    return conn, cursor
 
 
 def close_conn(conn, cursor):
@@ -148,7 +147,7 @@ def get_dx_detail_data():
 # 插入地区疫情历史数据
 # 插入全国疫情历史数据
 def update_history():
-    conn, cursor = Conn.connect()
+    conn, cursor = get_conn()
     try:
         # li = get_tx_detail_data()  # 1代表最新数据
         li = get_dx_detail_data()  # 1代表最新数据
@@ -177,7 +176,7 @@ def update_history():
         if len(dic) == 0:
             print(f"[WARN] {time.asctime()}  接口暂时异常，数据未获取到或解析全国历史疫情数据异常...")
         print(f"[INFO] {time.asctime()}  全国历史疫情爬虫已启动，正在获取数据....")
-        conn, cursor = Conn.connect()
+        conn, cursor = get_conn()
         sql = "insert into history values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         sql_query = "select confirm from history where ds=%s"
         for k, v in dic.items():
@@ -236,7 +235,7 @@ def update_hotsearch():
     try:
         print(f"[INFO] {time.asctime()}  新闻资讯爬虫已启动，正在获取数据...")
         context = get_baidu_hot()
-        conn, cursor = Conn.connect()
+        conn, cursor = get_conn()
         sql = "insert into hotsearch(dt,content) values(%s,%s)"
         ts = time.strftime("%Y-%m-%d %X")
         for i in context:
@@ -254,6 +253,91 @@ def online():
     update_history()
     update_hotsearch()
     return 200
+def my_online():
+    conn = pymysql.connect(
+        host='111.173.83.23',
+        user='root',
+        password='Wqq@123456',
+        db='test',
+        charset='utf8'
+    )
+
+    cur = conn.cursor()
+    try:
+        today_time=datetime.datetime.now().date().strftime("%Y年%m月%d")
+        today_time=today_time.replace('2022年','')
+        sql1 = "select * from maintenance_plan where `left2-半年`='{}' order by `number` desc;".format(today_time)
+        cur.execute(sql1)
+        content = cur.fetchall()
+
+        # 获取表头
+        sql = "SHOW FIELDS FROM maintenance_plan"
+        cur.execute(sql)
+        labels = cur.fetchall()
+        labels = [l[0] for l in labels]
+        cur.close()
+        conn.close()
+
+        return labels, content, sql1
+    except Exception as e:
+        today_time=datetime.datetime.now().date().strftime("%Y年%m月%d")
+        today_time1 = today_time.replace('2022年', '')
+        sql1 = "select * from maintenance_plan order by `left1-半月` asc;"
+        cur.execute(sql1)
+        content = cur.fetchall()
+
+        # 获取表头
+        sql = "SHOW FIELDS FROM maintenance_plan"
+        cur.execute(sql)
+        labels = cur.fetchall()
+        labels = [l[0] for l in labels]
+        cur.close()
+        conn.close()
+
+        return labels, content, sql1
+
+def _my_online(left):
+    conn = pymysql.connect(
+        host='111.173.83.23',
+        user='root',
+        password='Wqq@123456',
+        db='test',
+        charset='utf8'
+    )
+
+    cur = conn.cursor()
+    try:
+        today_time=datetime.datetime.now().date().strftime("%Y年%m月%d")
+        today_time=today_time.replace('2022年','')
+        sql1 = "select * from maintenance_plan where `{}`='{}' order by `number` desc;".format(left,today_time)
+        cur.execute(sql1)
+        content = cur.fetchall()
+
+        # 获取表头
+        sql = "SHOW FIELDS FROM maintenance_plan"
+        cur.execute(sql)
+        labels = cur.fetchall()
+        labels = [l[0] for l in labels]
+        cur.close()
+        conn.close()
+
+        return labels, content, sql1
+    except Exception as e:
+        today_time=datetime.datetime.now().date().strftime("%Y年%m月%d")
+        today_time1 = today_time.replace('2022年', '')
+        sql1 = "select * from maintenance_plan order by `left1-半月` asc;"
+        cur.execute(sql1)
+        content = cur.fetchall()
+
+        # 获取表头
+        sql = "SHOW FIELDS FROM maintenance_plan"
+        cur.execute(sql)
+        labels = cur.fetchall()
+        labels = [l[0] for l in labels]
+        cur.close()
+        conn.close()
+
+        return labels, content, sql1
 
 
 if __name__ == "__main__":

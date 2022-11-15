@@ -134,6 +134,7 @@ function x_new_edit(title, a, b, c, d, e, f, g, h, w, he) {
 
 /*删除*/
 function member_del(obj, id) {
+    
     layer.confirm('确认要删除吗？', function (index) {
         //发异步删除数据
         $(obj).parents("tr").remove();

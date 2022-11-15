@@ -1,12 +1,6 @@
 import time
 import pymysql
 
-# def connecting_data():
-#     conn = pymysql.connect(host='121.62.21.198', user='root', password='', db='test', charset='utf8')
-#     cur = conn.cursor()
-#     return cur,conn
-import Conn
-
 
 def get_time():
     time_str = time.strftime("%Y{}%m{}%d{} %X")
@@ -14,12 +8,12 @@ def get_time():
 
 
 
-# def get_conn():
-#     # 建立连接
-#     conn = pymysql.connect(host="121.62.21.198", user="root", password="", db="test", charset="utf8")
-#     # c创建游标A
-#     cursor = conn.cursor()
-#     return conn, cursor
+def get_conn():
+    # 建立连接
+    conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="test", charset="utf8")
+    # c创建游标A
+    cursor = conn.cursor()
+    return conn, cursor
 
 
 def query_no(sql):
@@ -28,7 +22,7 @@ def query_no(sql):
     :param sql:
     :return:
     """
-    conn, cursor = Conn.connect()
+    conn, cursor = get_conn()
     cursor.execute(sql)
     res = cursor.fetchall()
     conn.commit()
@@ -50,7 +44,7 @@ def query(sql, *args):
     :param args:
     :return:
     """
-    conn, cursor = Conn.connect()
+    conn, cursor = get_conn()
     cursor.execute(sql, args)
     res = cursor.fetchall()
     conn.commit()
@@ -58,9 +52,9 @@ def query(sql, *args):
     return res
 
 def create_date():
-    # conn = pymysql.connect(host="121.62.21.198", user="root", password="", db="mysql", charset="utf8")
-    # cur = conn.cursor()
-    cur, conn = Conn.conn()
+    conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="mysql", charset="utf8")
+    cur = conn.cursor()
+
     # sql4 = f"create database `test`"
     # cur.execute(sql4)
     # cur.close()
@@ -259,9 +253,8 @@ def del_news(id):
 def get_register(n,user,password,mail,photonumber):
     # 建立数据库连接
     try:
-        # conn = pymysql.connect(host="121.62.21.198", user="root", password="", db="test", charset="utf8")
-        # cur=conn.cursor()
-        cur, conn = Conn.conn()
+        conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="test", charset="utf8")
+        cur=conn.cursor()
         sql=f"INSERT INTO `sys_user` VALUES (%s, '%s', '%s', '管理员', '%s', '%s')"%(n,user,password,mail,photonumber)
         print(sql)
         cur.execute(sql)
@@ -275,9 +268,8 @@ def get_register(n,user,password,mail,photonumber):
         return '200'
 
 def get_data_clear():
-    # conn = pymysql.connect(host="121.62.21.198", user="root", password="", db="test", charset="utf8")
-    # cur=conn.cursor()
-    cur, conn = Conn.conn()
+    conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="test", charset="utf8")
+    cur=conn.cursor()
     sql1=f"truncate table details"
     sql2=f"truncate table hotsearch"
     sql3=f"truncate table history"
@@ -290,7 +282,7 @@ def get_data_clear():
 
 def get_user_list(page_size, page_no, param):
     # 建立数据库连接
-    # conn = pymysql.connect(host="121.62.21.198", user="root", password="", db="test", charset="utf8")
+    # conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="test", charset="utf8")
     # cur=conn.cursor()
     count_sql="select count(*) from sys_user where " + param
     count_res = query(count_sql)[0][0]
@@ -319,9 +311,8 @@ def get_user_list(page_size, page_no, param):
     return data_page, count_res, page_list, max_page
 
 def create():
-    # conn = pymysql.connect(host="121.62.21.198", user="root", password="", db="mysql", charset="utf8")
-    # cur = conn.cursor()
-    cur, conn = Conn.conn()
+    conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="mysql", charset="utf8")
+    cur = conn.cursor()
     try:
         sql2=f"create database `test`"
         cur.execute(sql2)

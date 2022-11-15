@@ -18,7 +18,6 @@ import requests
 from bs4 import BeautifulSoup
 from flask import Blueprint, render_template, request
 from reposted import baidu_fanyi
-import Conn
 
 dft_blueprint = Blueprint('default', __name__)
 
@@ -175,9 +174,9 @@ def make_md5(s, encoding='utf-8'):
 
 
 def mca():
-    # conn = pymysql.connect(host='121.62.21.198', user='root', password='', db='test', charset='utf8')
-    # cur = conn.cursor()
-    cur, conn = Conn.conn()
+    conn = pymysql.connect(host='121.62.21.198', user='root', password='', db='test', charset='utf8')
+    cur = conn.cursor()
+
     sql = "select * from hitachi_mca"
     cur.execute(sql)
     content = cur.fetchall()
@@ -193,9 +192,8 @@ def mca():
 
 def get_conn(sql):
     try:
-        # conn=pymysql.connect(host='121.62.21.198',user='root',password='',db='test',port=3306,charset='utf8')
-        # cur=conn.cursor()
-        cur, conn = Conn.conn()
+        conn=pymysql.connect(host='121.62.21.198',user='root',password='',db='test',port=3306,charset='utf8')
+        cur=conn.cursor()
         sql=f"select * from `test`.`thyssenkrupp` where 错误码 = '{sql}'"
         cur.execute(sql)
         data=cur.fetchall()
@@ -220,9 +218,8 @@ def getmca():
     return text_connent
 def get_mca_conn(sql):
     try:
-        # conn=pymysql.connect(host='121.62.21.198',user='root',password='',db='test',port=3306,charset='utf8')
-        # cur=conn.cursor()
-        cur, conn = Conn.conn()
+        conn=pymysql.connect(host='121.62.21.198',user='root',password='',db='test',port=3306,charset='utf8')
+        cur=conn.cursor()
         sql=f"select * from `test`.`hitachi_mca` where TCD= '{sql}'"
         cur.execute(sql)
         data=cur.fetchall()
@@ -241,9 +238,8 @@ def get_mca_conn(sql):
         return 'Error:{}'.format(err),'程序超时'
 def getconn_data():
     try:
-        # conn=pymysql.connect(host='121.62.21.198',user='root',password='',db='test',port=3306,charset='utf8')
-        # cur=conn.cursor()
-        cur, conn = Conn.conn()
+        conn=pymysql.connect(host='121.62.21.198',user='root',password='',db='test',port=3306,charset='utf8')
+        cur=conn.cursor()
         sql="select * from `test`.`thyssenkrupp`"
         cur.execute(sql)
         data=cur.fetchall()

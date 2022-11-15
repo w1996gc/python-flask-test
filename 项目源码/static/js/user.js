@@ -166,15 +166,18 @@ function get_search() {
     all_page_param = param;
     get_old_data(page_no)
 }
-// function user_close() {
-//     layer.confirm('确认要修改吗？', function (index) {
-//         $.ajax({
-//             url: "/user/revise",
-//             data: {"ds": ds},
-//             method: "DELETE",
-//             success: function (obj) {
-//                 layer.msg('已删除!' + ds, {icon: 1, time: 1000});
-//             }
-//         });
-//     });
-// }
+function user_close(obj,ds) {
+     
+     layer.confirm('确认要修改吗？', function (index) { 
+         //alert(index);
+         $(obj).parents("tr").remove();
+         $.ajax({
+             url: "/user/revise",
+             data: {"ds": ds},
+             method: "DELETE",
+             success: function (obj) {
+                 layer.msg('已删除!' + ds, {icon: 1, time: 1000});
+             }
+         });
+     });
+ }
