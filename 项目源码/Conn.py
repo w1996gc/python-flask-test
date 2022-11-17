@@ -12,10 +12,10 @@ import os
 import pymysql
 
 def conn():
-    conn = pymysql.connect(host='111.173.83.23', user='root', password='Wqq@123456', db='test', charset='utf8')
+    conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
     cur = conn.cursor()
     return cur,conn
 def connect():
-    conn = pymysql.connect(host='111.173.83.23', user='root', password='Wqq@123456', db='test', charset='utf8')
+    conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
     cursor = conn.cursor()
     return conn,cursor

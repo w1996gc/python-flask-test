@@ -10,7 +10,7 @@ def get_time():
 
 def get_conn():
     # 建立连接
-    conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="test", charset="utf8")
+    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="test", charset="utf8")
     # c创建游标A
     cursor = conn.cursor()
     return conn, cursor
@@ -52,7 +52,7 @@ def query(sql, *args):
     return res
 
 def create_date():
-    conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="mysql", charset="utf8")
+    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="mysql", charset="utf8")
     cur = conn.cursor()
 
     # sql4 = f"create database `test`"
@@ -253,7 +253,7 @@ def del_news(id):
 def get_register(n,user,password,mail,photonumber):
     # 建立数据库连接
     try:
-        conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="test", charset="utf8")
+        conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="test", charset="utf8")
         cur=conn.cursor()
         sql=f"INSERT INTO `sys_user` VALUES (%s, '%s', '%s', '管理员', '%s', '%s')"%(n,user,password,mail,photonumber)
         print(sql)
@@ -268,7 +268,7 @@ def get_register(n,user,password,mail,photonumber):
         return '200'
 
 def get_data_clear():
-    conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="test", charset="utf8")
+    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="test", charset="utf8")
     cur=conn.cursor()
     sql1=f"truncate table details"
     sql2=f"truncate table hotsearch"
@@ -282,7 +282,7 @@ def get_data_clear():
 
 def get_user_list(page_size, page_no, param):
     # 建立数据库连接
-    # conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="test", charset="utf8")
+    # conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="test", charset="utf8")
     # cur=conn.cursor()
     count_sql="select count(*) from sys_user where " + param
     count_res = query(count_sql)[0][0]
@@ -311,7 +311,7 @@ def get_user_list(page_size, page_no, param):
     return data_page, count_res, page_list, max_page
 
 def create():
-    conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="mysql", charset="utf8")
+    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="mysql", charset="utf8")
     cur = conn.cursor()
     try:
         sql2=f"create database `test`"

@@ -153,7 +153,7 @@ def login():
     return render_template('login.html')
 
 def __register():
-    conn = pymysql.connect(host='111.173.83.23', user='root', password='Wqq@123456', db='test', charset='utf8')
+    conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
     cur = conn.cursor()
 
     sql=f"select count(*) from sys_user;"
@@ -391,7 +391,7 @@ def create_get_date():
     return render_template('appdata.html')
 @app.route('/sql/adb')
 def create_s1():
-    conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="mysql", charset="utf8")
+    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="mysql", charset="utf8")
     cur = conn.cursor()
     sql = f"create database `test`"
     cur.execute(sql)
@@ -400,7 +400,7 @@ def create_s1():
     return render_template('数据库管理.html')
 @app.route('/sql/sdb')
 def create_sd1():
-    conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="mysql", charset="utf8")
+    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="mysql", charset="utf8")
     cur = conn.cursor()
     sql = f"show databases"
     cur.execute(sql)
@@ -514,7 +514,7 @@ def my_update_date():
     return render_template('html/update.html', labels=labels, content=content,sql=sql)
 def get_my_sql(left, new_number,number):
     try:
-        conn = pymysql.connect(host='111.173.83.23', user='root', password='Wqq@123456', db='test', charset='utf8')
+        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
         cur = conn.cursor()
         #sql1 = "select `number`,`position`,`{}` from maintenance_plan where `{}`='{}' order by `number` desc".format(left,left, number)
         sql1="update maintenance_plan set `{}`='{}' where number='{}'".format(left,new_number,number)
@@ -535,7 +535,7 @@ def get_my_sql(left, new_number,number):
 
         return labels,content1,sql1
     except Exception as e:
-        conn = pymysql.connect(host='111.173.83.23', user='root', password='Wqq@123456', db='test', charset='utf8')
+        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
         cur = conn.cursor()
 
         sql = "select * from maintenance_plan order by `left1-半月` asc"
@@ -564,7 +564,7 @@ def my_left():
     labels,content,sql = _get_sql()
     return render_template('html/index.html', labels=labels, content=content,sql=sql)
 def _get_sql():
-    conn = pymysql.connect(host='111.173.83.23', user='root', password='Wqq@123456', db='test', charset='utf8')
+    conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
     cur = conn.cursor()
 
     sql1 = "select * from maintenance_plan order by `left1-半月` asc"
@@ -582,7 +582,7 @@ def _get_sql():
     return labels, content,sql1
 def get_sql(left, number):
     try:
-        conn = pymysql.connect(host='111.173.83.23', user='root', password='Wqq@123456', db='test', charset='utf8')
+        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
         cur = conn.cursor()
 
         sql1 = "select `number`,`position`,`{}` from maintenance_plan where `{}`='{}' order by `number` desc".format(left,left, number)
@@ -599,7 +599,7 @@ def get_sql(left, number):
 
         return labels,content,sql1
     except Exception as e:
-        conn = pymysql.connect(host='111.173.83.23', user='root', password='Wqq@123456', db='test', charset='utf8')
+        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
         cur = conn.cursor()
 
         sql = "select * from maintenance_plan order by `left1-半月` asc"
@@ -689,7 +689,7 @@ def show_tab5():
 @app.route('/sql/account')
 def show_tab6():
 
-    # conn = pymysql.connect(host='111.173.83.23',user='root',password='Wqq@123456',db='test',charset='utf8')
+    # conn = pymysql.connect(host='127.0.0.1',user='root',password='123456',db='test',charset='utf8')
     # cur = conn.cursor()
     cur,conn = Conn.conn()
 
@@ -765,7 +765,7 @@ def User_display():
     try:
         dd = user_dd(ddcc)
         if dd:
-            conn = pymysql.connect(host='111.173.83.23',user='root',password='Wqq@123456',db='test',charset='utf8')
+            conn = pymysql.connect(host='127.0.0.1',user='root',password='123456',db='test',charset='utf8')
             cur = conn.cursor()
 
             sql = "select * from sys_user"
@@ -959,7 +959,7 @@ def make_md5(s, encoding='utf-8'):
 
 
 def mca():
-    conn = pymysql.connect(host='111.173.83.23', user='root', password='Wqq@123456', db='test', charset='utf8')
+    conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
     cur = conn.cursor()
 
     sql = "select * from hitachi_mca"
@@ -977,7 +977,7 @@ def mca():
 
 def get_conn(sql):
     try:
-        conn = pymysql.connect(host='111.173.83.23', user='root', password='Wqq@123456', db='test', port=3306, charset='utf8')
+        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', port=3306, charset='utf8')
         cur = conn.cursor()
         sql = f"select * from `test`.`thyssenkrupp` where 错误码 = '{sql}'"
         cur.execute(sql)
@@ -1011,7 +1011,7 @@ def getmca():
 
 def get_mca_conn(sql):
     try:
-        conn = pymysql.connect(host='111.173.83.23', user='root', password='Wqq@123456', db='test', port=3306, charset='utf8')
+        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', port=3306, charset='utf8')
         cur = conn.cursor()
         sql = f"select * from `test`.`hitachi_mca` where TCD= '{sql}'"
         cur.execute(sql)
@@ -1035,7 +1035,7 @@ def get_mca_conn(sql):
 
 def getconn_data():
     try:
-        conn = pymysql.connect(host='111.173.83.23', user='root', password='Wqq@123456', db='test', port=3306, charset='utf8')
+        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', port=3306, charset='utf8')
         cur = conn.cursor()
         sql = "select * from `test`.`thyssenkrupp`"
         cur.execute(sql)
@@ -1092,7 +1092,7 @@ def url_download(url):
         return 'Error:{}'.format(ee), '下载失败'
 def createdb():
     try:
-        conn = pymysql.connect(host='111.173.83.23', user='root', password='Wqq@123456', db='mysql', port=3306, charset='utf8')
+        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='mysql', port=3306, charset='utf8')
         cur = conn.cursor()
         sql = "create database test"
         cur.execute(sql)

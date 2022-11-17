@@ -1,0 +1,135 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>科技园保养计划</title>
+</head>
+<style>
+    #time{
+        font-size: 28px;
+        color:#FF0000;
+
+    }
+</style>
+<body>
+<div class="content">
+        <div class="content-left">
+            <!--<img src="images/d.png" alt="">-->
+        </div>
+        <div class="content-right">
+            <form method="post" action="index.html">
+                <div class="right-infp">
+                    <div class="right-infp-name">
+
+                        <input type="text" name="number" placeholder="请输入编号:" maxlength="13" required="" value=""
+                               autocomplete="off">
+                        <input type="text" name="new_number" placeholder="请输入新内容:" maxlength="13" required="" value=""
+                               autocomplete="off">
+
+
+                    </div>
+		    <div id="time"></div>
+                    <div id="update"><a href="/update.html">Database Update</a></div>
+                    <div>
+                        <input type="checkbox" value="left1-半月" name="left">left1
+                        <input type="checkbox" value="left2-半年" name="left">left2
+                        <input type="checkbox" value="left3-半月" name="left">left3
+                        <input type="checkbox" value="left4-半月" name="left">left4
+                        <input type="submit">
+                    </div>
+                    <div class="content" style="color:#FF0000">
+                        执行的命令为:{{sql}}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<body>
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3></h3>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover" border="1" bordercolor＝"#000000">
+                        <thead>
+                        <tr style="color:#0000ff;background-color:#48a6fd;font-size:18px;">
+                            {% for i in labels %}
+                                <td>{{ i }}</td>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in content %}
+                            <tr>
+                                {% for j in i %}
+                                    <td>{{ j }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script>
+Date.prototype.format = function(fmt) {
+      var o = {
+        "y+": this.getFullYear, //年
+        "M+": this.getMonth() + 1, //月份
+        "d+": this.getDate(), //日
+        "h+": this.getHours(), //小时
+        "m+": this.getMinutes(), //分
+        "s+": this.getSeconds(), //秒
+      };
+      if (/(y+)/.test(fmt))
+        fmt = fmt.replace(
+          RegExp.$1,
+          (this.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
+      for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length == 1
+              ? o[k]
+              : ("00" + o[k]).substr(("" + o[k]).length)
+          );
+      return fmt;
+    };
+    setInterval(
+      "document.getElementById('time').innerHTML = (new Date()).format('yyyy-MM-dd hh:mm:ss');",
+      1000
+    );
+
+</script>
+<script type="text/javascript" src="/eel.js"></script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+

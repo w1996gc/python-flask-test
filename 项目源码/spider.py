@@ -13,7 +13,7 @@ import re
 
 def get_conn():
     # 建立数据库连接
-    conn = pymysql.connect(host="111.173.83.23", user="root", password="Wqq@123456", db="test", charset="utf8")
+    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="test", charset="utf8")
     # 创建游标
     cursor = conn.cursor()
     return conn, cursor
@@ -255,9 +255,9 @@ def online():
     return 200
 def my_online():
     conn = pymysql.connect(
-        host='111.173.83.23',
+        host='127.0.0.1',
         user='root',
-        password='Wqq@123456',
+        password='123456',
         db='test',
         charset='utf8'
     )
@@ -298,9 +298,9 @@ def my_online():
 
 def _my_online(left):
     conn = pymysql.connect(
-        host='111.173.83.23',
+        host='127.0.0.1',
         user='root',
-        password='Wqq@123456',
+        password='123456',
         db='test',
         charset='utf8'
     )
