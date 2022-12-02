@@ -9,14 +9,34 @@ from selenium.webdriver import Chrome,Firefox, FirefoxOptions,ChromeOptions
 import pandas as pd
 from bs4 import BeautifulSoup
 import re
+import os
 
 
 def get_conn():
     # 建立数据库连接
-    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="test", charset="utf8")
-    # 创建游标
-    cursor = conn.cursor()
-    return conn, cursor
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "Wqq@123456",
+        "db": "test",
+        "charset": "utf8"
+    }
+    if not os.path.exists("auto.json"):
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)    
+        # 创建游标
+        cursor = conn.cursor()
+        return conn, cursor
 
 
 def close_conn(conn, cursor):
@@ -255,9 +275,9 @@ def online():
     return 200
 def my_online():
     conn = pymysql.connect(
-        host='127.0.0.1',
+        host='111.173.83.23',
         user='root',
-        password='123456',
+        password='Wqq@123456',
         db='test',
         charset='utf8'
     )
@@ -298,9 +318,9 @@ def my_online():
 
 def _my_online(left):
     conn = pymysql.connect(
-        host='127.0.0.1',
+        host='111.173.83.23',
         user='root',
-        password='123456',
+        password='Wqq@123456',
         db='test',
         charset='utf8'
     )

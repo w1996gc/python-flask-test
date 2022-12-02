@@ -49,21 +49,40 @@ def main_page():
 def data_about():
     return render_template('html/about.html')
 # 获取服务器时间
+
+@app.route('/music', methods=['GET',"POST"])
+def py_music():
+    pl_dir = './static/dict'
+    pl_files = [file for file in os.listdir(pl_dir) if file.endswith('.py')]
+    result="<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'><style>h3,a{font-size:50px;},.main{display: flex;flex-direction: column;}</style>"
+    result+=f"""<h3>资源展示<br/><a href='/index.html'>Select Data</a></h3>"""
+    for item in pl_files:
+        result += f"<div class='main' style='display: flex;flex-direction: column;height: auto;margin: 10px auto;overflow: hidden;'>当前资源为:{item}<br/><a href='/static/dict/{item}'>{item}</a></div><br/>"
+        # return render_template('image.html', result=os.path.join(image_dir,item))
+    return result
 @app.route('/time')
 def get_time():
     return utils.get_time()
 #  获取图片
 @app.route('/image', methods=['GET',"POST"])
 def webim():
-    image_dir='./static/image'
+    image_dir='./static/img'
     image_files = [file for file in os.listdir(image_dir) if file.endswith('.png')]
     image_file = request.args.get('image_file')
-    result="<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'><style>h3,a{font-size:50px;},.main{display: flex;flex-direction: column;}</style>"
-    result+=f"""<h3>播放图片<br/><a href='/index.html'>Select Data</a></h3>"""
+    result="<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>"
+    result+=f"""<h3>播放图片<br/><a href='/index.html'>Select Data</a><br/><br/><a href='/setimg'>Select Img</a></h3>"""
+    index=0
     for item in image_files:
-        result += f"<div class='main' style='display: flex;flex-direction: column;height: auto;margin: 10px auto;overflow: hidden;'>当前图片为:{item}<br/><img src='/static/image/{item}'></a></div><br/>"
+        index +=1
+        result += f"<div class='main' style='display: flex;flex-direction: column;height: auto;margin: 5px auto;overflow: hidden;'>当前图片为第{index}张:{item}<br/><img src='/static/img/{item}'></a></div><br/>"
         # return render_template('image.html', result=os.path.join(image_dir,item))
     return result
+
+@app.route('/setimg', methods=['GET',"POST"])
+def select_img():
+    return render_template('html/select_img.html')
+
+
 # 中间统计数据
 @app.route('/c1')
 def get_c1_data():
@@ -153,18 +172,37 @@ def login():
     return render_template('login.html')
 
 def __register():
-    conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
-    cur = conn.cursor()
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "Wqq@123456",
+        "db": "test",
+        "charset": "utf8"
+    }
+    if not os.path.exists("auto.json"):
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+        cur = conn.cursor()
 
-    sql=f"select count(*) from sys_user;"
-    cur.execute(sql)
-    content = cur.fetchall()
-    n=str([i[0]for i in content])
-    n=n.replace('[','')
-    n=n.replace(']','')
-    cur.close()
-    conn.close()
-    return n
+        sql=f"select count(*) from sys_user;"
+        cur.execute(sql)
+        content = cur.fetchall()
+        n=str([i[0]for i in content])
+        n=n.replace('[','')
+        n=n.replace(']','')
+        cur.close()
+        conn.close()
+        return n
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method=='POST':
@@ -391,24 +429,62 @@ def create_get_date():
     return render_template('appdata.html')
 @app.route('/sql/adb')
 def create_s1():
-    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="mysql", charset="utf8")
-    cur = conn.cursor()
-    sql = f"create database `test`"
-    cur.execute(sql)
-    cur.close()
-    conn.close()
-    return render_template('数据库管理.html')
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "Wqq@123456",
+        "db": "test",
+        "charset": "utf8"
+    }
+    if not os.path.exists("auto.json"):
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+        cur = conn.cursor()
+        sql = f"create database `test`"
+        cur.execute(sql)
+        cur.close()
+        conn.close()
+        return render_template('数据库管理.html')
 @app.route('/sql/sdb')
 def create_sd1():
-    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="mysql", charset="utf8")
-    cur = conn.cursor()
-    sql = f"show databases"
-    cur.execute(sql)
-    res = cur.fetchall()
-    labels = [l[0] for l in res]
-    cur.close()
-    conn.close()
-    return render_template('数据库管理.html', labels=labels)
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "Wqq@123456",
+        "db": "test",
+        "charset": "utf8"
+    }
+    if not os.path.exists("auto.json"):
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+        cur = conn.cursor()
+        sql = f"show databases"
+        cur.execute(sql)
+        res = cur.fetchall()
+        labels = [l[0] for l in res]
+        cur.close()
+        conn.close()
+        return render_template('数据库管理.html', labels=labels)
 @app.route('/sql/数据库管理.html')
 def create_c2():
     return render_template('数据库管理.html')
@@ -514,44 +590,82 @@ def my_update_date():
     return render_template('html/update.html', labels=labels, content=content,sql=sql)
 def get_my_sql(left, new_number,number):
     try:
-        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
-        cur = conn.cursor()
-        #sql1 = "select `number`,`position`,`{}` from maintenance_plan where `{}`='{}' order by `number` desc".format(left,left, number)
-        sql1="update maintenance_plan set `{}`='{}' where number='{}'".format(left,new_number,number)
-        cur.execute(sql1)
-        conn.commit()
-        #content = cur.fetchall()
-        sql2 = "select * from maintenance_plan order by `left1-半月` asc"
-        cur.execute(sql2)
-        content1 = cur.fetchall()
+        data = {
+            "host": "111.173.83.23",
+            "user": "root",
+            "password": "Wqq@123456",
+            "db": "test",
+            "charset": "utf8"
+        }
+        if not os.path.exists("auto.json"):
+            json_str = json.dumps(data, indent=4)
+            with open("auto.json", "w") as f:
+                f.write(json_str)
+        else:
+            file = open('auto.json', 'rb')
+            jsonData = json.load(file)
+            host = jsonData['host']
+            user = jsonData['user']
+            pwd = jsonData['password']
+            db = jsonData['db']
+            charset = jsonData['charset']
+            conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+            cur = conn.cursor()
+            #sql1 = "select `number`,`position`,`{}` from maintenance_plan where `{}`='{}' order by `number` desc".format(left,left, number)
+            sql1="update maintenance_plan set `{}`='{}' where number='{}'".format(left,new_number,number)
+            cur.execute(sql1)
+            conn.commit()
+            #content = cur.fetchall()
+            sql2 = "select * from maintenance_plan order by `left1-半月` asc"
+            cur.execute(sql2)
+            content1 = cur.fetchall()
 
-        # 获取表头
-        sql = "SHOW FIELDS FROM maintenance_plan"
-        cur.execute(sql)
-        labels = cur.fetchall()
-        labels = [l[0] for l in labels]
-        cur.close()
-        conn.close()
+            # 获取表头
+            sql = "SHOW FIELDS FROM maintenance_plan"
+            cur.execute(sql)
+            labels = cur.fetchall()
+            labels = [l[0] for l in labels]
+            cur.close()
+            conn.close()
 
-        return labels,content1,sql1
+            return labels,content1,sql1
     except Exception as e:
-        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
-        cur = conn.cursor()
+        data = {
+            "host": "111.173.83.23",
+            "user": "root",
+            "password": "Wqq@123456",
+            "db": "test",
+            "charset": "utf8"
+        }
+        if not os.path.exists("auto.json"):
+            json_str = json.dumps(data, indent=4)
+            with open("auto.json", "w") as f:
+                f.write(json_str)
+        else:
+            file = open('auto.json', 'rb')
+            jsonData = json.load(file)
+            host = jsonData['host']
+            user = jsonData['user']
+            pwd = jsonData['password']
+            db = jsonData['db']
+            charset = jsonData['charset']
+            conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+            cur = conn.cursor()
 
-        sql = "select * from maintenance_plan order by `left1-半月` asc"
-        cur.execute(sql)
-        
-        content = cur.fetchall()
+            sql = "select * from maintenance_plan order by `left1-半月` asc"
+            cur.execute(sql)
 
-        # 获取表头
-        sql = "SHOW FIELDS FROM maintenance_plan"
-        cur.execute(sql)
-        labels = cur.fetchall()
-        labels = [l[0] for l in labels]
-        cur.close()
-        conn.close()
+            content = cur.fetchall()
 
-        return labels,content,e
+            # 获取表头
+            sql = "SHOW FIELDS FROM maintenance_plan"
+            cur.execute(sql)
+            labels = cur.fetchall()
+            labels = [l[0] for l in labels]
+            cur.close()
+            conn.close()
+
+            return labels,content,e
 
 
 @app.route('/index.html',methods=['GET','POST'])
@@ -564,28 +678,29 @@ def my_left():
     labels,content,sql = _get_sql()
     return render_template('html/index.html', labels=labels, content=content,sql=sql)
 def _get_sql():
-    conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
-    cur = conn.cursor()
-
-    sql1 = "select * from maintenance_plan order by `left1-半月` asc"
-    cur.execute(sql1)
-    content = cur.fetchall()
-
-    # 获取表头
-    sql = "SHOW FIELDS FROM maintenance_plan"
-    cur.execute(sql)
-    labels = cur.fetchall()
-    labels = [l[0] for l in labels]
-    cur.close()
-    conn.close()
-
-    return labels, content,sql1
-def get_sql(left, number):
-    try:
-        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "Wqq@123456",
+        "db": "test",
+        "charset": "utf8"
+    }
+    if not os.path.exists("auto.json"):
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
         cur = conn.cursor()
 
-        sql1 = "select `number`,`position`,`{}` from maintenance_plan where `{}`='{}' order by `number` desc".format(left,left, number)
+        sql1 = "select * from maintenance_plan order by `left1-半月` asc"
         cur.execute(sql1)
         content = cur.fetchall()
 
@@ -597,24 +712,80 @@ def get_sql(left, number):
         cur.close()
         conn.close()
 
-        return labels,content,sql1
+        return labels, content,sql1
+def get_sql(left, number):
+    try:
+        data = {
+            "host": "111.173.83.23",
+            "user": "root",
+            "password": "Wqq@123456",
+            "db": "test",
+            "charset": "utf8"
+        }
+        if not os.path.exists("auto.json"):
+            json_str = json.dumps(data, indent=4)
+            with open("auto.json", "w") as f:
+                f.write(json_str)
+        else:
+            file = open('auto.json', 'rb')
+            jsonData = json.load(file)
+            host = jsonData['host']
+            user = jsonData['user']
+            pwd = jsonData['password']
+            db = jsonData['db']
+            charset = jsonData['charset']
+            conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+            cur = conn.cursor()
+
+            sql1 = "select `number`,`position`,`{}` from maintenance_plan where `{}`='{}' order by `number` desc".format(left,left, number)
+            cur.execute(sql1)
+            content = cur.fetchall()
+
+            # 获取表头
+            sql = "SHOW FIELDS FROM maintenance_plan"
+            cur.execute(sql)
+            labels = cur.fetchall()
+            labels = [l[0] for l in labels]
+            cur.close()
+            conn.close()
+
+            return labels,content,sql1
     except Exception as e:
-        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
-        cur = conn.cursor()
+        data = {
+            "host": "111.173.83.23",
+            "user": "root",
+            "password": "Wqq@123456",
+            "db": "test",
+            "charset": "utf8"
+        }
+        if not os.path.exists("auto.json"):
+            json_str = json.dumps(data, indent=4)
+            with open("auto.json", "w") as f:
+                f.write(json_str)
+        else:
+            file = open('auto.json', 'rb')
+            jsonData = json.load(file)
+            host = jsonData['host']
+            user = jsonData['user']
+            pwd = jsonData['password']
+            db = jsonData['db']
+            charset = jsonData['charset']
+            conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+            cur = conn.cursor()
 
-        sql = "select * from maintenance_plan order by `left1-半月` asc"
-        cur.execute(sql)
-        content = cur.fetchall()
+            sql = "select * from maintenance_plan order by `left1-半月` asc"
+            cur.execute(sql)
+            content = cur.fetchall()
 
-        # 获取表头
-        sql = "SHOW FIELDS FROM maintenance_plan"
-        cur.execute(sql)
-        labels = cur.fetchall()
-        labels = [l[0] for l in labels]
-        cur.close()
-        conn.close()
+            # 获取表头
+            sql = "SHOW FIELDS FROM maintenance_plan"
+            cur.execute(sql)
+            labels = cur.fetchall()
+            labels = [l[0] for l in labels]
+            cur.close()
+            conn.close()
 
-        return labels,content,e
+            return labels,content,e
 # -------------mysql查询-----------------
 @app.route('/sql/show/details')
 def show_tab1():
@@ -689,7 +860,7 @@ def show_tab5():
 @app.route('/sql/account')
 def show_tab6():
 
-    # conn = pymysql.connect(host='127.0.0.1',user='root',password='123456',db='test',charset='utf8')
+    # conn = pymysql.connect(host='111.173.83.23',user='root',password='Wqq@123456',db='test',charset='utf8')
     # cur = conn.cursor()
     cur,conn = Conn.conn()
 
@@ -765,20 +936,39 @@ def User_display():
     try:
         dd = user_dd(ddcc)
         if dd:
-            conn = pymysql.connect(host='127.0.0.1',user='root',password='123456',db='test',charset='utf8')
-            cur = conn.cursor()
+            data = {
+                "host": "111.173.83.23",
+                "user": "root",
+                "password": "Wqq@123456",
+                "db": "test",
+                "charset": "utf8"
+            }
+            if not os.path.exists("auto.json"):
+                json_str = json.dumps(data, indent=4)
+                with open("auto.json", "w") as f:
+                    f.write(json_str)
+            else:
+                file = open('auto.json', 'rb')
+                jsonData = json.load(file)
+                host = jsonData['host']
+                user = jsonData['user']
+                pwd = jsonData['password']
+                db = jsonData['db']
+                charset = jsonData['charset']
+                conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+                cur = conn.cursor()
 
-            sql = "select * from sys_user"
-            cur.execute(sql)
-            content = cur.fetchall()
+                sql = "select * from sys_user"
+                cur.execute(sql)
+                content = cur.fetchall()
 
-            # 获取表头
-            sql = "SHOW FIELDS FROM sys_user"
-            cur.execute(sql)
-            labels = cur.fetchall()
-            labels = [l[0] for l in labels]
+                # 获取表头
+                sql = "SHOW FIELDS FROM sys_user"
+                cur.execute(sql)
+                labels = cur.fetchall()
+                labels = [l[0] for l in labels]
 
-            return render_template('admin.html', labels=labels, content=content)
+                return render_template('admin.html', labels=labels, content=content)
     except Exception as ee:
         if '1049' in ee:
             createdb()
@@ -959,37 +1149,75 @@ def make_md5(s, encoding='utf-8'):
 
 
 def mca():
-    conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
-    cur = conn.cursor()
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "Wqq@123456",
+        "db": "test",
+        "charset": "utf8"
+    }
+    if not os.path.exists("auto.json"):
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+        cur = conn.cursor()
 
-    sql = "select * from hitachi_mca"
-    cur.execute(sql)
-    content = cur.fetchall()
+        sql = "select * from hitachi_mca"
+        cur.execute(sql)
+        content = cur.fetchall()
 
-    # 获取表头
-    sql = "SHOW FIELDS FROM hitachi_mca"
-    cur.execute(sql)
-    labels = cur.fetchall()
-    labels = [l[0] for l in labels]
+        # 获取表头
+        sql = "SHOW FIELDS FROM hitachi_mca"
+        cur.execute(sql)
+        labels = cur.fetchall()
+        labels = [l[0] for l in labels]
 
-    return labels, content
+        return labels, content
 
 
 def get_conn(sql):
     try:
-        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', port=3306, charset='utf8')
-        cur = conn.cursor()
-        sql = f"select * from `test`.`thyssenkrupp` where 错误码 = '{sql}'"
-        cur.execute(sql)
-        data = cur.fetchall()
-        errill = data[0][1]
-        errreason = data[0][2]
-        cur.close()
-        conn.close()
-        if errreason == '':
-            errreason = '暂无'
+        data = {
+            "host": "111.173.83.23",
+            "user": "root",
+            "password": "Wqq@123456",
+            "db": "test",
+            "charset": "utf8"
+        }
+        if not os.path.exists("auto.json"):
+            json_str = json.dumps(data, indent=4)
+            with open("auto.json", "w") as f:
+                f.write(json_str)
+        else:
+            file = open('auto.json', 'rb')
+            jsonData = json.load(file)
+            host = jsonData['host']
+            user = jsonData['user']
+            pwd = jsonData['password']
+            db = jsonData['db']
+            charset = jsonData['charset']
+            conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+            cur = conn.cursor()
+            sql = f"select * from `test`.`thyssenkrupp` where 错误码 = '{sql}'"
+            cur.execute(sql)
+            data = cur.fetchall()
+            errill = data[0][1]
+            errreason = data[0][2]
+            cur.close()
+            conn.close()
+            if errreason == '':
+                errreason = '暂无'
+                return errill, errreason
             return errill, errreason
-        return errill, errreason
     except Exception as ee:
         e = '该故障代码不存在，请检查后重新输入'
         if '1049' in ee:
@@ -1011,19 +1239,38 @@ def getmca():
 
 def get_mca_conn(sql):
     try:
-        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', port=3306, charset='utf8')
-        cur = conn.cursor()
-        sql = f"select * from `test`.`hitachi_mca` where TCD= '{sql}'"
-        cur.execute(sql)
-        data = cur.fetchall()
-        errill = data[0][1]
-        errreason = data[0][2]
-        cur.close()
-        conn.close()
-        if errreason == '':
-            errreason = '暂无'
+        data = {
+            "host": "111.173.83.23",
+            "user": "root",
+            "password": "Wqq@123456",
+            "db": "test",
+            "charset": "utf8"
+        }
+        if not os.path.exists("auto.json"):
+            json_str = json.dumps(data, indent=4)
+            with open("auto.json", "w") as f:
+                f.write(json_str)
+        else:
+            file = open('auto.json', 'rb')
+            jsonData = json.load(file)
+            host = jsonData['host']
+            user = jsonData['user']
+            pwd = jsonData['password']
+            db = jsonData['db']
+            charset = jsonData['charset']
+            conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+            cur = conn.cursor()
+            sql = f"select * from `test`.`hitachi_mca` where TCD= '{sql}'"
+            cur.execute(sql)
+            data = cur.fetchall()
+            errill = data[0][1]
+            errreason = data[0][2]
+            cur.close()
+            conn.close()
+            if errreason == '':
+                errreason = '暂无'
+                return errill, errreason
             return errill, errreason
-        return errill, errreason
     except Exception as ee:
         e = '该故障代码不存在，请检查后重新输入'
         if '1049' in ee:
@@ -1035,14 +1282,33 @@ def get_mca_conn(sql):
 
 def getconn_data():
     try:
-        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', port=3306, charset='utf8')
-        cur = conn.cursor()
-        sql = "select * from `test`.`thyssenkrupp`"
-        cur.execute(sql)
-        data = cur.fetchall()
-        cur.close()
-        conn.close()
-        return [var for var in data]
+        data = {
+            "host": "111.173.83.23",
+            "user": "root",
+            "password": "Wqq@123456",
+            "db": "test",
+            "charset": "utf8"
+        }
+        if not os.path.exists("auto.json"):
+            json_str = json.dumps(data, indent=4)
+            with open("auto.json", "w") as f:
+                f.write(json_str)
+        else:
+            file = open('auto.json', 'rb')
+            jsonData = json.load(file)
+            host = jsonData['host']
+            user = jsonData['user']
+            pwd = jsonData['password']
+            db = jsonData['db']
+            charset = jsonData['charset']
+            conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+            cur = conn.cursor()
+            sql = "select * from `test`.`thyssenkrupp`"
+            cur.execute(sql)
+            data = cur.fetchall()
+            cur.close()
+            conn.close()
+            return [var for var in data]
     except Exception as ee:
         if '1049' in ee:
             createdb()
@@ -1092,18 +1358,50 @@ def url_download(url):
         return 'Error:{}'.format(ee), '下载失败'
 def createdb():
     try:
-        conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='mysql', port=3306, charset='utf8')
-        cur = conn.cursor()
-        sql = "create database test"
-        cur.execute(sql)
-        cur.close()
-        conn.close()
+        data = {
+            "host": "111.173.83.23",
+            "user": "root",
+            "password": "Wqq@123456",
+            "db": "test",
+            "charset": "utf8"
+        }
+        if not os.path.exists("auto.json"):
+            json_str = json.dumps(data, indent=4)
+            with open("auto.json", "w") as f:
+                f.write(json_str)
+        else:
+            file = open('auto.json', 'rb')
+            jsonData = json.load(file)
+            host = jsonData['host']
+            user = jsonData['user']
+            pwd = jsonData['password']
+            db = jsonData['db']
+            charset = jsonData['charset']
+            conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+            cur = conn.cursor()
+            sql = "create database test"
+            cur.execute(sql)
+            cur.close()
+            conn.close()
     except Exception as ee:
         if '1049' in ee:
             createdb()
         data = None
         return data
+def setting():
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "Wqq@123456",
+        "db": "test",
+        "charset": "utf8"
+    }
+    if not os.path.exists("auto.json"):
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
 
 if __name__ == '__main__':
     # 端口号设置
+    setting()
     app.run(host="0.0.0.0", port=5672,debug=True)

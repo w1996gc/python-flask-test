@@ -24,35 +24,22 @@
         color:#FF0000;
 
     }
-    table {
-        border-collapse: collapse;
-    }
-
-    .panel-body {
-        overflow: auto;
-        height: 100%; /* 设置固定高度 */
-        width: 100%;
-        /*position: absolute;*/
-        font-size:18px;
-    }
-    .panel-body th {
-        position: sticky;
-        top: 0; /* 首行永远固定在头部  */
-    }
-    .panel-body th:first-child {
-        z-index: 2; /*表头的首列要在上面*/
-    }
     /*.layui-btn{*/
     /*    color: #fff;*/
     /*    background-color: #42b8f1;*/
     /*    !*border-radius: 100px;*!*/
     /*}*/
+    .layui-text{
+        position: flex;display: inline-block;font-size: 22px;border-radius: 12px;color:#000000;
+        border: solid 1px;
+        padding: 0 4px;
+    }
 </style>
 <body>
 
 <div class="content">
         <div class="content-left">
-            <!--<img src="images/d.png" alt="">-->
+            <a href="static/dact/Python_music_player.py"></a>
         </div>
         <div class="content-right">
             <form method="post" action="index.html">
@@ -69,19 +56,24 @@
 
                     </div>
 		    <div id="time"></div>
-                    <div id="update"><a href="/update.html">Database Update</a></div>
+                    <div id="update"><a href="/update.html" style="font-size: 28px;">Database Update</a></div>
                     <div id="btn">
-                        <a href="/spided"  class="layui-btn" >今天</a><br/>
-                        <a href="/image"  class="image-btn" >定位到二维码</a>
+
+                        <a href="/spided"  class="layui-btn" style="font-size: 28px;">今天</a><br/>
+
+                        <a href="/image"  class="image-btn" style="font-size: 28px;">定位到二维码</a><br/>
+
                     </div>
                     <div>
+                        <!--<br/>-->
+                        <div class="layui-text">
                         <input type="checkbox" value="left1-半月" name="left">left1
                         <input type="checkbox" value="left2-半年" name="left">left2
                         <input type="checkbox" value="left3-半月" name="left">left3
                         <input type="checkbox" value="left4-半月" name="left">left4
-                        <input type="submit">
+                        <input type="submit" style="color:blue;">
+                        </div>
                     </div>
-
                     <div class="content" style="color:#FF0000">
                         执行的命令为:{{sql}}
                     </div>

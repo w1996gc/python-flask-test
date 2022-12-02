@@ -90,7 +90,7 @@
                         </thead>
                         <tbody>
                         {% for i in content %}
-                            <tr">
+                            <tr>
                                 {% for j in i %}
                                     <td>{{ j }}</td>
                                 {% endfor %}
@@ -131,7 +131,7 @@ Date.prototype.format = function(fmt) {
       return fmt;
     };
     setInterval(
-      "document.getElementById('time').innerHTML = (new Date()).format('yyyy月MM日dd hh时mm分ss秒');",
+      "document.getElementById('time').innerHTML = (new Date()).format('yyyy年MM月dd日 hh时mm分ss秒');",
       1000
     );
 

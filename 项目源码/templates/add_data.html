@@ -31,30 +31,34 @@
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
 </head>
 <body>
-<div class="am-cf admin-main">
+<div class="am-cf admin-main" >
+    <form method="post" action="sql/add_data.html">
       <div class="admin-content">
 
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> / <small>一些常用功能</small></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> / <small>一些常用功能<br><a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:end ;background-color: white" href="javascript:location.replace(location.href);" title="刷新">
+          <i class="layui-icon" style="line-height:38px">刷新ဂ</i></a></small></div>
+
     </div>
 
     <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
-      <li><a href="show/details" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>查数据表<br/>details</a></li>
-      <li><a href="show/history" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>查数据表<br/>history</a></li>
-      <li><a href="show/hotsearch" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>查数据表<br/>hotsearch</a></li>
-      <li><a href="account" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>查数据表<br/>sys_user</a></li>
+      <li><a href="/sql/show/details" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>查数据表<br/>details</a></li>
+      <li><a href="/sql/show/history" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>查数据表<br/>history</a></li>
+      <li><a href="/sql/show/hotsearch" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>查数据表<br/>hotsearch</a></li>
+      <li><a href="/account" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>查数据表<br/>sys_user</a></li>
       <!--<li><a href="#" class="am-text-warning"><span class="am-icon-btn am-icon-briefcase"></span><br/>成交订单<br/></a></li>
       <li><a href="#" class="am-text-danger"><span class="am-icon-btn am-icon-recycle"></span><br/>昨日访问<br/></a></li>
       <li><a href="#" class="am-text-secondary"><span class="am-icon-btn am-icon-user-md"></span><br/>在线用户<br/></a></li>-->
     </ul>
         <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
-      <li><a href="show/thyssenkrupp" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>查数据表<br/>thyssenkrupp</a></li>
-      <li><a href="show/hitachi_mca" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>查数据表<br/>hitachi_mca</a></li>
-      <li><a href="insert/thyssenkrupp" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>插数据表<br/>thyssenkrupp</a></li>
-      <li><a href="insert/hitachi_mca" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>插数据表<br/>hitachi_mca</a></li>
+      <li><a href="/sql/show/thyssenkrupp" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>查数据表<br/>thyssenkrupp</a></li>
+      <li><a href="/sql/show/hitachi_mca" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>查数据表<br/>hitachi_mca</a></li>
+      <li><a href="/sql/insert/thyssenkrupp" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>插数据表<br/>thyssenkrupp</a></li>
+      <li><a href="/sql/insert/hitachi_mca" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>插数据表<br/>hitachi_mca</a></li>
 
     </ul>
       </div>
+        </form>
     </div>
 <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">

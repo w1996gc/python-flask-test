@@ -10,12 +10,52 @@
 
 import os
 import pymysql
+import json
 
 def conn():
-    conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
-    cur = conn.cursor()
-    return cur,conn
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "Wqq@123456",
+        "db": "test",
+        "charset": "utf8"
+    }
+    if not os.path.exists("auto.json"):
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+
+        cur = conn.cursor()
+        return cur,conn
 def connect():
-    conn = pymysql.connect(host='127.0.0.1', user='root', password='123456', db='test', charset='utf8')
-    cursor = conn.cursor()
-    return conn,cursor
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "Wqq@123456",
+        "db": "test",
+        "charset": "utf8"
+    }
+    if not os.path.exists("auto.json"):
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+        cursor = conn.cursor()
+        return conn,cursor

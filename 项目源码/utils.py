@@ -1,3 +1,5 @@
+import json
+import os
 import time
 import pymysql
 
@@ -10,10 +12,28 @@ def get_time():
 
 def get_conn():
     # 建立连接
-    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="test", charset="utf8")
-    # c创建游标A
-    cursor = conn.cursor()
-    return conn, cursor
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "123456",
+        "db": "test",
+        "charset": "utf8"
+    }
+    if not os.path.exists("auto.json"):
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)  # c创建游标A
+        cursor = conn.cursor()
+        return conn, cursor
 
 
 def query_no(sql):
@@ -52,8 +72,27 @@ def query(sql, *args):
     return res
 
 def create_date():
-    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="mysql", charset="utf8")
-    cur = conn.cursor()
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "123456",
+        "db": "test",
+        "charset": "utf8"
+    }
+    if not os.path.exists("auto.json"):
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+        cur = conn.cursor()
 
     # sql4 = f"create database `test`"
     # cur.execute(sql4)
@@ -64,18 +103,18 @@ def create_date():
     # cur.close()
     # conn.close()
 
-    sql1=f"CREATE TABLE `test`.`details`  (`id` int NOT NULL AUTO_INCREMENT,`update_time` datetime NULL DEFAULT NULL COMMENT '数据最后更新时间',`province` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '省',`city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '市',`confirm` int NULL DEFAULT NULL COMMENT '累计确诊',`confirm_add` int NULL DEFAULT NULL COMMENT '新增治愈',`heal` int NULL DEFAULT NULL COMMENT '累计治愈',`dead` int NULL DEFAULT NULL COMMENT '累计死亡',PRIMARY KEY (`id`) USING BTREE) ENGINE = InnoDB AUTO_INCREMENT = 552 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;"
-    cur.execute(sql1)
-    cur.close()
-    conn.close()
-    sql2=f"CREATE TABLE `test`.`history`  (`ds` datetime NOT NULL COMMENT '日期',`confirm` int NULL DEFAULT NULL COMMENT '累计确诊',`confirm_add` int NULL DEFAULT NULL COMMENT '当日新增确诊',`suspect` int NULL DEFAULT NULL COMMENT '剩余疑似',`suspect_add` int NULL DEFAULT NULL COMMENT '当日新增疑似',`heal` int NULL DEFAULT NULL COMMENT '累计治愈',`heal_add` int NULL DEFAULT NULL COMMENT '当日新增治愈',`dead` int NULL DEFAULT NULL COMMENT '累计死亡',`dead_add` int NULL DEFAULT NULL COMMENT '当日新增死亡',PRIMARY KEY (`ds`) USING BTREE) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;"
-    cur.execute(sql2)
-    cur.close()
-    conn.close()
-    sql3=f"CREATE TABLE `test`.`hotsearch`  (`id` int NOT NULL AUTO_INCREMENT,`dt` datetime NULL DEFAULT NULL,`content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,PRIMARY KEY (`id`) USING BTREE) ENGINE = InnoDB AUTO_INCREMENT = 61 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;"
-    cur.execute(sql3)
-    cur.close()
-    conn.close()
+        sql1=f"CREATE TABLE `test`.`details`  (`id` int NOT NULL AUTO_INCREMENT,`update_time` datetime NULL DEFAULT NULL COMMENT '数据最后更新时间',`province` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '省',`city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '市',`confirm` int NULL DEFAULT NULL COMMENT '累计确诊',`confirm_add` int NULL DEFAULT NULL COMMENT '新增治愈',`heal` int NULL DEFAULT NULL COMMENT '累计治愈',`dead` int NULL DEFAULT NULL COMMENT '累计死亡',PRIMARY KEY (`id`) USING BTREE) ENGINE = InnoDB AUTO_INCREMENT = 552 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;"
+        cur.execute(sql1)
+        cur.close()
+        conn.close()
+        sql2=f"CREATE TABLE `test`.`history`  (`ds` datetime NOT NULL COMMENT '日期',`confirm` int NULL DEFAULT NULL COMMENT '累计确诊',`confirm_add` int NULL DEFAULT NULL COMMENT '当日新增确诊',`suspect` int NULL DEFAULT NULL COMMENT '剩余疑似',`suspect_add` int NULL DEFAULT NULL COMMENT '当日新增疑似',`heal` int NULL DEFAULT NULL COMMENT '累计治愈',`heal_add` int NULL DEFAULT NULL COMMENT '当日新增治愈',`dead` int NULL DEFAULT NULL COMMENT '累计死亡',`dead_add` int NULL DEFAULT NULL COMMENT '当日新增死亡',PRIMARY KEY (`ds`) USING BTREE) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;"
+        cur.execute(sql2)
+        cur.close()
+        conn.close()
+        sql3=f"CREATE TABLE `test`.`hotsearch`  (`id` int NOT NULL AUTO_INCREMENT,`dt` datetime NULL DEFAULT NULL,`content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,PRIMARY KEY (`id`) USING BTREE) ENGINE = InnoDB AUTO_INCREMENT = 61 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;"
+        cur.execute(sql3)
+        cur.close()
+        conn.close()
 
 def test():
     sql = "select * from details"
@@ -253,36 +292,74 @@ def del_news(id):
 def get_register(n,user,password,mail,photonumber):
     # 建立数据库连接
     try:
-        conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="test", charset="utf8")
-        cur=conn.cursor()
-        sql=f"INSERT INTO `sys_user` VALUES (%s, '%s', '%s', '管理员', '%s', '%s')"%(n,user,password,mail,photonumber)
-        print(sql)
-        cur.execute(sql)
-        conn.commit()
-        cur.close()
-        conn.close()
-        return '200'
+        data = {
+            "host": "111.173.83.23",
+            "user": "root",
+            "password": "123456",
+            "db": "test",
+            "charset": "utf8"
+        }
+        if not os.path.exists("auto.json"):
+            json_str = json.dumps(data, indent=4)
+            with open("auto.json", "w") as f:
+                f.write(json_str)
+        else:
+            file = open('auto.json', 'rb')
+            jsonData = json.load(file)
+            host = jsonData['host']
+            user = jsonData['user']
+            pwd = jsonData['password']
+            db = jsonData['db']
+            charset = jsonData['charset']
+            conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+            cur=conn.cursor()
+            sql=f"INSERT INTO `sys_user` VALUES (%s, '%s', '%s', '管理员', '%s', '%s')"%(n,user,password,mail,photonumber)
+            print(sql)
+            cur.execute(sql)
+            conn.commit()
+            cur.close()
+            conn.close()
+            return '200'
     except Exception as ee:
         if '1049' in ee:
             create()
         return '200'
 
 def get_data_clear():
-    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="test", charset="utf8")
-    cur=conn.cursor()
-    sql1=f"truncate table details"
-    sql2=f"truncate table hotsearch"
-    sql3=f"truncate table history"
-    cur.execute(sql1)
-    cur.execute(sql2)
-    cur.execute(sql3)
-    cur.close()
-    conn.close()
-    return '200'
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "123456",
+        "db": "test",
+        "charset": "utf8"
+    }
+    if not os.path.exists("auto.json"):
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+        cur=conn.cursor()
+        sql1=f"truncate table details"
+        sql2=f"truncate table hotsearch"
+        sql3=f"truncate table history"
+        cur.execute(sql1)
+        cur.execute(sql2)
+        cur.execute(sql3)
+        cur.close()
+        conn.close()
+        return '200'
 
 def get_user_list(page_size, page_no, param):
     # 建立数据库连接
-    # conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="test", charset="utf8")
+    # conn = pymysql.connect(host="111.173.83.23", user="root", password="123456", db="test", charset="utf8")
     # cur=conn.cursor()
     count_sql="select count(*) from sys_user where " + param
     count_res = query(count_sql)[0][0]
@@ -311,18 +388,37 @@ def get_user_list(page_size, page_no, param):
     return data_page, count_res, page_list, max_page
 
 def create():
-    conn = pymysql.connect(host="127.0.0.1", user="root", password="123456", db="mysql", charset="utf8")
-    cur = conn.cursor()
-    try:
-        sql2=f"create database `test`"
-        cur.execute(sql2)
-        cur.close()
-        conn.close()
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "Wqq@123456",
+        "db": "test",
+        "charset": "utf8"
+    }
+    if not os.path.exists("auto.json"):
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+        cur = conn.cursor()
+        try:
+            sql2=f"create database `test`"
+            cur.execute(sql2)
+            cur.close()
+            conn.close()
 
-        sql1 = f"CREATE TABLE `test`.`sys_user`  (`id` int NOT NULL AUTO_INCREMENT,`username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,`password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,`name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,`email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,`phone` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,PRIMARY KEY (`id`) USING BTREE) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;"
-        cur.execute(sql1)
-        cur.close()
-        conn.close()
-        return True
-    except Exception:
-        return False
+            sql1 = f"CREATE TABLE `test`.`sys_user`  (`id` int NOT NULL AUTO_INCREMENT,`username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,`password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,`name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,`email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,`phone` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,PRIMARY KEY (`id`) USING BTREE) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;"
+            cur.execute(sql1)
+            cur.close()
+            conn.close()
+            return True
+        except Exception:
+            return False
