@@ -78,7 +78,7 @@
                 </tr>
                 <tr>
                     <th>服务器地址</th>
-                    <td>127.0.0.1:5000</td>
+                    <td id="host"></td>
                 </tr>
                 <tr>
                     <th>操作系统</th>
@@ -103,6 +103,11 @@
 
     <blockquote class="layui-elem-quote layui-quote-nm">众志成城，齐心协力防治疫情！</blockquote>
 </div>
-
+<script>
+    setInterval(
+      "document.getElementById('host').innerHTML = window.location.host;",
+      1000
+    );
+</script>
 </body>
 </html>
