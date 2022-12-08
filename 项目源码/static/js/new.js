@@ -107,10 +107,10 @@ function show_data(page_data, page_no, page_list) {
 
 function x_new_edit(title, a, b, c, d, e, f, g, h, w, he) {
     if (w == null || w == '') {
-        w = 600
+        w = 400
     }
     if (he == null || he == '') {
-        he = 550
+        he = 650
     }
     $('#id').val(a);
     $('#update_time').val(b);

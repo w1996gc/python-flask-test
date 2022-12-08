@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>维修记录统计列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="../../static/css/font.css">
+    <link rel="stylesheet" href="../../static/css/xadmin.css">
+    <script src="../../static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../static/js/xadmin.js"></script>
+    <script type="text/javascript" src="../../static/js/eel.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">数据管理</a>
+        <a>
+          <cite>维修记录统计列表</cite></a>
+      </span>
+    <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:38px">ဂ</i></a>
+</div>
+<div class="x-body">
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+
+            <input class="layui-input" placeholder="电梯编号" name="province_s" id="province_s" type="text">
+            <span class="layui-btn" onclick="get_search()"><i class="layui-icon">&#xe615;</i></span>
+        </form>
+    </div>
+    <xblock>
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>电梯编号</th>
+            <th>位置</th>
+            <th>时间</th>
+            <th>故障现象</th>
+            <th>故障诊断</th>
+            <th>电梯类型</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="new_data">
+
+        </tbody>
+    </table>
+    <div class="page">
+        <div id="page_list">
+
+        </div>
+    </div>
+
+</div>
+</body>
+<style>
+    .layui-form-label {
+        height: 20px !important;
+        width: 150px !important;
+        margin: 10px auto;overflow: hidden;
+
+    }
+    /*input::-webkit-calendar-picker-indicator {*/
+    /*    position: absolute;*/
+    /*    right: 0;*/
+    /*    padding-left: calc(100% - 24px);*/
+    /*    padding-right: 8px;*/
+    /*}*/
+
+    /* 日期标签定宽
+       将日期图标收回矿中*/
+    /*input {*/
+    /*    position: relative;*/
+    /*    width: 140px;*/
+    /*}*/
+
+
+    /* 日期标签 默认不显示 年月日
+      此时日期框不可用*/
+    /*input::-webkit-datetime-edit {*/
+    /*    display: none;*/
+    }
+
+    /* 日期标签 显示 placeholder
+        添加一个默认值让日期框可选*/
+    /*input:empty:before {*/
+    /*    content: attr(placeholder);*/
+    /*}*/
+</style>
+
+<div class="x-body" id="new-edit" style="display: none;height: auto;margin: 10px auto;overflow: hidden;">
+    <form class="layui-form" style="height: auto;margin: 10px auto;overflow: hidden;">
+        <div class="layui-form-item">
+            <label for="id" class="layui-form-label">
+                <span class="x-red">*</span>电梯编号
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" disabled id="update_time" name="update_time" required lay-verify="required"
+                       autocomplete="off" class="layui-input">
+                <input type="hidden" disabled id="id" name="id">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="province" class="layui-form-label">
+                <span class="x-red">*</span>位置
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" disabled id="province" name="province" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="confirm" class="layui-form-label">
+                <span class="x-red">*</span>时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="date" id="confirm" name="confirm" required lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="confirm_add" class="layui-form-label">
+                <span class="x-red">*</span>故障现象
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="confirm_add" name="confirm_add" required lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="heal" class="layui-form-label">
+                <span class="x-red">*</span>故障诊断
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="heal" name="heal" required lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="dead" class="layui-form-label">
+                <span class="x-red">*</span>电梯类型
+            </label>
+            <div class="layui-input-inline">
+                <select name="dead" id="dead" required lay-verify="required" autocomplete="off" class="layui-input">
+                        <option value="暂无此类型" style="flood-color: red">--Choices(* This type is not available)--
+                        </option>
+                        <option value="通力电梯">通力电梯</option>
+                        <option value="通力扶梯">通力扶梯</option>
+                        <option value="蒂森电梯">蒂森电梯</option>
+                        <option value="蒂森扶梯">蒂森扶梯</option>
+                        <option value="快速电梯">快速电梯</option>
+                        <option value="5">南昌</option>
+                        <option value="6">赣州</option>
+                        <option value="7">瑞金</option>
+                        <option value="8">西安</option>
+                        <option value="" id="FaultType"></option>
+                    </select>
+                <!--<input type="text" id="dead" name="dead" required lay-verify="required"
+                       autocomplete="off" class="layui-input">-->
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="L_repass" class="layui-form-label">
+            </label>
+            <button class="layui-btn" lay-filter="edit" lay-submit="">
+                修改
+            </button>
+        </div>
+    </form>
+</div>
+<!--<script>-->
+<!--    function changeDate(idval) {-->
+<!--        var dom = document.getElementById(idval);-->
+<!--        console.log(dom)-->
+<!--        console.log(document.getElementById('confirm').placeholder=d)-->
+<!--        var value = dom.value;-->
+<!--        if (value != null || value != "") {-->
+<!--            dom.setAttribute("placeholder", value);-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+</html>

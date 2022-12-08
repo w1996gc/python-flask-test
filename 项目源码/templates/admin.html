@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <title>区域疫情统计列表</title>
+    <title>用户表</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="../../static/css/font.css">
     <link rel="stylesheet" href="../../static/css/xadmin.css">
     <script src="../../static/js/jquery.min.js"></script>
@@ -16,172 +15,140 @@
     <script type="text/javascript" src="../../static/js/xadmin.js"></script>
     <script type="text/javascript" src="../../static/js/user.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-    <!--[if lt IE 9]>-->
+    <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <!--<script>
-    function user_close(a,b) {
-	alert(a)
-        $(obj).parents("tr").remove();
-        $.ajax({
-            url: "/user/revise",
-            data: {"ds": ds},
-            method: "DELETE",
-            success: function (obj) {
-                layer.msg('已删除!' + ds, {icon: 1, time: 1000});
-		alert('已删除!' + ds);
-            }
-        });
-    }
-</script>-->
+    <![endif]-->
 </head>
+
 <body>
 <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">控制台</a>
+        <a href="">数据管理</a>
         <a>
-          <cite>用户列表</cite></a>
+          <cite>用户表</cite></a>
       </span>
     <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
        href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
 </div>
-<div class="row">
-    <div class="col-md-6 col-sm-12 col-xs-12">
-        <div class="panel panel-default">
+<div class="x-body">
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
 
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead>
-                        <tr>
-                            {% for i in labels %}
-                                <td>{{ i }}</td>
-                            {% endfor %}
-                        <td>操作</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for i in content %}
-                            <tr>
-                                {% for j in i %}
-                                    <td>{{ j }}</td>
-                                {% endfor %}
-                            <td class="td_manage">
-            <a title="编辑" onclick="user_edit('编辑','2022-06-08',3178526,80224,0,0,294871,214,17988,159)" href="javascript:;">
-                <i class="layui-icon"></i>
-            </a>
-            <a title="删除" onclick="user_close(this,item)" href="javascript:;">  <i class="layui-icon"></i>
-            </a>
-        </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <input class="layui-input" placeholder="用户名" name="province_s" id="province_s" type="text">
+            <span class="layui-btn" onclick="get_search()"><i class="layui-icon">&#xe615;</i></span>
+        </form>
+    </div>
+    <xblock>
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>用户名</th>
+            <th>密码</th>
+            <th>管理员</th>
+            <th>电子邮件</th>
+            <th>手机号</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="new_data">
+
+        </tbody>
+    </table>
+    <div class="page">
+        <div id="page_list">
+
         </div>
-
     </div>
 
 </div>
-<div>
-    <input type="button" value="修改" onclick="window.location.href='/user/revise'" class="layui-btn" lay-filter="edit">
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+</body>
+<style>
+    .layui-form-label {
+        width: 150px !important;
+        margin: 10px auto;overflow: hidden;
+    }
+    /*input::-webkit-calendar-picker-indicator {*/
+    /*    position: absolute;*/
+    /*    right: 0;*/
+    /*    padding-left: calc(100% - 24px);*/
+    /*    padding-right: 8px;*/
+    /*}*/
 
-<div class="x-body" id="old-edit" style="display: none">
-    <form class="layui-form">
+    /* 日期标签定宽
+       将日期图标收回矿中*/
+    /*input {*/
+    /*    position: relative;*/
+    /*    width: 140px;*/
+    /*}*/
+
+
+    /* 日期标签 默认不显示 年月日
+      此时日期框不可用*/
+    /*input::-webkit-datetime-edit {*/
+    /*    display: none;*/
+    }
+
+    /* 日期标签 显示 placeholder
+        添加一个默认值让日期框可选*/
+    /*input:empty:before {*/
+    /*    content: attr(placeholder);*/
+    /*}*/
+</style>
+
+<div class="x-body" id="new-edit" style="display: none">
+    <form class="layui-form" style="height: auto;margin: 10px auto;overflow: hidden;">
         <div class="layui-form-item">
-            <label for="ds" class="layui-form-label">
-                <span class="x-red">*</span>时间
+            <label for="id" class="layui-form-label">
+                <span class="x-red">*</span>用户名
             </label>
             <div class="layui-input-inline">
-                <input type="text" disabled id="ds" name="ds" required lay-verify="required"
+                <input type="text" disabled id="update_time" name="update_time" required lay-verify="required"
                        autocomplete="off" class="layui-input">
+                <input type="hidden" disabled id="id" name="id">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="confirm" class="layui-form-label">
-                <span class="x-red">*</span>累计确诊
+            <label for="province" class="layui-form-label">
+                <span class="x-red">*</span>密码
             </label>
             <div class="layui-input-inline">
-                <input type="number" id="confirm" name="confirm" required lay-verify="required|number"
+                <input type="password" disabled id="province" name="province" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="confirm" class="layui-form-label">
+                <span class="x-red">*</span>管理员
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="confirm" name="confirm" required lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label for="confirm_add" class="layui-form-label">
-                <span class="x-red">*</span>当日新增确诊
+                <span class="x-red">*</span>电子邮件
             </label>
             <div class="layui-input-inline">
-                <input type="number" id="confirm_add" name="confirm_add" required lay-verify="required|number"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="suspect" class="layui-form-label">
-                <span class="x-red">*</span>剩余疑似
-            </label>
-            <div class="layui-input-inline">
-                <input type="number" id="suspect" name="suspect" required lay-verify="required|number"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="suspect_add" class="layui-form-label">
-                <span class="x-red">*</span>当日新增疑似
-            </label>
-            <div class="layui-input-inline">
-                <input type="number" id="suspect_add" name="suspect_add" required lay-verify="required|number"
+                <input type="text" id="confirm_add" name="confirm_add" required lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label for="heal" class="layui-form-label">
-                <span class="x-red">*</span>累计治愈
+                <span class="x-red">*</span>手机号
             </label>
             <div class="layui-input-inline">
-                <input type="number" id="heal" name="heal" required lay-verify="required|number"
+                <input type="text" id="heal" name="heal" required lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item">
-            <label for="heal_add" class="layui-form-label">
-                <span class="x-red">*</span>当日新增治愈
-            </label>
-            <div class="layui-input-inline">
-                <input type="number" id="heal_add" name="heal_add" required lay-verify="required|number"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="dead" class="layui-form-label">
-                <span class="x-red">*</span>累计死亡
-            </label>
-            <div class="layui-input-inline">
-                <input type="number" id="dead" name="dead" required lay-verify="required|number"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="dead_add" class="layui-form-label">
-                <span class="x-red">*</span>当日新增死亡
-            </label>
-            <div class="layui-input-inline">
-                <input type="number" id="dead_add" name="dead_add" required lay-verify="required|number"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
+
 
         <div class="layui-form-item">
             <label for="L_repass" class="layui-form-label">
@@ -192,12 +159,5 @@
         </div>
     </form>
 </div>
-
-</body>
-<style>
-    .layui-form-label {
-        width: 150px !important;
-    }
-</style>
 
 </html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Maintenance records</title>
+    <style>
+        #showdiv {
+            width: 450px;
+            height: 530px;
+            border: solid 2px grey;
+            border-radius: 10px;
+            /*margin: auto;*/
+            margin-top: 20px;
+            margin-left: 350px;
+        }
+
+        body {
+            background: url(static/imgg/backgroud.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        tr {
+            height: 35px;
+        }
+
+        span {
+            font-size: 13px;
+        }
+
+        /*//验证码设置*/
+        #codeSpan {
+            font-size: 20px;
+        }
+
+        /*日期框图标撑满全框
+           但是图标本身却在框外*/
+        input::-webkit-calendar-picker-indicator {
+            position: absolute;
+            right: 0;
+            padding-left: calc(100% - 24px);
+            padding-right: 8px;
+        }
+
+        /* 日期标签定宽
+           将日期图标收回矿中*/
+        input {
+            position: relative;
+            width: 140px;
+        }
+
+
+        /* 日期标签 默认不显示 年月日
+		  此时日期框不可用*/
+        input::-webkit-datetime-edit {
+            display: none;
+        }
+
+        /* 日期标签 显示 placeholder
+            添加一个默认值让日期框可选*/
+        input:empty:before {
+            content: attr(placeholder);
+        }
+
+        table {
+            margin: auto;
+            color: blue; /*white;*/
+            font-family: "Consolas";
+            margin-top: 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div id="showdiv">
+                        <a href="/index.html" class="indeed" style="font-size:28px;">维保任务</a><br> 
+    <form method="post" action="/records.html">
+        <table>
+            <tr>
+                <td width="50px">电梯编号:</td>
+                <td width="300px">
+                    <input type="text" name="uname" id="uname" required="" value=""/><span id="" style="color: red">*Within ten words</span>
+                </td>
+            </tr>
+            <tr>
+                <td width="50px">电梯位置:</td>
+                <td width="300px">
+                <input type="text" name="pistion" id="pistion" required="" value=""/><span id="" style="color: red">*Within ten words</span>
+                </td>
+
+            </tr>
+            <tr>
+                <td width="50px">时间:</td>
+                <td>
+                    <input type="date" name="date" id="date" required="" class="show_placeholder" placeholder="请选择日期"
+                           onchange="changeDate(this.id)"/>
+                </td>
+            </tr>
+            <tr>
+                <td>故障现象:</td>
+                <td>
+
+                    <textarea name="intrm" rows="5" cols="30" required=""></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>故障诊断:</td>
+                <td>
+                    <textarea name="intro" rows="5" cols="30" required=""></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>故障类型:</td>
+                <td>
+
+                    <select name="address">
+                        <option value="暂无此类型" style="flood-color: red">--Choices(* This type is not available)--
+                        </option>
+                        <option value="通力电梯">通力电梯</option>
+                        <option value="通力扶梯">通力扶梯</option>
+                        <option value="蒂森电梯">蒂森电梯</option>
+                        <option value="蒂森扶梯">蒂森扶梯</option>
+                        <option value="快速电梯">快速电梯</option>
+                        <option value="5">南昌</option>
+                        <option value="6">赣州</option>
+                        <option value="7">瑞金</option>
+                        <option value="8">西安</option>
+                        <option value="" id="FaultType"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="determine" id="determine" value="Determine"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center" style="color: blue">
+                    {{sql}}
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script>
+    //js操作
+    //
+    function changeDate(idval) {
+        var dom = document.getElementById(idval);
+        var value = dom.value;
+        if (value != null || value != "") {
+            dom.setAttribute("placeholder", value);
+        }
+    }
+
+    //jquery操作
+    /*时间改变且有值时，恢复日期显示；否则仍显示 placeholder
+           $('#date').change(function(){
+                   if(!$(this).val()){
+                           $(this).addClass('show_placeholder');
+                   }else{
+                           $(this).removeClass('show_placeholder');
+                   }
+           });
+       */
+</script>
+
+
+</body>
+</html>

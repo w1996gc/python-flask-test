@@ -119,6 +119,7 @@ body{
 }
 .x-body{
     padding: 20px;
+        height: auto;margin: 10px auto;overflow: hidden;
 }
 .x-nav{
     padding: 0 20px;

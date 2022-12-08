@@ -16,7 +16,32 @@
     #time{
         font-size: 28px;
         color:#FF0000;
+    }
+    input::-webkit-calendar-picker-indicator {
+        position: absolute;
+        right: 0;
+        padding-left: calc(100% - 24px);
+        padding-right: 8px;
+    }
 
+    /* 日期标签定宽
+       将日期图标收回矿中*/
+    input {
+        position: relative;
+        /*width: 140px;*/
+    }
+
+
+    /* 日期标签 默认不显示 年月日
+      此时日期框不可用*/
+    input::-webkit-datetime-edit {
+        display: none;
+    }
+
+    /* 日期标签 显示 placeholder
+        添加一个默认值让日期框可选*/
+    input:empty:before {
+        content: attr(placeholder);
     }
 </style>
 <body>
@@ -28,11 +53,18 @@
             <form method="post" action="update.html">
                 <div class="right-infp">
                     <div class="right-infp-name">
-
+                        <tr>
+                            <td>
                         <input type="text" name="number" placeholder="请输入编号:" maxlength="13" required="" value=""
                                autocomplete="off">
-                        <input type="text" name="new_number" placeholder="请输入新内容:" maxlength="13" required="" value=""
-                               autocomplete="off">
+                            </td>
+                            </tr>
+                        <tr>
+                            <td>
+                        <input type="date" name="date" id="date" class="show_placeholder" placeholder="请选择日期" maxlength="13" required=""
+                               autocomplete="off" onchange="changeDate(this.id)" style="width: 140px;">
+                            </td>
+                            </tr>
 
 
                     </div>
@@ -116,6 +148,14 @@ Date.prototype.format = function(fmt) {
       "document.getElementById('time').innerHTML = (new Date()).format('yyyy-MM-dd hh:mm:ss');",
       1000
     );
+
+    function changeDate(idval) {
+        var dom = document.getElementById(idval);
+        var value = dom.value;
+        if (value != null || value != "") {
+            dom.setAttribute("placeholder", value);
+        }
+    }
 
 </script>
 <script type="text/javascript" src="/eel.js"></script>

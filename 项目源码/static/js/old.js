@@ -109,7 +109,7 @@ function show_data(page_data, page_no, page_list) {
 
 function x_old_edit(title, a, b, c, d, e, f, g, h, i, w, he) {
     if (w == null || w == '') {
-        w = 600
+        w = 400
     }
     if (he == null || he == '') {
         he = 650

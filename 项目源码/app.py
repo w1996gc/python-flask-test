@@ -36,10 +36,25 @@ class Flask(_Flask):
 
 
 app = Flask(__name__)
+# 字符串随便起
+app.secret_key = "affedasafafqwe"
+
 
 
 # -------------前台页面相关服务接口start----------------
 # 系统默认路径前台跳转
+@app.route('/records.html', methods=['GET',"POST"])
+def mrecords():
+    if request.method == 'POST':
+        leftnu=request.form.get('uname')
+        pistion=request.form.get('pistion')
+        date=request.form.get('date')
+        faultm=request.form.get('intrm')
+        causef=request.form.get('intro')
+        mtype=request.form.get('address')
+        sql=maintenance(leftnu,pistion, date, faultm, causef, mtype)
+        return render_template('records.html',sql=sql)
+    return render_template('records.html',sql='')
 # 系统默认路径前台跳转
 @app.route('/')
 def main_page():
@@ -48,6 +63,75 @@ def main_page():
 @app.route('/about.html',methods=['GET','POST'])
 def data_about():
     return render_template('html/about.html')
+
+# test
+@app.route('/sysuser',methods=['GET','POST'])
+def user_left():
+    return render_template('admin.html')
+
+# test
+@app.route('/user/list', methods=["POST"])
+def user_list():
+    get_data = request.form.to_dict()
+    page_size = get_data.get('page_size')
+    page_no = get_data.get('page_no')
+    param = get_data.get('param')
+    data, count, page_list, max_page = utils.get_sys_list(int(page_size), int(page_no), param)
+    return jsonify({"data": data, "count": count, "page_no": page_no, "page_list": page_list, "max_page": max_page})
+
+# test
+@app.route('/user/del', methods=["DELETE"])
+def user_del():
+    get_data = request.form.to_dict()
+    id = get_data.get('id')
+    utils.del_sys(id)
+    return '200'
+# test
+@app.route('/user/edit', methods=["POST"])
+def sys_new():
+    get_data = request.form.to_dict()
+    id = get_data.get('id')
+    confirm = get_data.get('province')
+    confirm_add = get_data.get('confirm')
+    heal = get_data.get('confirm_add')
+    dead = get_data.get('heal')
+    utils.sys_new(id, confirm, confirm_add, heal, dead)
+    return '200'
+
+# test
+@app.route('/left/del', methods=["DELETE"])
+def left_del():
+    get_data = request.form.to_dict()
+    id = get_data.get('id')
+    utils.del_left(id)
+    return '200'
+# test
+@app.route('/left/edit', methods=["POST"])
+def left_new():
+    get_data = request.form.to_dict()
+    id = get_data.get('id')
+    confirm = get_data.get('confirm')
+    confirm_add = get_data.get('confirm_add')
+    heal = get_data.get('heal')
+    dead = get_data.get('dead')
+    utils.left_new(id, confirm, confirm_add, heal, dead)
+    return '200'
+
+# test
+@app.route('/left/list', methods=["POST"])
+def left_list():
+    get_data = request.form.to_dict()
+    page_size = get_data.get('page_size')
+    page_no = get_data.get('page_no')
+    param = get_data.get('param')
+    data, count, page_list, max_page = utils.get_left_list(int(page_size), int(page_no), param)
+    return jsonify({"data": data, "count": count, "page_no": page_no, "page_list": page_list, "max_page": max_page})
+
+# test
+@app.route('/Exhibition',methods=['GET','POST'])
+def Exhibition_left():
+    return render_template('html/left.html')
+
 # 获取服务器时间
 
 @app.route('/music', methods=['GET',"POST"])
@@ -194,7 +278,7 @@ def __register():
         conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
         cur = conn.cursor()
 
-        sql=f"select count(*) from sys_user;"
+        sql=f"select count(*) from sys_user where  1=1;"
         cur.execute(sql)
         content = cur.fetchall()
         n=str([i[0]for i in content])
@@ -313,6 +397,7 @@ def new_list():
     page_size = get_data.get('page_size')
     page_no = get_data.get('page_no')
     param = get_data.get('param')
+
     data, count, page_list, max_page = utils.get_new_list(int(page_size), int(page_no), param)
     return jsonify({"data": data, "count": count, "page_no": page_no, "page_list": page_list, "max_page": max_page})
 
@@ -582,7 +667,7 @@ def online_date():
 def my_update_date():
     if request.method == 'POST':
         number=request.form.get('number')
-        new_number=request.form.get('new_number')
+        new_number=request.form.get('date')
         left=request.form.get('left')
         labels,content,sql = get_my_sql(left,new_number, number)
         return render_template('html/update.html', labels=labels, content=content,sql=sql)
@@ -590,17 +675,9 @@ def my_update_date():
     return render_template('html/update.html', labels=labels, content=content,sql=sql)
 def get_my_sql(left, new_number,number):
     try:
-        data = {
-            "host": "111.173.83.23",
-            "user": "root",
-            "password": "Wqq@123456",
-            "db": "test",
-            "charset": "utf8"
-        }
+
         if not os.path.exists("auto.json"):
-            json_str = json.dumps(data, indent=4)
-            with open("auto.json", "w") as f:
-                f.write(json_str)
+            setting()
         else:
             file = open('auto.json', 'rb')
             jsonData = json.load(file)
@@ -630,17 +707,9 @@ def get_my_sql(left, new_number,number):
 
             return labels,content1,sql1
     except Exception as e:
-        data = {
-            "host": "111.173.83.23",
-            "user": "root",
-            "password": "Wqq@123456",
-            "db": "test",
-            "charset": "utf8"
-        }
+
         if not os.path.exists("auto.json"):
-            json_str = json.dumps(data, indent=4)
-            with open("auto.json", "w") as f:
-                f.write(json_str)
+            setting()
         else:
             file = open('auto.json', 'rb')
             jsonData = json.load(file)
@@ -671,7 +740,7 @@ def get_my_sql(left, new_number,number):
 @app.route('/index.html',methods=['GET','POST'])
 def my_left():
     if request.method == 'POST':
-        number=request.form.get('number')
+        number=request.form.get('date')
         left=request.form.get('left')
         labels,content,sql = get_sql(left, number)
         return render_template('html/index.html', labels=labels, content=content,sql=sql)
@@ -700,7 +769,7 @@ def _get_sql():
         conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
         cur = conn.cursor()
 
-        sql1 = "select * from maintenance_plan order by `left1-半月` asc"
+        sql1 = "select * from maintenance_plan order by `left3-半月` asc"
         cur.execute(sql1)
         content = cur.fetchall()
 
@@ -715,17 +784,9 @@ def _get_sql():
         return labels, content,sql1
 def get_sql(left, number):
     try:
-        data = {
-            "host": "111.173.83.23",
-            "user": "root",
-            "password": "Wqq@123456",
-            "db": "test",
-            "charset": "utf8"
-        }
+
         if not os.path.exists("auto.json"):
-            json_str = json.dumps(data, indent=4)
-            with open("auto.json", "w") as f:
-                f.write(json_str)
+            setting()
         else:
             file = open('auto.json', 'rb')
             jsonData = json.load(file)
@@ -737,7 +798,7 @@ def get_sql(left, number):
             conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
             cur = conn.cursor()
 
-            sql1 = "select `number`,`position`,`{}` from maintenance_plan where `{}`='{}' order by `number` desc".format(left,left, number)
+            sql1 = "select * from maintenance_plan where `{}`='{}' order by `number` desc".format(left, number)
             cur.execute(sql1)
             content = cur.fetchall()
 
@@ -751,17 +812,9 @@ def get_sql(left, number):
 
             return labels,content,sql1
     except Exception as e:
-        data = {
-            "host": "111.173.83.23",
-            "user": "root",
-            "password": "Wqq@123456",
-            "db": "test",
-            "charset": "utf8"
-        }
+
         if not os.path.exists("auto.json"):
-            json_str = json.dumps(data, indent=4)
-            with open("auto.json", "w") as f:
-                f.write(json_str)
+            setting()
         else:
             file = open('auto.json', 'rb')
             jsonData = json.load(file)
@@ -1186,17 +1239,9 @@ def mca():
 
 def get_conn(sql):
     try:
-        data = {
-            "host": "111.173.83.23",
-            "user": "root",
-            "password": "Wqq@123456",
-            "db": "test",
-            "charset": "utf8"
-        }
+
         if not os.path.exists("auto.json"):
-            json_str = json.dumps(data, indent=4)
-            with open("auto.json", "w") as f:
-                f.write(json_str)
+            setting()
         else:
             file = open('auto.json', 'rb')
             jsonData = json.load(file)
@@ -1239,17 +1284,9 @@ def getmca():
 
 def get_mca_conn(sql):
     try:
-        data = {
-            "host": "111.173.83.23",
-            "user": "root",
-            "password": "Wqq@123456",
-            "db": "test",
-            "charset": "utf8"
-        }
+
         if not os.path.exists("auto.json"):
-            json_str = json.dumps(data, indent=4)
-            with open("auto.json", "w") as f:
-                f.write(json_str)
+            setting()
         else:
             file = open('auto.json', 'rb')
             jsonData = json.load(file)
@@ -1282,17 +1319,9 @@ def get_mca_conn(sql):
 
 def getconn_data():
     try:
-        data = {
-            "host": "111.173.83.23",
-            "user": "root",
-            "password": "Wqq@123456",
-            "db": "test",
-            "charset": "utf8"
-        }
+
         if not os.path.exists("auto.json"):
-            json_str = json.dumps(data, indent=4)
-            with open("auto.json", "w") as f:
-                f.write(json_str)
+            setting()
         else:
             file = open('auto.json', 'rb')
             jsonData = json.load(file)
@@ -1358,17 +1387,8 @@ def url_download(url):
         return 'Error:{}'.format(ee), '下载失败'
 def createdb():
     try:
-        data = {
-            "host": "111.173.83.23",
-            "user": "root",
-            "password": "Wqq@123456",
-            "db": "test",
-            "charset": "utf8"
-        }
         if not os.path.exists("auto.json"):
-            json_str = json.dumps(data, indent=4)
-            with open("auto.json", "w") as f:
-                f.write(json_str)
+            setting()
         else:
             file = open('auto.json', 'rb')
             jsonData = json.load(file)
@@ -1388,6 +1408,39 @@ def createdb():
             createdb()
         data = None
         return data
+
+
+def maintenance(leftnu,pistion,date,faultm,causef,mtype):
+    try:
+        if not os.path.exists("auto.json"):
+            setting()
+        else:
+            file = open('auto.json', 'rb')
+            jsonData = json.load(file)
+            host = jsonData['host']
+            user = jsonData['user']
+            pwd = jsonData['password']
+            db = jsonData['db']
+            charset = jsonData['charset']
+            conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+            cur = conn.cursor()
+            ssql="select count(*) from maintenance where  1=1"
+            cur.execute(ssql)
+            content = cur.fetchall()
+            id=str([i[0]for i in content])
+            id=id.replace('[','')
+            id=id.replace(']','')
+            id=int(id)
+            id +=1
+            sql=f"insert into maintenance (id,leftnu,pistion, date, faultm, causef, mtype) values ({id},'{leftnu}','{pistion}','{date}','{faultm}','{causef}','{mtype}')"
+            cur.execute(sql)
+            conn.commit()
+            cur.close()
+            conn.close()
+            return sql
+    except Exception as e:
+        return e
+
 def setting():
     data = {
         "host": "111.173.83.23",

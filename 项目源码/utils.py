@@ -2,7 +2,7 @@ import json
 import os
 import time
 import pymysql
-
+from datetime import datetime,date
 
 def get_time():
     time_str = time.strftime("%Y{}%m{}%d{} %X")
@@ -226,6 +226,91 @@ def get_new_list(page_size, page_no, param):
         data_page.append(item)
     return data_page, count_res, page_list, max_page
 
+# test
+def del_sys(id):
+    sql = "delete from  sys_user where id =" + id
+    res = query(sql)
+    return res
+
+# test
+def sys_new(id, confirm, confirm_add, heal, dead):
+    sql=f"update sys_user set password ='{confirm}',name='{confirm_add}',email='{dead}',phone='{heal}' where id ='{id}'"
+    print(sql)
+    res=query(sql)
+    return res
+
+# test
+def get_sys_list(page_size, page_no, param):
+    param = param.replace("\\", "")
+    count_sql = "select count(*) from sys_user where " + param
+    print(count_sql)
+    count_res = query_no(count_sql)[0][0]
+    start = page_size * (page_no - 1)
+    start = 0 if start < 0 else start
+    sql = "select * from sys_user where " + param + " order by id desc limit " + str(start) + "," + str(page_size)
+    res = query(sql)
+    data_page = []
+    page_list = []
+    max_page = 0
+    if count_res % page_size == 0:
+        max_page = int(count_res / page_size)
+    else:
+        max_page = int(count_res / page_size) + 1
+    if max_page <= 5:
+        page_list = [i for i in range(1, max_page + 1, 1)]
+    elif page_no + 2 > max_page:
+        page_list = [i for i in range(max_page - 5, max_page + 1, 1)]
+    elif page_no - 2 < 1:
+        page_list = [i for i in range(1, 6, 1)]
+    else:
+        page_list = [i for i in range(page_no - 2, page_no + 3, 1)]
+    for a, b, c, e, f, g in res:
+        item = [a, b, c,  e, f, g]
+        data_page.append(item)
+    return data_page, count_res, page_list, max_page
+
+
+# test
+def del_left(id):
+    sql = "delete from  maintenance where id =" + id
+    res = query(sql)
+    return res
+# test
+def left_new(id, confirm, confirm_add, heal, dead):
+    sql=f"update maintenance set date ='{confirm}',faultm='{confirm_add}',causef='{heal}',mtype='{dead}' where id ='{id}'"
+    res=query(sql)
+    return res
+
+# test
+def get_left_list(page_size, page_no, param):
+    param = param.replace("\\", "")
+    count_sql = "select count(*) from maintenance where " + param
+    print(count_sql)
+    count_res = query_no(count_sql)[0][0]
+    start = page_size * (page_no - 1)
+    start = 0 if start < 0 else start
+    sql = "select * from maintenance where " + param + " order by id desc limit " + str(start) + "," + str(page_size)
+    res = query(sql)
+    data_page = []
+    page_list = []
+    max_page = 0
+    if count_res % page_size == 0:
+        max_page = int(count_res / page_size)
+    else:
+        max_page = int(count_res / page_size) + 1
+    if max_page <= 5:
+        page_list = [i for i in range(1, max_page + 1, 1)]
+    elif page_no + 2 > max_page:
+        page_list = [i for i in range(max_page - 5, max_page + 1, 1)]
+    elif page_no - 2 < 1:
+        page_list = [i for i in range(1, 6, 1)]
+    else:
+        page_list = [i for i in range(page_no - 2, page_no + 3, 1)]
+    for a, b, c, d, e, f, g in res:
+        d = datetime.strptime(d, '%Y-%m-%d')
+        item = [a, b, c, d.strftime("%Y-%m-%d"), e, f, g]
+        data_page.append(item)
+    return data_page, count_res, page_list, max_page
 
 def get_news_list(page_size, page_no, param):
     param = param.replace("\\", "")
@@ -313,7 +398,7 @@ def get_register(n,user,password,mail,photonumber):
             charset = jsonData['charset']
             conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
             cur=conn.cursor()
-            sql=f"INSERT INTO `sys_user` VALUES (%s, '%s', '%s', '管理员', '%s', '%s')"%(n,user,password,mail,photonumber)
+            sql=f"INSERT ignore INTO `sys_user` VALUES (%s, '%s', '%s', '管理员', '%s', '%s')"%(n,user,password,mail,photonumber)
             print(sql)
             cur.execute(sql)
             conn.commit()

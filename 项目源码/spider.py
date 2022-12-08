@@ -327,8 +327,8 @@ def _my_online(left):
 
     cur = conn.cursor()
     try:
-        today_time=datetime.datetime.now().date().strftime("%Y年%m月%d")
-        today_time=today_time.replace('2022年','')
+        today_time=datetime.datetime.now().date().strftime("%Y-%m-%d")
+        # today_time=today_time.replace('2022年','')
         sql1 = "select * from maintenance_plan where `{}`='{}' order by `number` desc;".format(left,today_time)
         cur.execute(sql1)
         content = cur.fetchall()
@@ -343,8 +343,8 @@ def _my_online(left):
 
         return labels, content, sql1
     except Exception as e:
-        today_time=datetime.datetime.now().date().strftime("%Y年%m月%d")
-        today_time1 = today_time.replace('2022年', '')
+        today_time=datetime.datetime.now().date().strftime("%Y-%m-%d")
+        # today_time1 = today_time.replace('2022年', '')
         sql1 = "select * from maintenance_plan order by `left1-半月` asc;"
         cur.execute(sql1)
         content = cur.fetchall()
