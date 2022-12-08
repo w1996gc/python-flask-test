@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,16 +12,17 @@
 
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
 
-        <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/jquery.min.js"></script>
     <script type="text/javascript" src="../../static/lib/layui/layui.js" charset="utf-8"></script>
     <script src="../../static/js/welcom.js"></script>
     <title>科技园保养计划</title>
 </head>
 <style>
-    #time{
+    #time {
         font-size: 28px;
-        color:#FF0000;
+        color: #FF0000;
     }
+
     input::-webkit-calendar-picker-indicator {
         position: absolute;
         right: 0;
@@ -49,13 +49,18 @@
     input:empty:before {
         content: attr(placeholder);
     }
+
     /*.layui-btn{*/
     /*    color: #fff;*/
     /*    background-color: #42b8f1;*/
     /*    !*border-radius: 100px;*!*/
     /*}*/
-    .layui-text{
-        position: flex;display: inline-block;font-size: 22px;border-radius: 12px;color:#000000;
+    .layui-text {
+        position: flex;
+        display: inline-block;
+        font-size: 22px;
+        border-radius: 12px;
+        color: #000000;
         border: solid 1px;
         padding: 0 4px;
     }
@@ -63,53 +68,57 @@
 <body>
 
 <div class="content">
-        <div class="content-left">
-            <a href="static/dact/Python_music_player.py"></a>
-        </div>
-        <div class="content-right">
-            <form method="post" action="index.html">
-                <div class="right-infp">
-                    <div class="right-infp-name">
-                        <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:left"href="javascript:location.replace(location.href);" title="刷新">
-                            <i class="layui-icon" style="line-height:38px">刷新ဂ</i></a>
-                        <br></br>
-                        <tr>
-                            <td>
-                        <input type="date" name="date" id="date" class="show_placeholder" placeholder="请选择日期" maxlength="13" required=""
-                               autocomplete="off" onchange="changeDate(this.id)" style="width: 140px;">
-                            </td>
-                            </tr>
-<!--                    </div>-->
-<!--                    <div class="right-infp-btn">-->
-<!--                        <button class="btn" type="submit">登录</button>-->
+    <div class="content-left">
+        <a href="static/dact/Python_music_player.py"></a>
+    </div>
+    <div class="content-right">
+        <form method="post" action="index.html">
+            <div class="right-infp">
+                <div class="right-infp-name">
+                    <a class="layui-btn layui-btn-primary layui-btn-small"
+                       style="line-height:1.6em;margin-top:3px;float:left"
+                       href="javascript:location.replace(location.href);" title="刷新">
+                        <i class="layui-icon" style="line-height:38px">刷新ဂ</i></a>
+                    <br></br>
+                    <tr>
+                        <td>
+                            <input type="date" name="date" id="date" class="show_placeholder" placeholder="请选择日期"
+                                   maxlength="13" required=""
+                                   autocomplete="off" onchange="changeDate(this.id)" style="width: 140px;">
+                        </td>
+                    </tr>
+                    <!--                    </div>-->
+                    <!--                    <div class="right-infp-btn">-->
+                    <!--                        <button class="btn" type="submit">登录</button>-->
 
-                    </div>
-		    <div id="time"></div>
-                    <div id="update"><a href="/update.html" style="font-size: 28px;">Database Update</a></div>
-                    <div id="btn">
+                </div>
+                <div id="time"></div>
+                <div id="update"><a href="/update.html" style="font-size: 28px;">Database Update</a></div>
+                <div id="btn">
 
-                        <a href="/spided"  class="layui-btn" style="font-size: 28px;">今天</a><br/>
+                    <a href="/spided" class="layui-btn" style="font-size: 28px;">今天</a><br/>
 
-                        <a href="/image"  class="image-btn" style="font-size: 28px;">定位到二维码</a><br/>
-                        <a href="/records.html" class="recod" style="font-size:28px;">定位到维修记录</a><br>
-                    </div>
-                    <div>
-                        <!--<br/>-->
-                        <div class="layui-text" style="position: flex;display: inline-block;font-size: 22px;border-radius: 12px;color:#000000;border: solid 1px;padding: 0 4px;">
+                    <a href="/image" class="image-btn" style="font-size: 28px;">定位到二维码</a><br/>
+                    <a href="/records.html" class="recod" style="font-size:28px;">定位到维修记录</a><br>
+                </div>
+                <div>
+                    <!--<br/>-->
+                    <div class="layui-text"
+                         style="position: flex;display: inline-block;font-size: 22px;border-radius: 12px;color:#000000;border: solid 1px;padding: 0 4px;">
                         <input type="checkbox" value="left1-半月" name="left">left1
                         <input type="checkbox" value="left2-半年" name="left">left2
                         <input type="checkbox" value="left3-半月" name="left">left3
                         <input type="checkbox" value="left4-半月" name="left">left4
                         <input type="submit" style="color:blue;">
-                        </div>
-                    </div>
-                    <div class="content" style="color:#FF0000">
-                        执行的命令为:{{sql}}
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="content" style="color:#FF0000">
+                    执行的命令为:{{sql}}
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 </body>
 <body>
 <div class="row">
@@ -124,17 +133,21 @@
                         <thead>
                         <tr style="color:#0000ff;background-color:#48a6fd;font-size:18px;">
                             {% for i in labels %}
-                                <td style="width: 10%;height: 5%;">{{ i }}</td>
+                            <td style="width: 10%;height: 5%;">{{ i }}</td>
                             {% endfor %}
+                            <td>链接</td>
                         </tr>
+
                         </thead>
                         <tbody>
                         {% for i in content %}
-                            <tr>
-                                {% for j in i %}
-                                    <td>{{ j }}</td>
-                                {% endfor %}
-                            </tr>
+                        <tr>
+                            {% for j in i %}
+                            <td>{{ j }}</td>
+                            {% endfor %}
+                            <td><a href="/static/img/{{ i[0] }}.png">{{ i[0] }}</a></td>
+                        </tr>
+
                         {% endfor %}
                         </tbody>
                     </table>
@@ -146,34 +159,35 @@
 
 </div>
 <script>
-Date.prototype.format = function(fmt) {
-      var o = {
-        "y+": this.getFullYear, //年
-        "M+": this.getMonth() + 1, //月份
-        "d+": this.getDate(), //日
-        "h+": this.getHours(), //小时
-        "m+": this.getMinutes(), //分
-        "s+": this.getSeconds(), //秒
-      };
-      if (/(y+)/.test(fmt))
-        fmt = fmt.replace(
-          RegExp.$1,
-          (this.getFullYear() + "").substr(4 - RegExp.$1.length)
-        );
-      for (var k in o)
-        if (new RegExp("(" + k + ")").test(fmt))
-          fmt = fmt.replace(
-            RegExp.$1,
-            RegExp.$1.length == 1
-              ? o[k]
-              : ("00" + o[k]).substr(("" + o[k]).length)
-          );
-      return fmt;
+    Date.prototype.format = function (fmt) {
+        var o = {
+            "y+": this.getFullYear, //年
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+        };
+        if (/(y+)/.test(fmt))
+            fmt = fmt.replace(
+                RegExp.$1,
+                (this.getFullYear() + "").substr(4 - RegExp.$1.length)
+            );
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt))
+                fmt = fmt.replace(
+                    RegExp.$1,
+                    RegExp.$1.length == 1
+                        ? o[k]
+                        : ("00" + o[k]).substr(("" + o[k]).length)
+                );
+        return fmt;
     };
     setInterval(
-      "document.getElementById('time').innerHTML = (new Date()).format('yyyy年MM月dd日 hh时mm分ss秒');",
-      1000
+        "document.getElementById('time').innerHTML = (new Date()).format('yyyy年MM月dd日 hh时mm分ss秒');",
+        1000
     );
+
     function changeDate(idval) {
         var dom = document.getElementById(idval);
         var value = dom.value;
@@ -181,7 +195,6 @@ Date.prototype.format = function(fmt) {
             dom.setAttribute("placeholder", value);
         }
     }
-
 
 
 </script>
