@@ -33,16 +33,17 @@
 </style>
 <body>
 <div>
-    <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:left"href="javascript:location.replace(location.href);" title="刷新">
-    <i class="layui-icon" style="line-height:38px;font-size: 28px;">刷新ဂ</i></a>
+    <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:left"
+       href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:38px;font-size: 28px;">刷新ဂ</i></a>
     <br><br/>
-    <a href="/index.html"  class="layui-btn" style="font-size: 28px;">Select Data</a>
-<br/>
+    <a href="/index.html" class="layui-btn" style="font-size: 28px;">Select Data</a>
+    <br/>
 
-<form>
-    <input id='input' placeholder='请输入编号:' type='text'/>
-</form>
-<button onclick="btn()">提交</button>
+    <form>
+        <input id='input' placeholder='请输入编号:' type='text'/>
+    </form>
+    <button onclick="btn()">提交</button>
 
 </div>
 <div id="html"></div>
@@ -52,264 +53,39 @@
 <div>
     <table border="1" bordercolor="#000000" class="table table-striped table-bordered table-hover">
         <thead>
-        <tr style="color:#0000ff;background-color:#48a6fd;font-size:18px;">
-            <td style="width: 10%;height: 5%;">id</td>
-            <td style="width: 10%;height: 5%;">number</td>
-            <td style="width: 10%;height: 5%;">position</td>
+        <tr style="color:#0000ff;background-color:#48a6fd;font-size:18px;width: 1px;">
+            {% for i in labels %}
+            <td style="width: 10%;height: 5%;">{{ i }}</td>
+            {% endfor %}
+            <td>链接</td>
         </tr>
         </thead>
+        {% for i in content %}
         <tr>
-            <td>1</td>
-            <td>1栋东T46974</td>
-            <td><a href="/static/image/1栋东T46974.png">1栋东T46974.png</a></td>
+            {% for j in i %}
+            <td>{{ j }}</td>
+            {% endfor %}
+
+            <td><a href="/static/img/{{ i[1] }}.png">{{ i[1] }}</a></td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td>1栋T46976</td>
-            <td><a href="/static/image/1栋T46976.png">1栋T46976.png</a></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>1栋T48294</td>
-            <td><a href="/static/image/1栋T48294.png">1栋T48294.png</a></td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>1栋中T46975</td>
-            <td><a href="/static/image/1栋中T46975.png">1栋中T46975.png</a></td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>2栋T46961</td>
-            <td><a href="/static/image/2栋T46961.png">2栋T46961.png</a></td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>2栋T46962</td>
-            <td><a href="/static/image/2栋T46962.png">2栋T46962.png</a></td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>2栋T46963</td>
-            <td><a href="/static/image/2栋T46963.png">2栋T46963.png</a></td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>2栋T48293</td>
-            <td><a href="/static/image/2栋T48293.png">2栋T48293.png</a></td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>3栋T46965</td>
-            <td><a href="/static/image/3栋T46965.png">3栋T46965.png</a></td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>3栋T46967</td>
-            <td><a href="/static/image/3栋T46967.png">3栋T46967.png</a></td>
-        </tr>
-        <tr>
-            <td>11</td>
-            <td>3栋T46973</td>
-            <td><a href="/static/image/3栋T46973.png">3栋T46973.png</a></td>
-        </tr>
-        <tr>
-            <td>12</td>
-            <td>4栋T47707</td>
-            <td><a href="/static/image/4栋T47707.png">4栋T47707.png</a></td>
-        </tr>
-        <tr>
-            <td>13</td>
-            <td>4栋T47708</td>
-            <td><a href="/static/image/4栋T47708.png">4栋T47708.png</a></td>
-        </tr>
-        <tr>
-            <td>14</td>
-            <td>5栋AT48290</td>
-            <td><a href="/static/image/5栋AT48290.png">5栋AT48290.png</a></td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>5栋东T47704</td>
-            <td><a href="/static/image/5栋东T47704.png">5栋东T47704.png</a></td>
-        </tr>
-        <tr>
-            <td>16</td>
-            <td>6栋T47717</td>
-            <td><a href="/static/image/6栋T47717.png">6栋T47717.png</a></td>
-        </tr>
-        <tr>
-            <td>17</td>
-            <td>7栋T47714</td>
-            <td><a href="/static/image/7栋T47714.png">7栋T47714.png</a></td>
-        </tr>
-        <tr>
-            <td>18</td>
-            <td>7栋T47715</td>
-            <td><a href="/static/image/7栋T47715.png">7栋T47715.png</a></td>
-        </tr>
-        <tr>
-            <td>19</td>
-            <td>8栋T47710</td>
-            <td><a href="/static/image/8栋T47710.png">8栋T47710.png</a></td>
-        </tr>
-        <tr>
-            <td>20</td>
-            <td>8栋T47711</td>
-            <td><a href="/static/image/8栋T47711.png">8栋T47711.png</a></td>
-        </tr>
-        <tr>
-            <td>21</td>
-            <td>8栋T47712</td>
-            <td><a href="/static/image/8栋T47712.png">8栋T47712.png</a></td>
-        </tr>
-        <tr>
-            <td>22</td>
-            <td>9栋T46966</td>
-            <td><a href="/static/image/9栋T46966.png">9栋T46966.png</a></td>
-        </tr>
-        <tr>
-            <td>23</td>
-            <td>9栋T46972</td>
-            <td><a href="/static/image/9栋T46972.png">9栋T46972.png</a></td>
-        </tr>
-        <tr>
-            <td>24</td>
-            <td>10栋北T46978</td>
-            <td><a href="/static/image/10栋北T46978.png">10栋北T46978.png</a></td>
-        </tr>
-        <tr>
-            <td>25</td>
-            <td>10栋东T46977</td>
-            <td><a href="/static/image/10栋东T46977.png">10栋东T46977.png</a></td>
-        </tr>
-        <tr>
-            <td>26</td>
-            <td>10栋南T46979</td>
-            <td><a href="/static/image/10栋南T46979.png">10栋南T46979.png</a></td>
-        </tr>
-        <tr>
-            <td>27</td>
-            <td>11北T46968</td>
-            <td><a href="/static/image/11北T46968.png">11北T46968.png</a></td>
-        </tr>
-        <tr>
-            <td>28</td>
-            <td>11栋T46964</td>
-            <td><a href="/static/image/11栋T46964.png">11栋T46964.png</a></td>
-        </tr>
-        <tr>
-            <td>29</td>
-            <td>11栋东T46970</td>
-            <td><a href="/static/image/11栋东T46970.png">11栋东T46970.png</a></td>
-        </tr>
-        <tr>
-            <td>30</td>
-            <td>12栋T53501</td>
-            <td><a href="/static/image/12栋T53501.png">12栋T53501.png</a></td>
-        </tr>
-        <tr>
-            <td>31</td>
-            <td>15栋T53503</td>
-            <td><a href="/static/image/15栋T53503.png">15栋T53503.png</a></td>
-        </tr>
-        <tr>
-            <td>32</td>
-            <td>16栋T53506</td>
-            <td><a href="/static/image/16栋T53506.png">16栋T53506.png</a></td>
-        </tr>
-        <tr>
-            <td>33</td>
-            <td>17栋T53508</td>
-            <td><a href="/static/image/17栋T53508.png">17栋T53508.png</a></td>
-        </tr>
-        <tr>
-            <td>34</td>
-            <td>18栋T53493</td>
-            <td><a href="/static/image/18栋T53493.png">18栋T53493.png</a></td>
-        </tr>
-        <tr>
-            <td>35</td>
-            <td>18栋T53495</td>
-            <td><a href="/static/image/18栋T53495.png">18栋T53495.png</a></td>
-        </tr>
-        <tr>
-            <td>36</td>
-            <td>19北T53494</td>
-            <td><a href="/static/image/19北T53494.png">19北T53494.png</a></td>
-        </tr>
-        <tr>
-            <td>37</td>
-            <td>19栋T53494</td>
-            <td><a href="/static/image/19栋T53494.png">19栋T53494.png</a></td>
-        </tr>
-        <tr>
-            <td>38</td>
-            <td>A1北T54965</td>
-            <td><a href="/static/image/A1北T54965.png">A1北T54965.png</a></td>
-        </tr>
-        <tr>
-            <td>39</td>
-            <td>A3-2栋T63895</td>
-            <td><a href="/static/image/A3-2栋T63895.png">A3-2栋T63895.png</a></td>
-        </tr>
-        <tr>
-            <td>40</td>
-            <td>A3西2北T54964</td>
-            <td><a href="/static/image/A3西2北T54964.png">A3西2北T54964.png</a></td>
-        </tr>
-        <tr>
-            <td>41</td>
-            <td>A3西2南T54963</td>
-            <td><a href="/static/image/A3西2南T54963.png">A3西2南T54963.png</a></td>
-        </tr>
-        <tr>
-            <td>42</td>
-            <td>B2-5AT48661</td>
-            <td><a href="/static/image/B2-5AT48661.png">B2-5AT48661.png</a></td>
-        </tr>
-        <tr>
-            <td>43</td>
-            <td>B2-5A栋T48663</td>
-            <td><a href="/static/image/B2-5A栋T48663.png">B2-5A栋T48663.png</a></td>
-        </tr>
-        <tr>
-            <td>44</td>
-            <td>B2-5BT48662</td>
-            <td><a href="/static/image/B2-5BT48662.png">B2-5BT48662.png</a></td>
-        </tr>
-        <tr>
-            <td>45</td>
-            <td>华为四号梯栋T54960</td>
-            <td><a href="/static/image/华为四号梯栋T54960.png">华为四号梯栋T54960.png</a></td>
-        </tr>
-        <tr>
-            <td>46</td>
-            <td>美食广场F1扶梯T53497</td>
-            <td><a href="/static/image/美食广场F1扶梯T53497.png">美食广场F1扶梯T53497.png</a></td>
-        </tr>
-        <tr>
-            <td>47</td>
-            <td>美食广场F2扶梯T53500</td>
-            <td><a href="/static/image/美食广场F2扶梯T53500.png">美食广场F2扶梯T53500.png</a></td>
-        </tr>
-        <tr>
-            <td>48</td>
-            <td>美食广场南T53492</td>
-            <td><a href="/static/image/美食广场南T53492.png">美食广场南T53492.png</a></td>
-        </tr>
+
+        {% endfor %}
+
     </table>
 </div>
 <script>
     var x = document.getElementById("input") //获取输入框元素
     var y = document.getElementById("html") //获取id为html的元素
+    var z = document.getElementById("id") //获取id为html的元素
+
 
     function btn() {
         y.innerHTML = "图片路径在:/static/img/T" + x.value + ".png"; //将输入框的值赋给div标签
-        document.getElementById('myaaa').src = "/static/img/" +"T"+ x.value + ".png"
+        document.getElementById('myaaa').src = "/static/img/" + "T" + x.value + ".png"
         //document.getElementById('myaaa').innerText = "/static/img/"+ x.value + ".png"
 
     }
+
 </script>
 <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

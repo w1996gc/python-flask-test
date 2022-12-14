@@ -2,6 +2,7 @@
 
 import random
 import re
+import traceback
 
 import pymysql
 from flask import Flask as _Flask, jsonify, flash
@@ -21,9 +22,11 @@ import requests
 from bs4 import BeautifulSoup
 from flask import Blueprint, render_template, request
 
-from User_related import Application
 from reposted import baidu_fanyi
 import Conn
+from 编程.Webdemo.项目源码.MyEncoder import MyEncoder
+
+
 class JSONEncoder(_JSONEncoder):
     def default(self, o):
         if isinstance(o, decimal.Decimal):
@@ -38,7 +41,118 @@ class Flask(_Flask):
 app = Flask(__name__)
 # 字符串随便起
 app.secret_key = "affedasafafqwe"
+# -------------前台页面相关服务接口start----------------
+# 首页
+app.config.from_object('config')
 
+music_name_file = {}
+image_name_file = {}
+video_name_file ={}
+name_file_dict = {"mymusic":music_name_file ,"myimage":image_name_file,"myvideo":video_name_file}
+
+
+@app.route('/my',methods=['GET'])
+def mywelcome():
+    print('in welcome')
+    return render_template("HomePage.html")
+
+@app.route('/List/',methods=['GET'])
+def get_list():
+
+    print(request.args)
+    getType = request.args['type']
+    getType="my"+getType
+    content_list = name_file_dict[getType].keys()
+    content_list=list(content_list)
+    resp = {"successed":True, "List":content_list}
+    resp = json.dumps(resp,cls=MyEncoder,indent=4)
+    return resp
+
+@app.route('/upload/',methods=['GET','POST'])
+def upload():
+
+    resp = {"successed": True, "List": []}
+    if request.method=='GET':
+        print(request.args['type'])
+    if request.method=='POST':
+        try:
+            print(request.form)
+            print(request.files["file"])
+            f = request.files["file"]
+            upType = request.form['type'].encode("gbk")  ###原文都是Unicode,在操作文件时会报错
+            upType = str(upType, "utf-8")
+            upType="my"+upType
+            filename = request.form["filename"]
+            name_file_dict[upType]={filename:True}
+            # name_file_dict['mymusic']={filename:True}
+            print(name_file_dict,type(upType))
+        except(Exception):
+            failed_Res = traceback.format_exc()
+            message = "表单数据解析异常" + failed_Res
+            resp["message"] = message
+            resp["successed"] = False
+            resp = json.dumps(resp)
+            return resp
+
+        #检查有没有重名
+        try:
+            flag = name_file_dict[upType][filename]
+            if flag=='False':
+                filename += u"a"
+        except:
+            name_file_dict[upType][filename] = True
+
+        filename = filename.encode("utf-8")
+        filename = str(filename, "utf-8")
+        try:
+            f_write = open("static/" + upType + "/" + upType + "Storage.txt", "a", encoding="utf-8")
+            f_write.write("\n")
+            f_write.write(filename)
+            f_write.close()
+            f.save("static/" + upType + "/" + filename)
+        except(Exception):
+            failed_Res = traceback.format_exc()
+            message = "文件保存失败" + failed_Res
+            resp["message"] = message
+            resp["successed"] = False
+            resp = json.dumps(resp)
+            return resp
+
+    resp = json.dumps(resp)
+    return resp
+
+@app.route('/musicPage.html',methods=['GET'])
+def musicPage():
+    return render_template('musicPage.html')
+
+@app.route('/imagePage.html',methods=['GET'])
+def imagePage():
+    return render_template('imagePage.html')
+
+@app.route('/videoPage.html',methods=['GET'])
+def videoPage():
+    return render_template('videoPage.html')
+
+@app.route('/informationPage.html',methods=['GET'])
+def informationPage():
+    return render_template('informationPage.html')
+
+
+def get_name_file(type, name_dict):
+
+    fr = open("static/" + type + "/" + type + "Storage.txt","r",encoding="utf-8")
+    lines = fr.readlines()
+    for line in lines:
+        if len(line) == 0:
+            continue
+        print(line)
+        name_dict[line] = True
+print('当前已有文件：')
+get_name_file("mymusic", music_name_file)
+get_name_file("myimage", image_name_file)
+get_name_file("myvideo", video_name_file)
+# -------------前台页面相关服务接口start----------------
+# -------------前台页面相关服务接口start----------------
 
 
 # -------------前台页面相关服务接口start----------------
@@ -56,9 +170,9 @@ def mrecords():
         return render_template('records.html',sql=sql)
     return render_template('records.html',sql='')
 # 系统默认路径前台跳转
-@app.route('/')
-def main_page():
-    return render_template("main.html")
+# @app.route('/home.html', methods=['GET'])
+# def main_page():
+#     return render_template("html/main.html")
 
 @app.route('/about.html',methods=['GET','POST'])
 def data_about():
@@ -162,9 +276,75 @@ def webim():
         # return render_template('image.html', result=os.path.join(image_dir,item))
     return result
 
+
+# ttest
+def get_imsql():
+    if not os.path.exists("auto.json"):
+        setting()
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+        cur = conn.cursor()
+
+        sql1 = "select * from left_ledger order by `id` asc"
+        cur.execute(sql1)
+        content = cur.fetchall()
+
+        # 获取表头
+        sql = "SHOW FIELDS FROM left_ledger"
+        cur.execute(sql)
+        labels = cur.fetchall()
+        labels = [l[0] for l in labels]
+        cur.close()
+        conn.close()
+
+        return labels, content
+
+# ttest
+def _get_imsql():
+    if not os.path.exists("auto.json"):
+        setting()
+    else:
+        file = open('auto.json', 'rb')
+        jsonData = json.load(file)
+        host = jsonData['host']
+        user = jsonData['user']
+        pwd = jsonData['password']
+        db = jsonData['db']
+        charset = jsonData['charset']
+        conn = pymysql.connect(host=host, user=user, password=pwd, db=db, charset=charset)
+        cur = conn.cursor()
+
+        sql1 = "select * from left_ledger order by `id` asc"
+        cur.execute(sql1)
+        content = cur.fetchall()
+
+        # 获取表头
+        sql = "SHOW FIELDS FROM left_ledger"
+        cur.execute(sql)
+        labels = cur.fetchall()
+        labels = [l[0] for l in labels]
+        cur.close()
+        conn.close()
+
+        return labels, content
+
+
 @app.route('/setimg', methods=['GET',"POST"])
 def select_img():
-    return render_template('html/select_img.html')
+    if request.method == 'POST':
+        labels,content = get_imsql()
+        return render_template('html/select_img.html', labels=labels, content=content)
+    labels,content = _get_imsql()
+    return render_template('html/select_img.html', labels=labels, content=content)
+
+    # return render_template('html/select_img.html')
 
 
 # 中间统计数据
@@ -256,17 +436,8 @@ def login():
     return render_template('login.html')
 
 def __register():
-    data = {
-        "host": "111.173.83.23",
-        "user": "root",
-        "password": "Wqq@123456",
-        "db": "test",
-        "charset": "utf8"
-    }
     if not os.path.exists("auto.json"):
-        json_str = json.dumps(data, indent=4)
-        with open("auto.json", "w") as f:
-            f.write(json_str)
+        setting()
     else:
         file = open('auto.json', 'rb')
         jsonData = json.load(file)
@@ -514,17 +685,8 @@ def create_get_date():
     return render_template('appdata.html')
 @app.route('/sql/adb')
 def create_s1():
-    data = {
-        "host": "111.173.83.23",
-        "user": "root",
-        "password": "Wqq@123456",
-        "db": "test",
-        "charset": "utf8"
-    }
     if not os.path.exists("auto.json"):
-        json_str = json.dumps(data, indent=4)
-        with open("auto.json", "w") as f:
-            f.write(json_str)
+        setting()
     else:
         file = open('auto.json', 'rb')
         jsonData = json.load(file)
@@ -542,17 +704,8 @@ def create_s1():
         return render_template('数据库管理.html')
 @app.route('/sql/sdb')
 def create_sd1():
-    data = {
-        "host": "111.173.83.23",
-        "user": "root",
-        "password": "Wqq@123456",
-        "db": "test",
-        "charset": "utf8"
-    }
     if not os.path.exists("auto.json"):
-        json_str = json.dumps(data, indent=4)
-        with open("auto.json", "w") as f:
-            f.write(json_str)
+        setting()
     else:
         file = open('auto.json', 'rb')
         jsonData = json.load(file)
@@ -657,7 +810,12 @@ def online_date():
     if request.method == 'POST':
         left=request.form.get('left')
         labels, content, sql = spider._my_online(left)
-        return render_template('html/new_index.html', labels=labels, content=content, sql=sql)
+        print(content)
+        if content:
+            return render_template('html/new_index.html', labels=labels, content=content, sql=sql)
+        else:
+            result = '当天没有维保任务,可以休息了'
+            return render_template('html/new_index.html', labels=labels, content=content, sql=sql, result=result)
     labels,content,sql = _get_sql()
 
     #labels, content, sql = spider.my_online()
@@ -747,17 +905,8 @@ def my_left():
     labels,content,sql = _get_sql()
     return render_template('html/index.html', labels=labels, content=content,sql=sql)
 def _get_sql():
-    data = {
-        "host": "111.173.83.23",
-        "user": "root",
-        "password": "Wqq@123456",
-        "db": "test",
-        "charset": "utf8"
-    }
     if not os.path.exists("auto.json"):
-        json_str = json.dumps(data, indent=4)
-        with open("auto.json", "w") as f:
-            f.write(json_str)
+        setting()
     else:
         file = open('auto.json', 'rb')
         jsonData = json.load(file)
@@ -1202,17 +1351,8 @@ def make_md5(s, encoding='utf-8'):
 
 
 def mca():
-    data = {
-        "host": "111.173.83.23",
-        "user": "root",
-        "password": "Wqq@123456",
-        "db": "test",
-        "charset": "utf8"
-    }
     if not os.path.exists("auto.json"):
-        json_str = json.dumps(data, indent=4)
-        with open("auto.json", "w") as f:
-            f.write(json_str)
+        setting()
     else:
         file = open('auto.json', 'rb')
         jsonData = json.load(file)
@@ -1442,17 +1582,8 @@ def maintenance(leftnu,pistion,date,faultm,causef,mtype):
         return e
 
 def setting():
-    data = {
-        "host": "111.173.83.23",
-        "user": "root",
-        "password": "Wqq@123456",
-        "db": "test",
-        "charset": "utf8"
-    }
     if not os.path.exists("auto.json"):
-        json_str = json.dumps(data, indent=4)
-        with open("auto.json", "w") as f:
-            f.write(json_str)
+        setting()
 
 if __name__ == '__main__':
     # 端口号设置

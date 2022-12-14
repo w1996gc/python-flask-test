@@ -1,0 +1,2 @@
+favicon.ico
+通知.ico
