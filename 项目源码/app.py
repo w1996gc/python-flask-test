@@ -1,9 +1,9 @@
 # -*- coding:utf-8 -*-
-
+import datetime
 import random
 import re
 import traceback
-import datetime
+
 
 import pymysql
 from flask import Flask as _Flask, jsonify, flash
@@ -152,8 +152,6 @@ print('当前已有文件：')
 get_name_file("mymusic", music_name_file)
 get_name_file("myimage", image_name_file)
 get_name_file("myvideo", video_name_file)
-# -------------前台页面相关服务接口start----------------
-# -------------前台页面相关服务接口start----------------
 
 # test
 # 获取日期和倒计时
@@ -171,6 +169,9 @@ def my_get_time():
     b = datetime.datetime(year,month,day)  # 自己设置的保养电梯时间
     count_down = (b - a).days  # 保养电梯倒计时
     return count_down
+# -------------前台页面相关服务接口start----------------
+# -------------前台页面相关服务接口start----------------
+
 
 # -------------前台页面相关服务接口start----------------
 # 系统默认路径前台跳转
@@ -1156,17 +1157,8 @@ def User_display():
     try:
         dd = user_dd(ddcc)
         if dd:
-            data = {
-                "host": "111.173.83.23",
-                "user": "root",
-                "password": "Wqq@123456",
-                "db": "test",
-                "charset": "utf8"
-            }
             if not os.path.exists("auto.json"):
-                json_str = json.dumps(data, indent=4)
-                with open("auto.json", "w") as f:
-                    f.write(json_str)
+                setting()
             else:
                 file = open('auto.json', 'rb')
                 jsonData = json.load(file)
@@ -1600,8 +1592,20 @@ def maintenance(leftnu,pistion,date,faultm,causef,mtype):
         return e
 
 def setting():
+    data = {
+        "host": "111.173.83.23",
+        "user": "root",
+        "password": "Wqq@123456",
+        "db": "test",
+        "charset": "utf8",
+        "year": 2022,
+        "month": 12,
+        "day": 26
+    }
     if not os.path.exists("auto.json"):
-        setting()
+        json_str = json.dumps(data, indent=4)
+        with open("auto.json", "w") as f:
+            f.write(json_str)
 
 if __name__ == '__main__':
     # 端口号设置
