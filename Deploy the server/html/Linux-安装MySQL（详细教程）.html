@@ -1,0 +1,2241 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <link rel="canonical" href="https://blog.csdn.net/xhmico/article/details/125197747"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="report" content='{"pid": "blog", "spm":"1001.2101"}'>
+    <meta name="referrer" content="always">
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <meta name="applicable-device" content="pc">
+    <link  href="https://g.csdnimg.cn/static/logo/favicon32.ico"  rel="shortcut icon" type="image/x-icon" />
+    <title>Linux-安装MySQL（详细教程）_多加点辣也没关系的博客-CSDN博客_linux安装mysql</title>
+    <script>
+      (function(){
+        var el = document.createElement("script");
+        el.src = "https://s3a.pstatp.com/toutiao/push.js?1abfa13dfe74d72d41d83c86d240de427e7cac50c51ead53b2e79d40c7952a23ed7716d05b4a0f683a653eab3e214672511de2457e74e99286eb2c33f4428830";
+        el.id = "ttzz";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(el, s);
+      })(window)
+    </script>
+        <meta name="keywords" content="linux安装mysql">
+        <meta name="csdn-baidu-search"  content='{"autorun":true,"install":true,"keyword":"linux安装mysql"}'>
+    <meta name="description" content="本文的主要内容是在 Linux 上安装 MySQL，以下内容是源于 B站 - MySQL数据库入门到精通 整理而来。MySQL是一种关系型数据库管理系统，所使用的 SQL 语言是用于访问数据库的最常用标准化语言。MySQL 软件采用了双授权政策，分为社区版和商业版，由于其体积小、速度快、总体拥有成本低，尤其是开放源码这一特点，一般中小型和大型网站的开发都选择 MySQL 作为网站数据库。官网：https://www.mysql.com/进入官网之后点击 进入页面这里选择 进入页面，选择 根据你服务器">
+    <script src="//g.csdnimg.cn/tingyun/1.8.5/blog.js" type='text/javascript'></script>
+        <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/css/detail_enter-55b4b2a4d8.min.css">
+    <script type="application/ld+json">{"@context":"https://ziyuan.baidu.com/contexts/cambrian.jsonld","@id":"https://blog.csdn.net/xhmico/article/details/125197747","appid":"1638831770136827","pubDate":"2022-06-09T09:55:12","title":"Linux-安装MySQL（详细教程）_多加点辣也没关系的博客-CSDN博客_linux安装mysql","upDate":"2022-06-09T12:53:56"}</script>
+        <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/themesSkin/skin-number/skin-number-2c93789924.min.css">
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var isCorporate = false;//注释删除enterprise
+        var username =  "xhmico";
+        var skinImg = "white";
+        var blog_address = "https://blog.csdn.net/xhmico";
+        var currentUserName = "weixin_45872192";
+        var isOwner = false;
+        var loginUrl = "http://passport.csdn.net/account/login?from=https://blog.csdn.net/xhmico/article/details/125197747";
+        var blogUrl = "https://blog.csdn.net/";
+        var avatar = "https://profile.csdnimg.cn/A/8/4/3_xhmico";
+        var articleTitle = "Linux-安装MySQL（详细教程）";
+        var articleDesc = "本文的主要内容是在 Linux 上安装 MySQL，以下内容是源于 B站 - MySQL数据库入门到精通 整理而来。MySQL是一种关系型数据库管理系统，所使用的 SQL 语言是用于访问数据库的最常用标准化语言。MySQL 软件采用了双授权政策，分为社区版和商业版，由于其体积小、速度快、总体拥有成本低，尤其是开放源码这一特点，一般中小型和大型网站的开发都选择 MySQL 作为网站数据库。官网：https://www.mysql.com/进入官网之后点击 进入页面这里选择 进入页面，选择 根据你服务器";
+        var articleTitles = "Linux-安装MySQL（详细教程）_多加点辣也没关系的博客-CSDN博客_linux安装mysql";
+        var nickName = "多加点辣也没关系";
+        var articleDetailUrl = "https://blog.csdn.net/xhmico/article/details/125197747";
+        if(window.location.host.split('.').length == 3) {
+            blog_address = blogUrl + username;
+        }
+        var skinStatus = "White";
+        var blogStaticHost = "https://csdnimg.cn/release/blogv2/"
+        var mallTestStyle = "control"
+    </script>
+    <script src="https://g.csdnimg.cn/??fixed-sidebar/1.1.6/fixed-sidebar.js" type="text/javascript"></script>
+    <script src='//g.csdnimg.cn/common/csdn-report/report.js' type='text/javascript'></script>
+    <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css">
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+    <script src="https://dup.baidustatic.com/js/ds.js"></script>
+</head>
+  <body class="nodata " style="">
+        <script>
+            var toolbarSearchExt = '{"landingWord":["linux安装mysql"],"queryWord":"","tag":["mysql","linux","数据库"],"title":"Linux-安装MySQL（详细教程）"}';
+        </script>
+    <script src="https://g.csdnimg.cn/common/csdn-toolbar/csdn-toolbar.js" type="text/javascript"></script>
+    <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>
+<link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/pc/css/blog_code-01256533b5.min.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/chart-3456820cac.css" />
+
+<script>
+    var articleId = 125197747;
+    var commentscount = 14;
+    var curentUrl = "https://blog.csdn.net/xhmico/article/details/125197747";
+    var myUrl = "https://my.csdn.net/";
+    var highlight = ["linux","mysql","数据库","详细","安装","教程"];//高亮数组
+    var isRecommendModule = true;
+    var isBaiduPre = true;
+    var baiduCount = 2;
+    var setBaiduJsCount = 10;
+    var share_card_url = "https://app-blog.csdn.net/share?article_id=125197747&username=xhmico"
+	var articleType = 1;
+    var baiduKey = "linux安装mysql";
+    var userNewReport = true;
+    var needInsertBaidu = true;
+    var recommendRegularDomainArr = ["blog.csdn.net/.+/article/details/","download.csdn.net/download/","edu.csdn.net/course/detail/","ask.csdn.net/questions/","bbs.csdn.net/topics/","www.csdn.net/gather_.+/"]
+    var codeStyle = "";
+    var baiduSearchType = "baidulandingword";
+     var sharData = "{\"hot\":[{\"id\":1,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/a5f4260710904e538002a6ab337939b3.png\"},{\"id\":2,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/188b37199a2c4b74b1d9ffc39e0d52de.png\"},{\"id\":3,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/14ded358b631444581edd98a256bc5af.png\"},{\"id\":4,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/1470f23a770444d986ad551b9c33c5be.png\"},{\"id\":5,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/c329f5181dc74f6c9bd28c982bb9f91d.png\"},{\"id\":6,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/ccd8a3305e81460f9c505c95b432a65f.png\"},{\"id\":7,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/bc89d8283389440d97fc4d30e30f45e1.png\"},{\"id\":8,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/452d485b4a654f5592390550d2445edf.png\"},{\"id\":9,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/f8b9939db2ed474a8f43a643015fc8b7.png\"},{\"id\":10,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/6de8864187ab4ed3b1db0856369c36ff.png\"},{\"id\":11,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/673cc3470ff74072acba958dc0c46e2d.png\"},{\"id\":12,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/930c119760ac4491804db80f9c6d4e3f.png\"},{\"id\":13,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/15e6befb05a24233bc2b65e96aa8d972.png\"},{\"id\":14,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/2075fd6822184b95a41e214de4daec13.png\"},{\"id\":15,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/859b1552db244eb6891a809263a5c657.png\"},{\"id\":16,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/0be2f920f1f74290a98921974a9613fd.png\"},{\"id\":17,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/2e97e00b43f14afab494ea55ef3f4a6e.png\"},{\"id\":18,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/ff4ab252f46e444686f5135d6ebbfec0.png\"},{\"id\":19,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/ae029bbe99564e79911657912d36524f.png\"},{\"id\":20,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/b3ece39963de440388728e9e7b9bf427.png\"},{\"id\":21,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/6f14651a99ba486e926d63b6fa692997.png\"},{\"id\":22,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/83ceddf050084875a341e32dcceca721.png\"},{\"id\":23,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/b90368b8fd5d4c6c8c79a707d877cf7c.png\"},{\"id\":24,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/aeffae14ecf14e079b2616528c9a393b.png\"},{\"id\":25,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/c5a06b5a13d44d16bed868fc3384897a.png\"},{\"id\":26,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/08b697658b844b318cea3b119e9541ef.png\"},{\"id\":27,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/68ccb0b8d09346ac961d2b5c1a8c77bf.png\"},{\"id\":28,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/a2227a247e37418cbe0ea972ba6a859b.png\"},{\"id\":29,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/3a42825fede748f9993e5bb844ad350d.png\"},{\"id\":30,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/8882abc1dd484224b636966ea38555c3.png\"},{\"id\":31,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/4f6a5f636a3e444d83cf8cc06d87a159.png\"},{\"id\":32,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/1953ef79c56b4407b78d7181bdff11c3.png\"},{\"id\":33,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/c04a2a4f772948ed85b5b0380ed36287.png\"},{\"id\":34,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/5b4fecd05091405ea04d8c0f53e9f2c7.png\"},{\"id\":35,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/b89f576d700344e280d6ceb2a66c2420.png\"},{\"id\":36,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/1c65780e11804bbd9971ebadb3d78bcf.png\"},{\"id\":37,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/d590db2055f345db9706eb68a7ec151a.png\"},{\"id\":38,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/fe602f80700b4f6fb3c4a9e4c135510e.png\"},{\"id\":39,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/39ff2fcd31e04feba301a071976a0ba7.png\"},{\"id\":40,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/f9b61b3d113f436b828631837f89fb39.png\"},{\"id\":41,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/df1aca5f610c4ad48cd16da88c9c8499.png\"},{\"id\":42,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/d7acf73a1e6b41399a77a85040e10961.png\"},{\"id\":43,\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/b7f1b63542524b97962ff649ab4e7e23.png\"}],\"vip\":[{\"id\":1,\"vipUrl\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220920101150.png\",\"url\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220920101154.png\"},{\"id\":2,\"vipUrl\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220920101204.png\",\"url\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220920101208.png\"},{\"id\":3,\"vipUrl\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220920101211.png\",\"url\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220920101215.png\"},{\"id\":4,\"vipUrl\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220920101218.png\",\"url\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220920101220.png\"},{\"id\":5,\"vipUrl\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220920101223.png\",\"url\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220920101226.png\"},{\"id\":6,\"vipUrl\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220922100635.png\",\"url\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220922100639.png\"},{\"id\":7,\"vipUrl\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220922100642.png\",\"url\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220922100644.png\"},{\"id\":8,\"vipUrl\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220922100647.png\",\"url\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220922100649.png\"},{\"id\":9,\"vipUrl\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220922100652.png\",\"url\":\"https:\\/\\/img-home.csdnimg.cn\\/images\\/20220922100655.png\"},{\"id\":10,\"vipUrl\":\"https:\\/\\/img-blog.csdnimg.cn\\/55de67481fde4b04b97ad78f11fe369a.png\",\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/bb2418fb537e4d78b10d8765ccd810c5.png\"},{\"id\":11,\"vipUrl\":\"https:\\/\\/img-blog.csdnimg.cn\\/579c713394584d128104ef1044023954.png\",\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/f420d9fbcf5548079d31b5e809b6d6cd.png\"},{\"id\":12,\"vipUrl\":\"https:\\/\\/img-blog.csdnimg.cn\\/75b7f3155ba642f5a4cc16b7baf44122.png\",\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/a9030f5877be401f8b340b80b0d91e64.png\"},{\"id\":13,\"vipUrl\":\"https:\\/\\/img-blog.csdnimg.cn\\/0903d33cafa54934be3780aa54ae958d.png\",\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/2cd8c8929f5a42fca5da2a0aeb456203.png\"},{\"id\":14,\"vipUrl\":\"https:\\/\\/img-blog.csdnimg.cn\\/949fd7c22884439fbfc3c0e9c3b8dee7.png\",\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/dafbea9bd9eb4f3b962b48dc41657f89.png\"},{\"id\":15,\"vipUrl\":\"https:\\/\\/img-blog.csdnimg.cn\\/4119cfddd71d4e6a8a27a18dbb74d90e.png\",\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/c56310c8b6384d9e85388e4e342ce508.png\"},{\"id\":16,\"vipUrl\":\"https:\\/\\/img-blog.csdnimg.cn\\/121575274da142bcbbbbc2e8243dd411.png\",\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/5013993de06542f881018bb9abe2edf7.png\"},{\"id\":17,\"vipUrl\":\"https:\\/\\/img-blog.csdnimg.cn\\/4d97aa6dd4fe4f09a6bef5bdf8a6abcd.png\",\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/76f23877b6ad4066ad45ce8e31b4b977.png\"},{\"id\":18,\"vipUrl\":\"https:\\/\\/img-blog.csdnimg.cn\\/fdb619daf21b4c829de63b9ebc78859d.png\",\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/a1abe5d27a5441f599adfe662f510243.png\"},{\"id\":19,\"vipUrl\":\"https:\\/\\/img-blog.csdnimg.cn\\/676b7707bb11410f8f56bc0ed2b2345c.png\",\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/7ac5b467fbf24e1d8c2de3f3332c4f54.png\"},{\"id\":20,\"vipUrl\":\"https:\\/\\/img-blog.csdnimg.cn\\/0becb8cc227e4723b765bdd69a20fd4a.png\",\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/fdec85b26091486b9a89d0b8d45c3749.png\"},{\"id\":21,\"vipUrl\":\"https:\\/\\/img-blog.csdnimg.cn\\/1a6c06235ad44941b38c54cbc25a370c.png\",\"url\":\"https:\\/\\/img-blog.csdnimg.cn\\/410a06cda2d44b0c84578f88275caf70.png\"}],\"map\":{\"hot\":\"热门\",\"vip\":\"VIP\"}}";
+
+    var canRead = true;
+    var blogMoveHomeArticle = false;
+    var showPcWindowAd = false;
+    var showHeadWord = true;
+    var showSearchText = "";
+    var linkPage = true;
+    var articleSource = 1;
+    var articleReport = '{"pid": "blog", "spm":"1001.2101"}';
+    var isShowToQuestion = false;
+    var baiduSearchChannel = 'pc_relevant'
+    var baiduSearchIdentification = '.pc_relevant_landingrelevant'
+    var distRequestId = '1671116560440_14183'
+    var initRewardObject = {
+        giver: "weixin_45872192",
+        anchor: "xhmico",
+        articleId: "125197747",
+        sign: "80898d628f9a8ca3cf7ac38612e1313f",
+    }
+    var isLikeStatus = false;
+    var isUnLikeStatus = false;
+    var studyLearnWord = "";
+    var isCurrentUserVip = false;
+    var testNewStyle = "oldStyle"
+    var contentViewsHeight = 0;
+    var contentViewsCount = 0;
+    var contentViewsCountLimit = 5;
+    var isShowConcision = true
+    var isCookieConcision = false
+    var isHasDirectoryModel = false
+    var isShowSideModel = false
+    var isShowDirectoryModel = true
+    function getCookieConcision(sName){
+        var allCookie = document.cookie.split("; ");
+        for (var i=0; i < allCookie.length; i++){
+            var aCrumb = allCookie[i].split("=");
+            if (sName == aCrumb[0])
+                return aCrumb[1];
+        }
+        return null;
+    }
+    if (getCookieConcision('blog_details_concision') && getCookieConcision('blog_details_concision') == 0){
+        isCookieConcision = true
+        isShowSideModel = true
+        isShowDirectoryModel = false
+    }
+</script>
+<div class="main_father clearfix d-flex justify-content-center mainfather-concision" style="height:100%;">
+    <div class="container clearfix container-concision" id="mainBox">
+        <script>
+        if(!isCookieConcision){
+            $('.main_father').removeClass('mainfather-concision')
+            $('.main_father .container').removeClass('container-concision')
+        }
+        </script>
+        <main>
+<script type="text/javascript">
+    function getQueryString(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+      var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+      if( r != null ) return decodeURIComponent( r[2] ); return '';
+    }
+    function stripscript(s){
+      var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？%]")
+      var rs = "";
+      for (var i = 0; i < s.length; i++) {
+        rs = rs+s.substr(i, 1).replace(pattern, '');
+      }
+      return rs;
+    }
+    var blogHotWords = stripscript(getQueryString('utm_term')).length > 1 ? stripscript(getQueryString('utm_term')) : ''
+</script>
+<div class="blog-content-box">
+        <div class="article-header-box">
+        <div class="article-header">
+            <div class="article-title-box">
+                <h1 class="title-article" id="articleContentId">Linux-安装MySQL（详细教程）</h1>
+            </div>
+            <div class="article-info-box">
+                <div class="article-bar-top">
+                    <img class="article-type-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/original.png" alt="">
+                    <div class="bar-content">
+                    <a class="follow-nickName " href="https://blog.csdn.net/xhmico" target="_blank" rel="noopener" title="多加点辣也没关系">多加点辣也没关系</a>
+                    <img class="article-time-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newUpTime2.png" alt="">
+                    <span class="time">已于&nbsp;2022-06-09 12:54:21&nbsp;修改</span>
+                    <img class="article-read-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/articleReadEyes2.png" alt="">
+                    <span class="read-count">41566</span>
+                    <a id="blog_detail_zk_collection" class="un-collection" data-report-click='{"mod":"popu_823","spm":"1001.2101.3001.4232","ab":"new"}'>
+                        <img class="article-collect-img article-heard-img un-collect-status isdefault" style="display:none" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollect2.png" alt="">
+                        <img class="article-collect-img article-heard-img collect-status isactive" style="display:inline-block" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollectionActive2.png" alt="">
+                        <span class="name">收藏</span>
+                        <span class="get-collection">
+                            344
+                        </span>
+                    </a>
+                    </div>
+                </div>
+                <div class="blog-tags-box">
+                    <div class="tags-box artic-tag-box">
+                            <span class="label">分类专栏：</span>
+                                <a class="tag-link" href="https://blog.csdn.net/xhmico/category_11583061.html" target="_blank" rel="noopener">安装教程</a>
+                            <span class="label">文章标签：</span>
+                                <a data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"mysql","ab":"new","extra":"{\"searchword\":\"mysql\"}"}' class="tag-link" href="https://so.csdn.net/so/search/s.do?q=mysql&amp;t=blog&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=" target="_blank" rel="noopener">mysql</a>
+                                <a data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"linux","ab":"new","extra":"{\"searchword\":\"linux\"}"}' class="tag-link" href="https://so.csdn.net/so/search/s.do?q=linux&amp;t=blog&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=" target="_blank" rel="noopener">linux</a>
+                                <a data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"数据库","ab":"new","extra":"{\"searchword\":\"数据库\"}"}' class="tag-link" href="https://so.csdn.net/so/search/s.do?q=%E6%95%B0%E6%8D%AE%E5%BA%93&amp;t=blog&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=" target="_blank" rel="noopener">数据库</a>
+                    </div>
+                </div>
+                <div class="up-time"><span>于&nbsp;2022-06-09 12:53:56&nbsp;首次发布</span></div>
+                <div class="slide-content-box">
+                    <div class="article-copyright">
+                        <div class="creativecommons">
+                            版权声明：本文为博主原创文章，遵循<a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。
+                        </div>
+                        <div class="article-source-link">
+                            本文链接：<a href="https://blog.csdn.net/xhmico/article/details/125197747" target="_blank">https://blog.csdn.net/xhmico/article/details/125197747</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="operating">
+                    <a class="href-article-edit slide-toggle">版权</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="blogHuaweiyunAdvert"></div>
+        <div id="blogColumnPayAdvert">
+            <div class="column-group">
+                <div class="column-group-item column-group0 column-group-item-one">
+                    <div class="item-l">
+                        <a class="item-target" href="https://blog.csdn.net/xhmico/category_11583061.html" target="_blank" title="安装教程"
+                        data-report-view='{"spm":"1001.2101.3001.6332"}'
+                        data-report-click='{"spm":"1001.2101.3001.6332"}'>
+                            <img class="item-target" src="https://img-blog.csdnimg.cn/20190927151026427.png?x-oss-process=image/resize,m_fixed,h_224,w_224" alt="">
+                            <span class="title item-target">
+                                <span>
+                                <span class="tit">安装教程</span>
+                                    <span class="dec">专栏收录该内容</span>
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="item-m">
+                        <span>12 篇文章</span>
+                        <span>15 订阅</span>
+                    </div>
+                    <div class="item-r">
+                            <a class="item-target article-column-bt articleColumnFreeBt" data-id="11583061">订阅专栏</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <article class="baidu_pl">
+        <div id="article_content" class="article_content clearfix">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/kdoc_html_views-23cf357b0c.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-6e43165c0a.css">
+                <div id="content_views" class="markdown_views prism-atom-one-dark">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                    </svg>
+                    <p></p>
+<div class="toc">
+ <h3>Linux-安装MySQL</h3>
+ <ul><li><a href="#_6">前言</a></li><li><a href="#_11">一、概述</a></li><li><a href="#_18">二、下载</a></li><li><a href="#_51">三、安装</a></li><li><a href="#_143">四、卸载</a></li><li><a href="#_182">五、常用设置</a></li><li><a href="#_246">六、可能遇到的问题</a></li></ul>
+</div>
+<p></p>
+<hr />
+<h1><a id="_6"></a>前言</h1>
+<p>本文的主要内容是在 Linux 上安装 MySQL&#xff0c;以下内容是源于 B站 - <a href="https://www.bilibili.com/video/BV1Kr4y1i7ru?spm_id_from&#61;333.337.search-card.all.click">MySQL数据库入门到精通</a> 整理而来。</p>
+<hr />
+<h1><a id="_11"></a>一、概述</h1>
+<p><a href="https://baike.baidu.com/item/MySQL/471251?fr&#61;aladdin">MySQL</a>是一种关系型数据库管理系统&#xff0c;所使用的 SQL 语言是用于访问数据库的最常用标准化语言。MySQL 软件采用了双授权政策&#xff0c;分为社区版和商业版&#xff0c;由于其体积小、速度快、总体拥有成本低&#xff0c;尤其是开放源码这一特点&#xff0c;一般中小型和大型网站的开发都选择 MySQL 作为网站数据库。</p>
+<ul><li>社区版&#xff1a;免费&#xff0c;但是不提供任何技术支持</li><li>商业版&#xff1a;收费&#xff0c;可以试用30天&#xff0c;官方提供技术支持</li></ul>
+<h1><a id="_18"></a>二、下载</h1>
+<p>官网&#xff1a;<a href="https://www.mysql.com/">https://www.mysql.com/</a></p>
+<p><img src="https://img-blog.csdnimg.cn/19292ab8cd344905a159f965d9396730.png" alt="在这里插入图片描述" /><br /> 进入官网之后点击 <code>DOWNLOADS</code></p>
+<p><img src="https://img-blog.csdnimg.cn/3e4b86e1aa1c4e21bd7484731f4b9802.png" alt="在这里插入图片描述" /><br /> 进入页面</p>
+<p><img src="https://img-blog.csdnimg.cn/87b914a1e43d4c2c90e4bc0b8e898e2e.png" alt="在这里插入图片描述" /></p>
+<p>这里选择 <code>Downloads Archives</code></p>
+<p><img src="https://img-blog.csdnimg.cn/133578100c7d4443a49e5244d3d525c6.png" alt="在这里插入图片描述" /><br /> 进入页面&#xff0c;选择 <code>MySQL Community Server</code></p>
+<p><img src="https://img-blog.csdnimg.cn/05de983ae9d240569f58b179d5b97219.png" alt="在这里插入图片描述" /><br /> 根据你服务器的配置选择&#xff0c;我服务器是 CentOS 7 所以 Operating System 选择 <code>Red Hat Enterprise Linux / Oracle Linux</code> &#xff0c;OS Version 选择 <code>Red Hat Enterprise Linux 7 / Oracle Linux 7 (x86,64-bit)</code>&#xff0c;选择第一个点击 <code>Download</code> 下载。</p>
+<p><img src="https://img-blog.csdnimg.cn/5fe1ea4a88454ab3b8fe436f5c94abe5.png" alt="在这里插入图片描述" /></p>
+<p><code>----------------------------------------------------</code></p>
+<p>以下我也提供了 MySQL 的安装包供大家使用&#xff1a;</p>
+<p>网址&#xff1a;<a href="https://pan.baidu.com/s/1yCPRRaSJOMd72NWmSlAGwg">百度网盘</a></p>
+<p>提取码&#xff1a;vf2q</p>
+<p><code>----------------------------------------------------</code></p>
+<h1><a id="_51"></a>三、安装</h1>
+<p>连上 Linux 服务器&#xff08;这里的服务器我用的是云服务器&#xff09;&#xff0c;我先创建一个 mysql 的文件夹来存放安装包。</p>
+<pre><code class="prism language-bash"><span class="token comment"># 在 /soft 目录下创建一个空的文件夹 mysql</span>
+<span class="token function">mkdir</span> /soft/mysql
+<span class="token comment"># 进入这个新建的文件夹下</span>
+<span class="token builtin class-name">cd</span> /soft/mysql
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/765f3400a53745d4a242e2817a8ab7f8.png" alt="在这里插入图片描述" /><br /> 然后上传之前下载好的 Linux 下 MySQL 的安装包&#xff0c;使用 <code>rz</code> 命令&#xff08;有些终端工具是可以直接上传文件的&#xff0c;比如 FinalShell&#xff09;</p>
+<p><img src="https://img-blog.csdnimg.cn/cab9c4257d6e44baa821620b196e9e13.png" alt="在这里插入图片描述" /><br /> <img src="https://img-blog.csdnimg.cn/0fa326013be54b26a6b7226510722c87.png" alt="在这里插入图片描述" /><br /> 在该目录下再创建一个文件夹&#xff0c;并且将安装包解压到该文件夹中</p>
+<pre><code class="prism language-bash"><span class="token comment"># 在当前目录下&#xff08;mysql&#xff09;下创建一个 mysql-8.0.26 文件夹</span>
+<span class="token function">mkdir</span> mysql-8.0.26
+<span class="token comment"># 解压安装包到该目录下</span>
+<span class="token function">tar</span> -xvf mysql-8.0.26-1.el7.x86_64.rpm-bundle.tar -C mysql-8.0.26
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/e2139215cac947f3a23a1319fecc84c9.png" alt="在这里插入图片描述" /><br /> 解压完成之后可以切换到 <code>mysql-8.0.26</code> 目录下查看解压后的文件</p>
+<p><img src="https://img-blog.csdnimg.cn/8adbcd7ab5ed474888319f6e617d7ca3.png" alt="在这里插入图片描述" /><br /> 可以看到解压后的文件都是 rpm 文件&#xff0c;所以需要用到 <code>rpm</code> 包资源管理器相关的指令安装这些 rpm 的安装包</p>
+<p>在安装执行 rpm 安装包之前先下载 <code>openssl-devel</code> 插件&#xff0c;因为 mysql 里面有些 rpm 的安装依赖于该插件。</p>
+<pre><code class="prism language-bash">yum <span class="token function">install</span> openssl-devel
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/f11aa13e561943cb8fbff3ab0b63a496.png" alt="在这里插入图片描述" /></p>
+<p>安装完该插件之后&#xff0c;<code>依次</code>执行以下命令安装这些 rpm 包</p>
+<pre><code class="prism language-bash"><span class="token function">rpm</span> -ivh mysql-community-common-8.0.26-1.el7.x86_64.rpm
+
+<span class="token function">rpm</span> -ivh mysql-community-client-plugins-8.0.26-1.el7.x86_64.rpm
+
+<span class="token function">rpm</span> -ivh mysql-community-libs-8.0.26-1.el7.x86_64.rpm
+
+<span class="token function">rpm</span> -ivh mysql-community-libs-compat-8.0.26-1.el7.x86_64.rpm
+
+<span class="token function">rpm</span> -ivh  mysql-community-devel-8.0.26-1.el7.x86_64.rpm
+
+<span class="token function">rpm</span> -ivh mysql-community-client-8.0.26-1.el7.x86_64.rpm
+
+<span class="token function">rpm</span> -ivh  mysql-community-server-8.0.26-1.el7.x86_64.rpm
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/e2395575ccb049678e984840a6d8089c.png" alt="在这里插入图片描述" /></p>
+<p>注意&#xff1a;安装 rpm 包时提示 <code>依赖检测失败</code>&#xff0c;请详见文件末尾 <code>可能遇到的问题</code> 寻求解决方案。</p>
+<p>在 Linux 中 MySQL 安装好了之后系统会自动的注册一个服务&#xff0c;服务名称叫做 <code>mysqld</code>&#xff0c;所以可以通过以下命令操作 MySQL&#xff1a;</p>
+<ul><li> <p>启动 MySQL 服务&#xff1a;<code>systemctl start mysqld</code></p> </li><li> <p>重启 MySQL 服务&#xff1a;<code>systemctl restart mysqld</code></p> </li><li> <p>关闭 MySQL 服务&#xff1a;<code>systemctl stop mysqld</code></p> </li></ul>
+<p>这里先启动 MySQL 服务</p>
+<p><img src="https://img-blog.csdnimg.cn/ca285a430ded415bb81bb75486dce7dc.png" alt="在这里插入图片描述" /></p>
+<p>rpm 安装 MySQL 会自动生成一个随机密码&#xff0c;可在 <code>/var/log/mysqld.log</code> 这个文件中查找该密码</p>
+<pre><code class="prism language-bash"><span class="token function">cat</span> /var/log/mysqld.log
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/42ed9c5284bd4ef0b7d8dd5ca761ed6c.png" alt="在这里插入图片描述" /></p>
+<p>A temporay password is generated for <code>root</code>&#64;localhost: <code>****密码****</code> &#xff0c;这里我安装的 MySQL 生成的临时密码是&#xff1a;<code>JAgc&#61;S-:4fGC</code>&#xff0c;账号是 <code>root</code>&#xff0c;有了账号和密码之后就可以连接 MySQL 了。</p>
+<pre><code class="prism language-bash"><span class="token comment"># 连接 MySQL </span>
+mysql -u root -p
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/fa15c98d00314771ac385a3905a0ee8c.png" alt="在这里插入图片描述" /></p>
+<p>到此 Linux 上安装 MySQL 基本结束。</p>
+<h1><a id="_143"></a>四、卸载</h1>
+<p>卸载 MySQL 前需要先停止 MySQL</p>
+<p>命令&#xff1a;<code>systemctl stop mysqld</code></p>
+<p>停止 MySQL 之后查询 MySQL 的安装文件&#xff1a;<code>rpm -qa | grep -i mysql</code></p>
+<p><img src="https://img-blog.csdnimg.cn/dff59af6506e4ac2b37e36b814ed8708.png" alt="在这里插入图片描述" /></p>
+<p>卸载上述查询出来的所有的 MySQL 安装包</p>
+<pre><code class="prism language-bash"><span class="token function">rpm</span> -e mysql-community-client-plugins-8.0.26-1.el7.x86_64 --nodeps
+
+<span class="token function">rpm</span> -e mysql-community-server-8.0.26-1.el7.x86_64 --nodeps
+
+<span class="token function">rpm</span> -e mysql-community-common-8.0.26-1.el7.x86_64 --nodeps
+
+<span class="token function">rpm</span> -e mysql-community-libs-8.0.26-1.el7.x86_64 --nodeps
+
+<span class="token function">rpm</span> -e mysql-community-client-8.0.26-1.el7.x86_64 --nodeps
+
+<span class="token function">rpm</span> -e mysql-community-libs-compat-8.0.26-1.el7.x86_64 --nodeps
+</code></pre>
+<p>删除MySQL的数据存放目录</p>
+<pre><code class="prism language-bash"><span class="token function">rm</span> -rf /var/lib/mysql/
+</code></pre>
+<p>删除MySQL的配置文件备份</p>
+<pre><code class="prism language-bash"><span class="token function">rm</span> -rf /etc/my.cnf.rpmsave
+</code></pre>
+<h1><a id="_182"></a>五、常用设置</h1>
+<p><strong>&#xff08;1&#xff09;修改 root 用户密码</strong></p>
+<p>如果你觉得 MySQL 自动生成的密码太难记忆的话&#xff0c;可以连接 MySQL 之后进行修改密码</p>
+<pre><code class="prism language-sql"><span class="token keyword">ALTER</span>  <span class="token keyword">USER</span>  <span class="token string">&#39;root&#39;</span><span class="token variable">&#64;&#39;localhost&#39;</span>  IDENTIFIED <span class="token keyword">BY</span> <span class="token string">&#39;mike.8080&#39;</span><span class="token punctuation">;</span>
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/882727816bbc43a3b4f5e9684bd0e7f2.png" alt="在这里插入图片描述" /></p>
+<p>这里可能会提示 <code>Your password does not satisfy the current policy requirements</code>&#xff0c;意思是您的密码不符合当前规定的要求&#xff0c;你要么就把你的密码设置得复杂点&#xff0c;要么就去降低密码的校验规则。</p>
+<p>在 Linux 上安装 MySQL 时会自动安装一个校验密码的插件&#xff0c;默认密码检查策略要求密码必须包含&#xff1a;大小写字母、数字和特殊符号&#xff0c;并且长度不能少于8位。修改密码时新密码是否符合当前的策略&#xff0c;不满足则会提示ERROR</p>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/">官网</a>上能查到这个密码校验的规则&#xff0c;文档中搜索&#xff1a;<code>validate_password</code></p>
+<p><img src="https://img-blog.csdnimg.cn/4656efb918e746748cef2f6def7adb28.png" alt="在这里插入图片描述" /></p>
+<p><img src="https://img-blog.csdnimg.cn/76b02a02962d4a3fabfa298d230df72e.png" alt="在这里插入图片描述" /><br /> <img src="https://img-blog.csdnimg.cn/bc99307d65ca4364ab87bdc2d6b90f20.png" alt="在这里插入图片描述" /></p>
+<p>所以可以将这个限制密码位数设小一点&#xff0c;复杂度类型调底一点</p>
+<pre><code class="prism language-sql"><span class="token comment"># 将密码复杂度校验调整简单类型</span>
+<span class="token keyword">set</span> <span class="token keyword">global</span> validate_password<span class="token punctuation">.</span>policy <span class="token operator">&#61;</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token comment"># 设置密码最少位数限制为 4 位</span>
+<span class="token keyword">set</span> <span class="token keyword">global</span> validate_password<span class="token punctuation">.</span>length <span class="token operator">&#61;</span> <span class="token number">4</span><span class="token punctuation">;</span>
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/7b2a99a8df1b42b398eca06316c816a0.png" alt="在这里插入图片描述" /></p>
+<p>就可以设置较为简单的密码了。</p>
+<p><img src="https://img-blog.csdnimg.cn/6ed75dfd9f6740879fb5735803bfb959.png" alt="在这里插入图片描述" /></p>
+<p><strong>&#xff08;2&#xff09;创建用户与权限分配</strong></p>
+<p>默认的 root 用户只能当前节点localhost访问&#xff0c;是无法远程访问的&#xff0c;我们还需要创建一个新的账户&#xff0c;用于远程访问</p>
+<p>语法格式&#xff1a;<code>CREATE USER &lt;用户名&gt; [ IDENTIFIED ] BY [ PASSWORD ] &lt;口令&gt;</code></p>
+<pre><code class="prism language-sql"><span class="token comment"># mysql 8.0 以下</span>
+<span class="token keyword">create</span> <span class="token keyword">user</span> <span class="token string">&#39;mike&#39;</span><span class="token variable">&#64;&#39;%&#39;</span> IDENTIFIED <span class="token keyword">BY</span> <span class="token string">&#39;mike8080&#39;</span><span class="token punctuation">;</span>
+<span class="token comment"># mysql 8.0</span>
+<span class="token keyword">create</span> <span class="token keyword">user</span> <span class="token string">&#39;mike&#39;</span><span class="token variable">&#64;&#39;%&#39;</span> IDENTIFIED <span class="token keyword">WITH</span> mysql_native_password <span class="token keyword">BY</span> <span class="token string">&#39;mike8080&#39;</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+ <p>PS: mysql8.0 的默认密码验证不再是 password 。所以在创建用户时&#xff0c;create user ‘username’&#64;‘%’ identified by ‘password’; 客户端是无法连接服务的&#xff0c;所以在创建用户的时候需要加上 <code>WITH mysql_native_password</code></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/f8f3cae556194862947b39c58278b5bf.png" alt="在这里插入图片描述" /></p>
+<p>创建完用户之后还需要给用户分配权限&#xff0c;这里我将 <code>mike</code> 这个用户分配了所有的权限</p>
+<pre><code class="prism language-sql"><span class="token keyword">grant</span> <span class="token keyword">all</span> <span class="token keyword">on</span> <span class="token operator">*</span><span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">to</span> <span class="token string">&#39;mike&#39;</span><span class="token variable">&#64;&#39;%&#39;</span><span class="token punctuation">;</span>
+</code></pre>
+<p>如果你想权限分配得更细一点可参考博客&#xff1a;<a href="https://blog.csdn.net/qq_42874635/article/details/118420488">mysql给用户分配权限</a></p>
+<h1><a id="_246"></a>六、可能遇到的问题</h1>
+<p><strong>&#xff08;1&#xff09;启动 MySQL 时提示 <code>Failed to start mysqld.service: Unit not found.</code></strong></p>
+<p><img src="https://img-blog.csdnimg.cn/87ef77c773a94d459f251241ce0f3aa3.png" alt="在这里插入图片描述" /></p>
+<p>如果看到这个提示的话说明 mysql 安装失败了&#xff0c;我的建议是卸载重新安装。</p>
+<p><strong>&#xff08;2&#xff09;安装 rpm 包时提示 <code>依赖检测失败</code></strong></p>
+<p><img src="https://img-blog.csdnimg.cn/bb710fcd6c684cfd919ed5a8ed781305.png" alt="在这里插入图片描述" /></p>
+<p>解决办法&#xff1a;<code>卸载mariadb-libs</code></p>
+<pre><code class="prism language-bash"><span class="token function">rpm</span> -e mariadb-libs --nodeps
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/16cb156d89134f5e8eb6aafd3558f9ed.png" alt="在这里插入图片描述" /></p>
+<p>再重新安装失败的那个 rpm 包</p>
+<p><strong>&#xff08;3&#xff09;远程连接时出错</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/bfdb4c1e06444e4f8d3b029deb19fe25.png" alt="在这里插入图片描述" /></p>
+<p>这个错误提示出现的可能有很多&#xff0c;我就列举几个我能想到的吧</p>
+<ul><li>首先去检查你的 MySQL 是否关掉了&#xff0c;如果关了的话重启再连接</li><li>服务器上面的防火墙是否是开着的状态&#xff0c;或者 3306 的端口是否对外开放</li><li>如果你的服务器是云服务器的话&#xff0c;需要去云服务器上面开放 3306 的端口</li></ul>
+<p>第一种情况我就不赘述了&#xff0c;如果你的 MySQL 是安装在虚拟机上面的话&#xff0c;简单粗暴的方式是直接关闭防火墙</p>
+<pre><code class="prism language-bash"><span class="token comment"># 关闭防火墙</span>
+systemctl stop firewalld.service
+<span class="token comment"># 查看防火墙的状态</span>
+firewall-cmd --state
+<span class="token comment"># 禁止firewall开机启动</span>
+systemctl disable firewalld.service
+</code></pre>
+<p>或者为了安全&#xff0c;只开放特定的端口号&#xff0c;MySQL 默认端口是 3306</p>
+<pre><code class="prism language-bash"><span class="token comment"># 关闭防火墙</span>
+systemctl stop firewalld.service
+<span class="token comment"># 3306 端口对外开放</span>
+firewall-cmd --remove-port<span class="token operator">&#61;</span><span class="token number">3306</span>/tcp --permanent
+<span class="token comment"># 重启防火墙</span>
+firewall-cmd --reload
+</code></pre>
+<p><code>但是&#xff0c;如果你 MySQL 并不是安装在虚拟机上的&#xff0c;而是放到云服务器上面&#xff0c;那你必须还得在云服务上面开放这几个端口</code></p>
+<p>比方说我的 MySQL 是运行在 某某云 上面的&#xff0c;我就得做如下设置&#xff1a;</p>
+<p>找到我的服务器&#xff0c;点击 更多&#xff0c;选择 管理</p>
+<p><img src="https://img-blog.csdnimg.cn/011c214f6cf846a090fc1c62bd6dbacb.png" alt="在这里插入图片描述" /><br /> 进入下一个页面之后&#xff0c;选择 <code>防火墙</code></p>
+<p><img src="https://img-blog.csdnimg.cn/00bba75012d1402f9bc054aca3b29942.png" alt="在这里插入图片描述" /></p>
+<p>添加 <code>3306</code> 端口对外开放</p>
+<p><img src="https://img-blog.csdnimg.cn/64fa6a005a9a466e8c65f617180922d6.png" alt="在这里插入图片描述" /></p>
+<p>测试连接</p>
+<p><img src="https://img-blog.csdnimg.cn/356a0f8ff6ef4e609c423270d62b0730.png" alt="在这里插入图片描述" /></p>
+<hr />
+<p>参考博客&#xff1a;<br /> <a href="https://blog.csdn.net/weixin_45375866/article/details/110183532?spm&#61;1001.2014.3001.5501">CentOS7系统安装MySQL指导手册</a><br /> <a href="https://blog.csdn.net/weixin_45375866/article/details/123512884">MySQL如何创建用户</a><br /> <a href="http://c.biancheng.net/view/2608.html">MySQL创建用户&#xff08;CREATE USER&#xff09;</a><br /> <a href="http://www.manongjc.com/detail/14-idqebmctjpfanis.html">MySQL 8.0 配置mysql_native_password身份验证插件的密码</a><br /> <a href="https://blog.csdn.net/qq_42874635/article/details/118420488">mysql给用户分配权限</a></p>
+                </div>
+                <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/markdown_views-22a2fefd3b.css" rel="stylesheet">
+                <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/style-4566211012.css" rel="stylesheet">
+        </div>
+        <div id="treeSkill"></div>
+    </article>
+  <script>
+  $(function() {
+    setTimeout(function () {
+      var mathcodeList = document.querySelectorAll('.htmledit_views img.mathcode');
+      if (mathcodeList.length > 0) {
+        var testImg = new Image();
+        testImg.onerror = function () {
+          mathcodeList.forEach(function (item) {
+            $(item).before('<span class="img-codecogs">\\(' + item.alt + '\\)</span>');
+            $(item).remove();
+          })
+          MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        }
+        testImg.src = mathcodeList[0].src;
+      }
+    }, 1000)
+  })
+  </script>
+</div>
+<div class="more-toolbox-new" id="toolBarBox">
+    <div class="left-toolbox">
+        <div class="toolbox-left">
+            <div class="profile-box"><a class="profile-href" target="_blank" href="https://blog.csdn.net/xhmico"><img class="profile-img" src="https://profile.csdnimg.cn/A/8/4/3_xhmico"><span class="profile-name">多加点辣也没关系</span></a></div>
+            <div class="profile-attend">
+                    <a class="tool-attend tool-bt-button tool-bt-attend" href="javascript:;" data-report-view='{"mod":"1592215036_002","spm":"1001.2101.3001.4232","extend1":"关注"}'>关注</a>
+                <a class="tool-item-follow active-animation" style="display:none;">关注</a>
+            </div>
+        </div>
+        <div class="toolbox-middle">
+        <ul class="toolbox-list">
+            <li class="tool-item tool-item-size tool-active is-like" id="is-like">
+            <a class="tool-item-href">
+                <img style="display:none;" id="is-like-imgactive-animation-like" class="animation-dom active-animation" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarThumbUpactive.png" alt="">
+                <img class="isactive" style="display:none" id="is-like-imgactive" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2021Active.png" alt="">
+                <img class="isdefault" style="display:block" id="is-like-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2021Black.png" alt="">
+                <span id="spanCount" class="count ">
+                        54
+                </span>
+            </a>
+            <div class="tool-hover-tip"><span class="text space">点赞</span></div>
+            </li>
+            <li class="tool-item tool-item-size tool-active is-unlike" id="is-unlike">
+            <a class="tool-item-href">
+                <img class="isactive" style="margin-right:0px;display:none" id="is-unlike-imgactive" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newUnHeart2021Active.png" alt="">
+                <img class="isdefault" style="margin-right:0px;display:block" id="is-unlike-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newUnHeart2021Black.png" alt="">
+                <span id="unlikeCount" class="count "></span>
+            </a>
+            <div class="tool-hover-tip"><span class="text space">踩</span></div>
+            </li>
+            <li class="tool-item tool-item-size tool-active is-collection ">
+            <a class="tool-item-href" href="javascript:;" data-report-click='{"mod":"popu_824","spm":"1001.2101.3001.4130","ab":"new"}'>
+                <img style="display:none" id="is-collection-img-collection" class="animation-dom active-animation" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollectionActive.png" alt="">
+                <img class="isdefault" id="is-collection-img" style="display:none" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newCollectBlack.png" alt="">
+                <img class="isactive" id="is-collection-imgactive" style="display:block" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newCollectActive.png" alt="">
+                <span class="count get-collection active" id="get-collection">
+                    344
+                </span>
+            </a>
+            <div class="tool-hover-tip"><span class="text space">收藏</span></div>
+            </li>
+            <li class="tool-item tool-item-size tool-active tool-item-reward">
+                <a class="tool-item-href" href="javascript:;" data-report-click='{"mod":"popu_830","spm":"1001.2101.3001.4237","dest":"","ab":"new"}'>
+                <img class="isdefault reward-bt" id="rewardBtNew" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newRewardBlack.png" alt="打赏">
+                <span class="count"></span>
+                </a>
+                <div class="tool-hover-tip"><span class="text space">打赏</span></div>
+            </li>
+            <li class="tool-item tool-item-size tool-active tool-item-comment">
+            <a class="tool-item-href go-side-comment" data-report-click='{"spm":"1001.2101.3001.7009"}'>
+                <img class="isdefault" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newComment2021Black.png" alt="">
+                <span class="count">
+                    14
+                </span>
+            </a>
+            <div class="tool-hover-tip"><span class="text space">评论</span></div>
+            </li>
+            <li class="tool-item tool-item-bar">
+            </li>
+            <li class="tool-item tool-item-size tool-active tool-QRcode" id="tool-share">
+                <a class="tool-item-href" href="javascript:;" data-report-click='{"mod":"1582594662_002","spm":"1001.2101.3001.4129","ab":"new"}'>
+                    <img class="isdefault" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newShareBlack.png" alt="">
+                </a>
+                <div class="QRcode" id="tool-QRcode">
+                    <div class="share-bg-icon icon1" id="shareBgIcon"></div>
+                    <div class="share-bg-box">
+                        <div class="share-content">
+                            <img class="share-avatar" src="https://profile.csdnimg.cn/A/8/4/3_xhmico" alt="">
+                            <div class="share-tit">Linux-安装MySQL（详细教程）</div>
+                            <div class="share-dec">本文的主要内容是在 Linux 上安装 MySQL，以下内容是源于 B站 - MySQL数据库入门到精通 整理而来。MySQL是一种关系型数据库管理系统，所使用的 SQL 语言是用于访问数据库的最常用标准化语言。MySQL 软件采用了双授权政策，分为社区版和商业版，由于其体积小、速度快、总体拥有成本低，尤其是开放源码这一特点，一般中小型和大型网站的开发都选择 MySQL 作为网站数据库。官网：https://www.mysql.com/进入官网之后点击 进入页面这里选择 进入页面，选择 根据你服务器</div>
+                            <a id="copyPosterUrl" class="url" data-report-click='{"spm":"1001.2101.3001.7493"}' data-report-view='{"spm":"1001.2101.3001.7493"}'>复制链接</a>
+                        </div>
+                        <div class="share-code">
+                            <div class="share-code-box" id='shareCode'></div>
+                            <div class="share-code-text">扫一扫</div>
+                        </div>
+
+                    </div>
+                    <div class="share-code-type">
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+        </div>
+        <div class="toolbox-right">
+                <div class="tool-directory">
+                    <a class="bt-columnlist-show"
+                    data-id="11583061"
+                    data-free="true"
+                    data-subscribe="false"
+                    data-title="安装教程"
+                    data-img="https://img-blog.csdnimg.cn/20190927151026427.png?x-oss-process=image/resize,m_fixed,h_224,w_224"
+                    data-url="https://blog.csdn.net/xhmico/category_11583061.html"
+                    data-sum="12"
+                    data-people="15"
+                    data-price="0"
+                    data-oldprice="0"
+                    data-join="false"
+                    data-studyvip="false"
+                    data-studysubscribe="false"
+                    data-report-view='{"spm":"1001.2101.3001.6334","extend1":"专栏目录"}'
+                    data-report-click='{"spm":"1001.2101.3001.6334","extend1":"专栏目录"}'
+                    >专栏目录</a>
+                </div>
+        </div>
+    </div>
+</div>
+<script type=text/javascript crossorigin src="https://csdnimg.cn/release/phoenix/production/qrcode-7c90a92189.min.js"></script>
+<script src="//g.csdnimg.cn/??sharewx/1.2.1/sharewx.js" type="text/javascript"></script>
+<script type="text/javascript" crossorigin src="https://g.csdnimg.cn/common/csdn-login-box/csdn-login-box.js"></script>
+<script type="text/javascript" crossorigin src="https://g.csdnimg.cn/collection-box/2.1.0/collection-box.js"></script>
+                <div class="first-recommend-box recommend-box ">
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/web15185420056/article/details/125139647"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6661.1","mod":"popu_871","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromBaidu~Rate-1-125139647-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"1","strategy":"2~default~BlogCommendFromBaidu~Rate","dest":"https://blog.csdn.net/web15185420056/article/details/125139647"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/web15185420056/article/details/125139647" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6661.1","mod":"popu_871","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromBaidu~Rate-1-125139647-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"1","strategy":"2~default~BlogCommendFromBaidu~Rate","dest":"https://blog.csdn.net/web15185420056/article/details/125139647"}'  data-report-query='spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1-125139647-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1-125139647-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>Linux</em><em>安装</em><em>MySQL</em>(超<em>详细</em>)</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/web15185420056" target="_blank"><span class="blog-title">web15185420056的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">06-06</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					1316
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/web15185420056/article/details/125139647" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6661.1","mod":"popu_871","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromBaidu~Rate-1-125139647-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"1","strategy":"2~default~BlogCommendFromBaidu~Rate","dest":"https://blog.csdn.net/web15185420056/article/details/125139647"}'  data-report-query='spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1-125139647-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-1-125139647-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">1 查看是否已经<em>安装</em> <em>Mysql</em>我之前装过一次!如果你查看出来有东西，可以使用下面命令将其删除2 下载官方 <em>Mysql</em> 包如果<em>安装</em>有提示：Cannot write to &lsquo;<em>mysql</em>57-community-release-el7-10.noarch.rpm&rsquo; (No such file or directory)，那就是权限不够可以输入 su root 来解决，然后重新下载。3 <em>安装</em><em>MySQL</em>包4 <em>安装</em> <em>MySQL</em>如果执行命令过程中提示：Unable to find a match: <em>mysql</em>-comm</div>
+			</a>
+		</div>
+	</div>
+</div>
+                </div>
+            <script src="https://csdnimg.cn/release/blogv2/dist/components/js/pc_wap_commontools-d5fda285fa.min.js" type="text/javascript" async></script>
+            <div class="second-recommend-box recommend-box ">
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/qyj19920704/article/details/128300826"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.1","mod":"popu_387","extra":"{\"highlightScore\":\"0.0\",\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~AD_ESQUERY~yljh-1-128300826-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"default","index":"1","strategy":"2~default~AD_ESQUERY~yljh","dest":"https://blog.csdn.net/qyj19920704/article/details/128300826"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/qyj19920704/article/details/128300826" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.1","mod":"popu_387","extra":"{\"highlightScore\":\"0.0\",\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~AD_ESQUERY~yljh-1-128300826-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"default","index":"1","strategy":"2~default~AD_ESQUERY~yljh","dest":"https://blog.csdn.net/qyj19920704/article/details/128300826"}'  data-report-query='spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EAD_ESQUERY%7Eyljh-1-128300826-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EAD_ESQUERY%7Eyljh-1-128300826-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1">【<em>mysql</em>】<em>linux</em><em>安装</em> <em>mysql</em></div>
+					<div class="tag">最新发布</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/qyj19920704" target="_blank"><span class="blog-title">檀越的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">12-13</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					37
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/qyj19920704/article/details/128300826" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.1","mod":"popu_387","extra":"{\"highlightScore\":\"0.0\",\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~AD_ESQUERY~yljh-1-128300826-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"default","index":"1","strategy":"2~default~AD_ESQUERY~yljh","dest":"https://blog.csdn.net/qyj19920704/article/details/128300826"}'  data-report-query='spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EAD_ESQUERY%7Eyljh-1-128300826-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EAD_ESQUERY%7Eyljh-1-128300826-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">【代码】【<em>mysql</em>】<em>linux</em><em>安装</em> <em>mysql</em>。</div>
+			</a>
+		</div>
+	</div>
+</div>
+            </div>
+<a id="commentBox" name="commentBox"></a>
+<div id="pcCommentBox" class="comment-box comment-box-new2  login-comment-box-new" style="display:block">
+		<div class="has-comment" style="display:block">
+		<div class="has-comment-tit">评论<span class="count go-side-comment">14</span><span class="text go-side-comment">条</span><img class="go-side-comment more" src="https://csdnimg.cn/release/blogv2/dist/pc/img/commentArrowRightWhite.png" alt=""><a class="has-comment-bt-right go-side-comment focus">写评论</a></div>
+			<div class="has-comment-con comment-operate-item"></div>
+		</div>
+		<div class="unhas-comment" style="display:none">
+			<div class="unhas-comment-left">评论</div>
+			<div class="unhas-comment-right"><a class="go-side-comment focus">写评论</a></div>
+		</div>
+</div>
+            <div class="recommend-box insert-baidu-box recommend-box-style ">
+                <div class="recommend-item-box no-index" style="display:none"></div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/egegerhn/article/details/125139603"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.2","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-2-125139603-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"2","strategy":"2~default~BlogCommendFromBaidu~Rate","dest":"https://blog.csdn.net/egegerhn/article/details/125139603"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/egegerhn/article/details/125139603" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.2","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-2-125139603-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"2","strategy":"2~default~BlogCommendFromBaidu~Rate","dest":"https://blog.csdn.net/egegerhn/article/details/125139603"}'  data-report-query='spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-2-125139603-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-2-125139603-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>Linux</em> <em>安装</em><em>Mysql</em> <em>详细</em><em>教程</em>（图文<em>教程</em>）</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/egegerhn" target="_blank"><span class="blog-title">egegerhn的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">06-06</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					1558
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/egegerhn/article/details/125139603" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.2","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-2-125139603-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"2","strategy":"2~default~BlogCommendFromBaidu~Rate","dest":"https://blog.csdn.net/egegerhn/article/details/125139603"}'  data-report-query='spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-2-125139603-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-2-125139603-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">首先通过xshell或者 putty 远程进入<em>Linux</em> 命令行操作界面。1.去XShell - Download下载需要的版本。百度网盘：https://pan.baidu.com/s/1-pgv4cChPPdqU_JFI5H33Q
+密码6dj5【1】查看是否已经<em>安装</em> <em>Mysql</em>
+下面是我的操作，可见并没有<em>安装</em> <em>Mysql</em>，那么直接进入【2】如果你查看出来有东西，可以使用下面命令将其删除（xxx 为文件全名）
+【2】下载官方 <em>Mysql</em> 包1. 下载<em>mysql</em> 　　<em>MySQL</em> :: Download My</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/snow_maple521/article/details/127745717"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.3","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~YuanLiJiHua~Position-3-127745717-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"3","strategy":"2~default~YuanLiJiHua~Position","dest":"https://blog.csdn.net/snow_maple521/article/details/127745717"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/snow_maple521/article/details/127745717" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.3","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~YuanLiJiHua~Position-3-127745717-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"3","strategy":"2~default~YuanLiJiHua~Position","dest":"https://blog.csdn.net/snow_maple521/article/details/127745717"}'  data-report-query='spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EYuanLiJiHua%7EPosition-3-127745717-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EYuanLiJiHua%7EPosition-3-127745717-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>linux</em><em>安装</em><em>mysql</em></div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/snow_maple521" target="_blank"><span class="blog-title">snow_maple521的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">11-08</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					694
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/snow_maple521/article/details/127745717" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.3","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~YuanLiJiHua~Position-3-127745717-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"3","strategy":"2~default~YuanLiJiHua~Position","dest":"https://blog.csdn.net/snow_maple521/article/details/127745717"}'  data-report-query='spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EYuanLiJiHua%7EPosition-3-127745717-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EYuanLiJiHua%7EPosition-3-127745717-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1"><em>linux</em><em>安装</em>hive-3.1.2和<em>安装</em><em>mysql</em></div>
+			</a>
+		</div>
+	</div>
+</div>
+		<dl id="recommend-item-box-tow" class="recommend-item-box type_blog clearfix">
+
+		</dl>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/weixin_39622084/article/details/113164996"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.4","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-4-113164996-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"4","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_39622084/article/details/113164996"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/weixin_39622084/article/details/113164996" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.4","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-4-113164996-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"4","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_39622084/article/details/113164996"}'  data-report-query='spm=1001.2101.3001.6650.4&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-4-113164996-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-4-113164996-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>linux</em><em>安装</em>二进制<em>mysql</em>_<em>Linux</em>中<em>MySQL</em>二进制<em>安装</em>步骤</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/weixin_39622084" target="_blank"><span class="blog-title">weixin_39622084的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">01-19</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					79
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/weixin_39622084/article/details/113164996" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.4","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-4-113164996-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"4","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_39622084/article/details/113164996"}'  data-report-query='spm=1001.2101.3001.6650.4&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-4-113164996-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-4-113164996-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1"><em>MySQL</em>二进制<em>安装</em>步骤<em>安装</em>依赖环境[root@node3 ~]# yum -y install libaio将<em>mysql</em>-5.7.26-<em>linux</em>-glibc2.12-x86_64.tar.gz传到<em>linux</em>并解压[root@node3 ~]# tar -xf <em>mysql</em>-5.7.26-<em>linux</em>-glibc2.12-x86_64.tar.gz -C /opt/创建一个<em>mysql</em>用户[root@...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_download clearfix" data-url="https://download.csdn.net/download/ganwei793089452/10165275"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.5","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-download-2~default~ESLANDING~default-5-10165275-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"5","strategy":"2~default~ESLANDING~default","dest":"https://download.csdn.net/download/ganwei793089452/10165275"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://download.csdn.net/download/ganwei793089452/10165275" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.5","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-download-2~default~ESLANDING~default-5-10165275-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"5","strategy":"2~default~ESLANDING~default","dest":"https://download.csdn.net/download/ganwei793089452/10165275"}'  data-report-query='spm=1001.2101.3001.6650.5&utm_medium=distribute.pc_relevant.none-task-download-2%7Edefault%7EESLANDING%7Edefault-5-10165275-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-download-2%7Edefault%7EESLANDING%7Edefault-5-10165275-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>linux</em>下<em>安装</em><em>mysql</em></div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info display-flex">
+					<span class="info-block">12-20</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://download.csdn.net/download/ganwei793089452/10165275" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.5","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-download-2~default~ESLANDING~default-5-10165275-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"5","strategy":"2~default~ESLANDING~default","dest":"https://download.csdn.net/download/ganwei793089452/10165275"}'  data-report-query='spm=1001.2101.3001.6650.5&utm_medium=distribute.pc_relevant.none-task-download-2%7Edefault%7EESLANDING%7Edefault-5-10165275-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-download-2%7Edefault%7EESLANDING%7Edefault-5-10165275-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1"><em>linux</em>下<em>安装</em><em>mysql</em></div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/cuishaoye/article/details/106806316"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.6","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-6-106806316-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"6","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/cuishaoye/article/details/106806316"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/cuishaoye/article/details/106806316" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.6","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-6-106806316-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"6","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/cuishaoye/article/details/106806316"}'  data-report-query='spm=1001.2101.3001.6650.6&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-6-106806316-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-6-106806316-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>Linux</em>系统中<em>MySQL</em><em>安装</em>步骤</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/cuishaoye" target="_blank"><span class="blog-title">cuishaoye的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">06-17</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					154
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/cuishaoye/article/details/106806316" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.6","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-6-106806316-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"6","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/cuishaoye/article/details/106806316"}'  data-report-query='spm=1001.2101.3001.6650.6&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-6-106806316-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-6-106806316-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">（1）上传rpm包
+（2）yum下载并<em>安装</em>依赖包: net-tools、 perl、autoconf
+1）yum install -y net-tools
+
+2）yum install -y perl
+
+3）yum install -y autoconf
+
+（3）rpm -ivh <em>MySQL</em>-client-5.6.46-1.el7.x86_64.rpm     <em>安装</em>客户端
+
+（4）rpm -ivh <em>MySQL</em>-server-5.6.46-1.el7.x86_64.rpm     <em>安装</em>服务端
+
+（5）会有依赖</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/weixin_33186486/article/details/113478606"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.7","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-7-113478606-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"7","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_33186486/article/details/113478606"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/weixin_33186486/article/details/113478606" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.7","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-7-113478606-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"7","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_33186486/article/details/113478606"}'  data-report-query='spm=1001.2101.3001.6650.7&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-7-113478606-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-7-113478606-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>linux</em>下载<em>mysql</em>头文件_<em>Linux</em>下<em>安装</em><em>mysql</em></div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/weixin_33186486" target="_blank"><span class="blog-title">weixin_33186486的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">01-28</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					551
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/weixin_33186486/article/details/113478606" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.7","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-7-113478606-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"7","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_33186486/article/details/113478606"}'  data-report-query='spm=1001.2101.3001.6650.7&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-7-113478606-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-7-113478606-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">到<em>mysql</em>官网下载<em>mysql</em>编译好的二进制<em>安装</em>包，在下载页面Select Platform:选项选择<em>linux</em>-generic，然后把页面拉到底部，64位系统下载<em>Linux</em> - Generic (glibc 2.5) (x86, 64-bit)，32位系统下载<em>Linux</em> - Generic (glibc 2.5) (x86, 32-bit)解压32位<em>安装</em>包:进入<em>安装</em>包所在目录，执行命令：tar...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/AlerXiaoTian/article/details/50801032"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.8","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-8-50801032-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"8","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/AlerXiaoTian/article/details/50801032"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/AlerXiaoTian/article/details/50801032" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.8","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-8-50801032-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"8","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/AlerXiaoTian/article/details/50801032"}'  data-report-query='spm=1001.2101.3001.6650.8&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-8-50801032-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-8-50801032-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>linux</em> <em>mysql</em> <em>安装</em>和配置</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/AlerXiaoTian" target="_blank"><span class="blog-title">小景天天的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">03-04</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					342
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/AlerXiaoTian/article/details/50801032" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.8","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-8-50801032-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"8","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/AlerXiaoTian/article/details/50801032"}'  data-report-query='spm=1001.2101.3001.6650.8&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-8-50801032-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-8-50801032-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">系统redhat 6.5server版
+<em>mysql</em>5.5
+
+先到官方分别下载好<em>mysql</em>服务端和客户端，这里使用rpm版
+http://www.<em>mysql</em>.com/downloads/
+
+对于redhat 6.5server版<em>安装</em>出错,文件或包冲突问题，然后直接<em>安装</em>
+执行 yum remove <em>mysql</em>-libs&nbsp;
+
+查找以前是否<em>安装</em>有<em>mysql</em>，使用下面命令：
+rpm -q</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/weixin_47480968/article/details/120224381"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.9","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-9-120224381-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"9","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_47480968/article/details/120224381"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/weixin_47480968/article/details/120224381" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.9","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-9-120224381-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"9","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_47480968/article/details/120224381"}'  data-report-query='spm=1001.2101.3001.6650.9&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-9-120224381-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-9-120224381-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>Linux</em><em>安装</em>jdk和<em>mysql</em></div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/weixin_47480968" target="_blank"><span class="blog-title">weixin_47480968的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">09-12</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					85
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/weixin_47480968/article/details/120224381" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.9","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-9-120224381-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"9","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_47480968/article/details/120224381"}'  data-report-query='spm=1001.2101.3001.6650.9&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-9-120224381-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-9-120224381-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1"><em>安装</em>你要先把jdk文件传进去
+
+
+
+点击进去，然后找你你要拖得文件，直接拖到右边
+
+
+
+拖到右边，你可以输入ll查看你现在有没有，这就是我刚刚拖进去的jdk文件，就可以看到
+
+
+
+你先看看你的<em>linux</em>有没有java，输入rmp -qa| grep java
+
+
+
+没有的话，就可以进行解压了 ，前面是解压的文件 要是解压到别的路径，输入-C大写的c ，后面写上解压的路径，输入完点击回车就可以了
+
+
+
+停了就代表解压完成了
+
+
+
+想要查看jdk，输入你写的路径，然后在输入ls进行查看，就可以看到，...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/A_Runner/article/details/84644462"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.10","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-10-84644462-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"10","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/A_Runner/article/details/84644462"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/A_Runner/article/details/84644462" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.10","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-10-84644462-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"10","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/A_Runner/article/details/84644462"}'  data-report-query='spm=1001.2101.3001.6650.10&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-10-84644462-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-10-84644462-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>Linux</em><em>安装</em><em>MySQL</em></div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/A_Runner" target="_blank"><span class="blog-title">A_Runner的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">11-30</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					4091
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/A_Runner/article/details/84644462" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.10","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-10-84644462-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"10","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/A_Runner/article/details/84644462"}'  data-report-query='spm=1001.2101.3001.6650.10&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-10-84644462-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-10-84644462-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">&ldquo;芳草绿黏天一角，落花红沁水三弓&rdquo;
+接上篇，<em>Linux</em><em>安装</em>JDK，<em>安装</em>完JDK后，现在来<em>安装</em><em>MySQL</em>服务。
+
+下载<em>MySQL</em>服务，<em>MySQL</em>下载地址，
+选择对应的系统下载之后，通过共享文件的方式，传到服务器/usr/local/目录下。然后解压
+
+tar zxvf <em>mysql</em>-5.6.42-<em>linux</em>-glibc2.12-x86_64.tar.gz -C ./
+
+
+<em>安装</em>依赖
+
+yum -y in...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/yuyecsdn/article/details/90052291"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.11","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-11-90052291-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"11","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/yuyecsdn/article/details/90052291"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/yuyecsdn/article/details/90052291" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.11","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-11-90052291-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"11","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/yuyecsdn/article/details/90052291"}'  data-report-query='spm=1001.2101.3001.6650.11&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-11-90052291-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-11-90052291-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>linux</em>下<em>mysql</em><em>安装</em></div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/yuyecsdn" target="_blank"><span class="blog-title">常年被追砍的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">05-10</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					788
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/yuyecsdn/article/details/90052291" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.11","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-11-90052291-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"11","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/yuyecsdn/article/details/90052291"}'  data-report-query='spm=1001.2101.3001.6650.11&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-11-90052291-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-11-90052291-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">1.下载解压https://www.<em>mysql</em>.com/downloads/https://dev.<em>mysql</em>.com/downloads/<em>mysql</em>/
+
+#解压
+
+
+tar -zxvf <em>mysql</em>-5.6.33-<em>linux</em>-glibc2.5-x86_64.tar.gz
+#复制解压后的<em>mysql</em>目录
+cp -r <em>mysql</em>-5.6.33-<em>linux</em>-glibc2.5-x86_64 /usr/loc...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/spring_great/article/details/48520049"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.12","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-12-48520049-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"12","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/spring_great/article/details/48520049"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/spring_great/article/details/48520049" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.12","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-12-48520049-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"12","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/spring_great/article/details/48520049"}'  data-report-query='spm=1001.2101.3001.6650.12&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-12-48520049-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-12-48520049-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>linux</em> <em>安装</em><em>mysql</em> 服务端</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/spring_great" target="_blank"><span class="blog-title">李永亮的专栏</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">09-17</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					364
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/spring_great/article/details/48520049" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.12","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-12-48520049-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"12","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/spring_great/article/details/48520049"}'  data-report-query='spm=1001.2101.3001.6650.12&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-12-48520049-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-12-48520049-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">centos <em>mysql</em>客户端<em>安装</em></div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/qq_39181017/article/details/80239248"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.13","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-13-80239248-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"13","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/qq_39181017/article/details/80239248"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/qq_39181017/article/details/80239248" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.13","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-13-80239248-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"13","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/qq_39181017/article/details/80239248"}'  data-report-query='spm=1001.2101.3001.6650.13&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-13-80239248-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-13-80239248-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>linux</em><em>安装</em><em>mysql</em>，centOS7<em>安装</em>mysq</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/qq_39181017" target="_blank"><span class="blog-title">qq_39181017的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">05-08</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					104
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/qq_39181017/article/details/80239248" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.13","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-13-80239248-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"13","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/qq_39181017/article/details/80239248"}'  data-report-query='spm=1001.2101.3001.6650.13&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-13-80239248-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-13-80239248-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">哈哈哈哈！！！
+
+就是一个地址，写的很好的
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+https://www.<em>linux</em>idc.com/<em>Linux</em>/2016-09/135288.htm
+
+本地navercat连不上<em>linux</em>上的<em>mysql</em>
+
+&nbsp;
+
+https://blog.csdn.net/lifupingcn/article/details/53695360
+
+密码不一样时
+
+
+
+&nbsp;
+
+&nbsp;
+
+<em>数据库</em>连接不上
+
+htt...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/evildhjg/article/details/108857687"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.14","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-14-108857687-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"14","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/evildhjg/article/details/108857687"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/evildhjg/article/details/108857687" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.14","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-14-108857687-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"14","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/evildhjg/article/details/108857687"}'  data-report-query='spm=1001.2101.3001.6650.14&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-14-108857687-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-14-108857687-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>linux</em>l<em>安装</em><em>mysql</em>  附<em>详细</em>步骤！！</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/evildhjg" target="_blank"><span class="blog-title">evildhjg的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">09-28</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					253
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/evildhjg/article/details/108857687" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.14","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-14-108857687-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"14","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/evildhjg/article/details/108857687"}'  data-report-query='spm=1001.2101.3001.6650.14&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-14-108857687-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-14-108857687-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1"><em>linux</em>l<em>安装</em><em>mysql</em>
+一、准备工作
+1、前提：必须连接网络，这是在线<em>安装</em>
+（1）列出所有可安裝的软件清单
+yum list
+（2）从清单中找vim包
+yum list |grep vim
+（3）直接查找gcc包
+yum search gcc   ，  如果出现command not found ，那么执行下面的语句
+yum install gcc -y
+2、为了方便以后管理<em>Linux</em>系统里面的文件，最好创建一个文件夹来管理外部文件
+语句：
+退回到最顶级目录   ：	  cd &hellip;/
+存放tar包    </div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://zyqok.blog.csdn.net/article/details/103285472"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.15","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-15-103285472-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"15","strategy":"2~default~ESLANDING~default","dest":"https://zyqok.blog.csdn.net/article/details/103285472"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://zyqok.blog.csdn.net/article/details/103285472" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.15","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-15-103285472-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"15","strategy":"2~default~ESLANDING~default","dest":"https://zyqok.blog.csdn.net/article/details/103285472"}'  data-report-query='spm=1001.2101.3001.6650.15&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-15-103285472-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-15-103285472-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>Linux</em> <em>安装</em><em>Mysql</em>（图文<em>教程</em>）</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/sunnyzyq" target="_blank"><span class="blog-title">小白一个</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">11-28</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					3万+
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://zyqok.blog.csdn.net/article/details/103285472" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.15","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-15-103285472-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"15","strategy":"2~default~ESLANDING~default","dest":"https://zyqok.blog.csdn.net/article/details/103285472"}'  data-report-query='spm=1001.2101.3001.6650.15&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-15-103285472-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-15-103285472-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">首先通过 xshell 或者 putty 远程进入<em>Linux</em> 命令行操作界面。
+
+【1】查看是否已经<em>安装</em> <em>Mysql</em>
+
+
+rpm -qa | grep <em>mysql</em>
+
+ 下面是我的操作，可见并没有<em>安装</em> <em>Mysql</em>，那么直接进入【2】
+
+
+
+ 如果你查看出来有东西，可以使用下面命令将其删除（xxx 为文件全名）
+
+
+rpm -e xxx
+
+【2】下载官方 <em>Mysql</em> 包
+
+
+wget -i...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/weixin_30840573/article/details/98435844"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.16","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-16-98435844-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"16","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_30840573/article/details/98435844"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/weixin_30840573/article/details/98435844" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.16","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-16-98435844-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"16","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_30840573/article/details/98435844"}'  data-report-query='spm=1001.2101.3001.6650.16&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-16-98435844-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-16-98435844-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>Mysql</em> <em>linux</em> <em>安装</em>文档</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/weixin_30840573" target="_blank"><span class="blog-title">weixin_30840573的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">08-04</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					63
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/weixin_30840573/article/details/98435844" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.16","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-16-98435844-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"16","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_30840573/article/details/98435844"}'  data-report-query='spm=1001.2101.3001.6650.16&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-16-98435844-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-16-98435844-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">1、<em>安装</em>依赖包
+yum -y install gcc-c++ ncurses-devel cmake make perl gcc autoconf automake zlib libxml libgcrypt libtool bison
+2、<em>安装</em>boost库：
+首先先查询是否已经<em>安装</em>过boost
+rpm -qa boost*
+卸载旧boost-*等库：
+yum -y remove bo...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://huaweicloud.csdn.net/633563eed3efff3090b55300.html"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.17","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~activity-17-121855946-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"17","strategy":"2~default~ESLANDING~activity","dest":"https://huaweicloud.csdn.net/633563eed3efff3090b55300.html"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://huaweicloud.csdn.net/633563eed3efff3090b55300.html" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.17","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~activity-17-121855946-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"17","strategy":"2~default~ESLANDING~activity","dest":"https://huaweicloud.csdn.net/633563eed3efff3090b55300.html"}'  data-report-query='spm=1001.2101.3001.6650.17&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Eactivity-17-121855946-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Eactivity-17-121855946-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1">在<em>linux</em>中离线<em>安装</em><em>mysql</em></div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/m0_60305555" target="_blank"><span class="blog-title">m0_60305555的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">12-10</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					4236
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://huaweicloud.csdn.net/633563eed3efff3090b55300.html" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.17","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~activity-17-121855946-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"17","strategy":"2~default~ESLANDING~activity","dest":"https://huaweicloud.csdn.net/633563eed3efff3090b55300.html"}'  data-report-query='spm=1001.2101.3001.6650.17&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Eactivity-17-121855946-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Eactivity-17-121855946-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">1.在centos7当中检查当前系统的版本：
+
+cat /etc/redhat-release
+
+2.下载源码
+
+<em>MySQL</em> :: Download <em>MySQL</em> Community Server
+
+选择版本
+
+
+
+下载Bundle版，它把各种功能都捆绑在了一起。
+
+
+
+点击下载时提示要登录，无需理会。直接点击下面的超链接
+
+（Nothanks，juststartmydownload）即可
+
+
+
+
+
+3.检查是否<em>安装</em>其他的<em>mysql</em>
+
+rpm -qa|grep -i <em>mysql</em>
+
+4.卸载已安...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/weixin_42514750/article/details/115830817"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.18","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-18-115830817-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"18","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_42514750/article/details/115830817"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/weixin_42514750/article/details/115830817" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.18","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-18-115830817-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"18","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_42514750/article/details/115830817"}'  data-report-query='spm=1001.2101.3001.6650.18&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-18-115830817-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-18-115830817-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>linux</em> <em>mysql</em> bundle,<em>linux</em>下<em>安装</em><em>mysql</em></div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/weixin_42514750" target="_blank"><span class="blog-title">weixin_42514750的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">03-16</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					142
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/weixin_42514750/article/details/115830817" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.18","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-18-115830817-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"18","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_42514750/article/details/115830817"}'  data-report-query='spm=1001.2101.3001.6650.18&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-18-115830817-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-18-115830817-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">第一步准备工作(非必须的操作)关闭防火墙(如果有的话)关闭SE<em>linux</em>(如果有的话)如果之前有mariadb，则需要卸载，并删除对应的配置与数据：从官网下载<em>mysql</em><em>数据库</em>，选好<em>数据库</em>后下载下载连接：https://downloads.<em>mysql</em>.com/archives/get/p/23/file/<em>mysql</em>-5.7.29-1.el7.x86_64.rpm-bundle.tar上传到服务器或者...</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="recommend-item-box type_blog clearfix" data-url="https://blog.csdn.net/weixin_34302798/article/details/92392496"  data-report-view='{"ab":"new","spm":"1001.2101.3001.6650.19","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-19-92392496-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"19","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_34302798/article/details/92392496"}'>
+	<div class="content-box">
+		<div class="content-blog display-flex">
+			<div class="title-box">
+				<a href="https://blog.csdn.net/weixin_34302798/article/details/92392496" class="tit" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.19","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-19-92392496-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"19","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_34302798/article/details/92392496"}'  data-report-query='spm=1001.2101.3001.6650.19&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-19-92392496-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-19-92392496-blog-125197747.pc_relevant_landingrelevant'>
+					<div class="left ellipsis-online ellipsis-online-1"><em>linux</em> <em>安装</em><em>mysql</em>客户端</div>
+					<div class="tag">热门推荐</div>
+				</a>
+			</div>
+			<div class="info-box display-flex">
+				<div class="info">
+					<a href="https://blog.csdn.net/weixin_34302798" target="_blank"><span class="blog-title">weixin_34302798的博客</span></a>
+				</div>
+				<div class="info display-flex">
+					<span class="info-block time">06-01</span>
+					<span class="info-block read"><img class="read-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					3万+
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="desc-box">
+			<a href="https://blog.csdn.net/weixin_34302798/article/details/92392496" target="_blank"  data-report-click='{"ab":"new","spm":"1001.2101.3001.6650.19","mod":"popu_387","extra":"{\"highlightScore\":0.0,\"utm_medium\":\"distribute.pc_relevant.none-task-blog-2~default~ESLANDING~default-19-92392496-blog-125197747.pc_relevant_landingrelevant\",\"dist_request_id\":\"1671116560440_14183\"}","dist_request_id":"1671116560440_14183","ab_strategy":"enhancedownloadv1_v2","index":"19","strategy":"2~default~ESLANDING~default","dest":"https://blog.csdn.net/weixin_34302798/article/details/92392496"}'  data-report-query='spm=1001.2101.3001.6650.19&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-19-92392496-blog-125197747.pc_relevant_landingrelevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-19-92392496-blog-125197747.pc_relevant_landingrelevant'>
+				<div class="desc ellipsis-online ellipsis-online-1">2019独角兽企业重金招聘Python工程师标准&gt;&gt;&gt;
+
+         ...</div>
+			</a>
+		</div>
+	</div>
+</div>
+            </div>
+<div id="recommendNps" class="recommend-nps-box common-nps-box">
+  <h3 class="aside-title">“相关推荐”对你有帮助么？</h3>
+  <div class="aside-content">
+      <ul class="newnps-list">
+          <li class="newnps-item" data-type="非常没帮助">
+              <div class="newnps-img-box">
+                  <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel1.png" alt="">
+                  <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey1.png" alt="">
+              </div>
+              <div class="newnps-text">非常没帮助</div>
+          </li>
+          <li class="newnps-item" data-type="没帮助">
+              <div class="newnps-img-box">
+                  <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel2.png" alt="">
+                  <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey2.png" alt="">
+              </div>
+              <div class="newnps-text">没帮助</div>
+          </li>
+          <li class="newnps-item" data-type="一般">
+              <div class="newnps-img-box">
+                  <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel3.png" alt="">
+                  <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey3.png" alt="">
+              </div>
+              <div class="newnps-text">一般</div>
+          </li>
+          <li class="newnps-item" data-type="有帮助">
+              <div class="newnps-img-box">
+                  <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel4.png" alt="">
+                  <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey4.png" alt="">
+              </div>
+              <div class="newnps-text">有帮助</div>
+          </li>
+          <li class="newnps-item" data-type="非常有帮助">
+              <div class="newnps-img-box">
+                  <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel5.png" alt="">
+                  <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey5.png" alt="">
+              </div>
+              <div class="newnps-text">非常有帮助</div>
+          </li>
+      </ul>
+      <div class="newnps-form-box">
+      <div class="newnps-form">
+          <input type="text" placeholder="请输入建议或反馈后点击提交" class="newnps-input">
+          <span class="newnps-btn">提交</span>
+      </div>
+      </div>
+  </div>
+</div>            <div class="template-box">
+                <span>©️2022 CSDN</span>
+                <span>皮肤主题：数字20</span>
+                <span> 设计师：CSDN官方博客</span>
+                <span>
+                    <a href="https://blog.csdn.net/" class="back-home c-blue c-blue-hover c-blue-focus">返回首页</a>
+                </span>
+            </div>
+<div class="blog-footer-bottom" style="margin-top:10px;"></div>
+<script src="https://g.csdnimg.cn/common/csdn-footer/csdn-footer.js" data-isfootertrack="false" type="text/javascript"></script>
+<script type="text/javascript">
+    window.csdn.csdnFooter.options = {
+        el: '.blog-footer-bottom',
+        type: 2
+    }
+</script>        </main>
+<aside class="blog_container_aside">
+<div id="asideProfile" class="aside-box">
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/xhmico" target="_blank" data-report-click='{"mod":"popu_379","spm":"1001.2101.3001.4121","dest":"https://blog.csdn.net/xhmico","ab":"new"}'>
+                <img src="https://profile.csdnimg.cn/A/8/4/3_xhmico" class="avatar_pic">
+            </a>
+        </div>
+        <div class="user-info d-flex flex-column profile-intro-name-box">
+            <div class="profile-intro-name-boxTop">
+                <a href="https://blog.csdn.net/xhmico" target="_blank" class="" id="uid" title="多加点辣也没关系" data-report-click='{"mod":"popu_379","spm":"1001.2101.3001.4122","dest":"https://blog.csdn.net/xhmico","ab":"new"}'>
+                    <span class="name " username="xhmico">多加点辣也没关系</span>
+                </a>
+                <span>
+                </span>
+                <span class="flag expert-blog">
+                <span class="bubble">CSDN认证博客专家</span>
+                </span>
+                <span class="flag company-blog">
+                <span class="bubble">CSDN认证企业博客</span>
+                </span>
+            </div>
+            <div class="profile-intro-name-boxFooter">
+                <span class="personal-home-page personal-home-years" title="已加入 CSDN 3年">码龄3年</span>
+                    <span class="personal-home-page">
+                    <a class="personal-home-certification" href="https://i.csdn.net/#/uc/profile?utm_source=14998968" target="_blank" title="暂无认证">
+                    <img src="https://csdnimg.cn/identity/nocErtification.png" alt="">
+                    暂无认证
+                    </a>
+                    </span>
+            </div>
+        </div>
+    </div>
+    <div class="data-info d-flex item-tiling">
+        <dl class="text-center" title="33">
+            <a href="https://blog.csdn.net/xhmico" data-report-click='{"mod":"1598321000_001","spm":"1001.2101.3001.4310"}' data-report-query="t=1">
+                <dt><span class="count">33</span></dt>
+                <dd class="font">原创</dd>
+            </a>
+        </dl>
+        <dl class="text-center" data-report-click='{"mod":"1598321000_002","spm":"1001.2101.3001.4311"}' title="34308">
+            <a href="https://blog.csdn.net/rank/list/weekly" target="_blank">
+                <dt><span class="count">3万+</span></dt>
+                <dd class="font">周排名</dd>
+            </a>
+        </dl>
+        <dl class="text-center" title="18450">
+            <a href="https://blog.csdn.net/rank/list/total" data-report-click='{"mod":"1598321000_003","spm":"1001.2101.3001.4312"}' target="_blank">
+                <dt><span class="count">1万+</span></dt>
+                <dd class="font">总排名</dd>
+            </a>
+        </dl>
+        <dl class="text-center" style="min-width:58px" title="369270">
+            <dt><span class="count">36万+</span></dt>
+            <dd>访问</dd>
+        </dl>
+        <dl class="text-center" title="4级,点击查看等级说明">
+            <dt><a href="https://blog.csdn.net/blogdevteam/article/details/103478461" target="_blank">
+                <img class="level" src="https://csdnimg.cn/identity/blog4.png">
+            </a>
+            </dt>
+            <dd>等级</dd>
+        </dl>
+    </div>
+    <div class="item-rank"></div>
+    <div class="data-info d-flex item-tiling">
+        <dl class="text-center" title="1199">
+            <dt><span class="count">1199</span></dt>
+            <dd>积分</dd>
+        </dl>
+         <dl class="text-center" id="fanBox" title="390">
+            <dt><span class="count" id="fan">390</span></dt>
+            <dd>粉丝</dd>
+        </dl>
+        <dl class="text-center" title="715">
+            <dt><span class="count">715</span></dt>
+            <dd>获赞</dd>
+        </dl>
+        <dl class="text-center" title="148">
+            <dt><span class="count">148</span></dt>
+            <dd>评论</dd>
+        </dl>
+        <dl class="text-center" title="3232">
+            <dt><span class="count">3232</span></dt>
+            <dd>收藏</dd>
+        </dl>
+    </div>
+    <div class="aside-box-footer" data-report-view='{"spm":"3001.4296"}'>
+        <div class="badge-box d-flex">
+            <div class="badge d-flex">
+                <div class="icon-badge" title="新秀勋章">
+                    <div class="mouse-box">
+                        <img class="medal-img" data-report-click='{"spm":"3001.4296"}' src="https://csdnimg.cn/medal/xinxiu@240.png" alt="新秀勋章">
+                    </div>
+                </div>
+                <div class="icon-badge" title="持之以恒">
+                    <div class="mouse-box">
+                        <img class="medal-img" data-report-click='{"spm":"3001.4296"}' src="https://csdnimg.cn/medal/chizhiyiheng@240.png" alt="持之以恒">
+                    </div>
+                </div>
+                <div class="icon-badge" title="笔耕不辍">
+                    <div class="mouse-box">
+                        <img class="medal-img" data-report-click='{"spm":"3001.4296"}' src="https://csdnimg.cn/70592b2299594e37aedcaa91fc52a294.png" alt="笔耕不辍">
+                    </div>
+                </div>
+                <div class="icon-badge" title="勤写标兵">
+                    <div class="mouse-box">
+                        <img class="medal-img" data-report-click='{"spm":"3001.4296"}' src="https://csdnimg.cn/medal/qixiebiaobing4@240.png" alt="勤写标兵">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profile-intro-name-boxOpration">
+        <div class="opt-letter-watch-box">
+        <a class="bt-button personal-letter" href="https://im.csdn.net/chat/xhmico" target="_blank" rel="noopener">私信</a>
+        </div>
+        <div class="opt-letter-watch-box">
+            <a class="personal-watch bt-button" id="btnAttent" >关注</a>
+        </div>
+    </div>
+</div>
+ <div id="asideSearchArticle" class="aside-box">
+	<div class="aside-content search-comter">
+    <div class="aside-search aside-search-blog">
+        <input type="text" class="input-serch-blog" name="" autocomplete="off" value="" id="search-blog-words" placeholder="搜博主文章">
+        <a class="btn-search-blog">
+                    <img src="//csdnimg.cn/cdn/content-toolbar/csdn-sou.png?v=1587021042">
+        </a>
+    </div>
+    </div>
+</div>
+
+
+<div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list">
+			<li>
+				<a href="https://blog.csdn.net/xhmico/article/details/122390181" target="_blank"  data-report-click='{"mod":"popu_541","spm":"1001.2101.3001.4139","dest":"https://blog.csdn.net/xhmico/article/details/122390181","ab":"new"}'>
+				java 环境配置(详细教程)
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					<span class="read">128056</span>
+                </a>
+			</li>
+			<li>
+				<a href="https://blog.csdn.net/xhmico/article/details/122443660" target="_blank"  data-report-click='{"mod":"popu_541","spm":"1001.2101.3001.4139","dest":"https://blog.csdn.net/xhmico/article/details/122443660","ab":"new"}'>
+				R 语言的安装（详细教程）
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					<span class="read">59166</span>
+                </a>
+			</li>
+			<li>
+				<a href="https://blog.csdn.net/xhmico/article/details/122505951" target="_blank"  data-report-click='{"mod":"popu_541","spm":"1001.2101.3001.4139","dest":"https://blog.csdn.net/xhmico/article/details/122505951","ab":"new"}'>
+				虚拟机-安装与使用（详细教程）
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					<span class="read">45322</span>
+                </a>
+			</li>
+			<li>
+				<a href="https://blog.csdn.net/xhmico/article/details/125197747" target="_blank"  data-report-click='{"mod":"popu_541","spm":"1001.2101.3001.4139","dest":"https://blog.csdn.net/xhmico/article/details/125197747","ab":"new"}'>
+				Linux-安装MySQL（详细教程）
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					<span class="read">41552</span>
+                </a>
+			</li>
+			<li>
+				<a href="https://blog.csdn.net/xhmico/article/details/125029286" target="_blank"  data-report-click='{"mod":"popu_541","spm":"1001.2101.3001.4139","dest":"https://blog.csdn.net/xhmico/article/details/125029286","ab":"new"}'>
+				MySQL的安装（详细教程）
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png" alt="">
+					<span class="read">19858</span>
+                </a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div id="asideCategory" class="aside-box flexible-box">
+    <h3 class="aside-title">分类专栏</h3>
+    <div class="aside-content">
+        <ul>
+            <li>
+                <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11575146.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11575146.html","ab":"new"}'>
+                    <div class="special-column-bar "></div>
+                    <img src="https://img-blog.csdnimg.cn/20190927151132530.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        入门教程
+                    </span>
+                </a>
+                <span class="special-column-num">12篇</span>
+            </li>
+            <li>
+                <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11583061.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11583061.html","ab":"new"}'>
+                    <div class="special-column-bar "></div>
+                    <img src="https://img-blog.csdnimg.cn/20190927151026427.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        安装教程
+                    </span>
+                </a>
+                <span class="special-column-num">12篇</span>
+            </li>
+            <li>
+                <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11684243.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11684243.html","ab":"new"}'>
+                    <div class="special-column-bar "></div>
+                    <img src="https://img-blog.csdnimg.cn/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        运维相关
+                    </span>
+                </a>
+                <span class="special-column-num">3篇</span>
+            </li>
+            <li>
+                <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11919197.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11919197.html","ab":"new"}'>
+                    <div class="special-column-bar "></div>
+                    <img src="https://img-blog.csdnimg.cn/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        前端学习
+                    </span>
+                </a>
+                <span class="special-column-num">1篇</span>
+            </li>
+            <li>
+                <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11576386.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11576386.html","ab":"new"}'>
+                    <div class="special-column-bar "></div>
+                    <img src="https://img-blog.csdnimg.cn/20190927151124774.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        踩坑系列
+                    </span>
+                </a>
+                <span class="special-column-num">6篇</span>
+            </li>
+            <li>
+                <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11674963.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11674963.html","ab":"new"}'>
+                    <div class="special-column-bar "></div>
+                    <img src="https://img-blog.csdnimg.cn/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        算法学习
+                    </span>
+                </a>
+                <span class="special-column-num">2篇</span>
+            </li>
+            <li>
+                <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11815242.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11815242.html","ab":"new"}'>
+                    <div class="special-column-bar "></div>
+                    <img src="https://img-blog.csdnimg.cn/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        高级教程
+                    </span>
+                </a>
+                <span class="special-column-num">1篇</span>
+            </li>
+            <li>
+                <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11581876.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11581876.html","ab":"new"}'>
+                    <div class="special-column-bar "></div>
+                    <img src="https://img-blog.csdnimg.cn/20201014180756757.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        环境配置
+                    </span>
+                </a>
+                <span class="special-column-num">2篇</span>
+            </li>
+            <li>
+                <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11572673.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11572673.html","ab":"new"}'>
+                    <div class="special-column-bar "></div>
+                    <img src="https://img-blog.csdnimg.cn/20201014180756916.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                    <span class="title oneline">
+                        系统集成
+                    </span>
+                </a>
+                <span class="special-column-num">1篇</span>
+            </li>
+        </ul>
+    </div>
+    <p class="text-center">
+        <a class="flexible-btn" data-fbox="aside-archive"><img class="look-more" src="https://csdnimg.cn/release/blogv2/dist/pc/img/arrowDownWhite.png" alt=""></a>
+    </p>
+</div>
+<div id="asideNewComments" class="aside-box">
+    <h3 class="aside-title">最新评论</h3>
+    <div class="aside-content">
+        <ul class="newcomment-list">
+            <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/xhmico/article/details/125029286#comments_24572176" data-report-click='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/xhmico/article/details/125029286#comments_24572176","ab":"new"}' data-report-view='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/xhmico/article/details/125029286#comments_24572176","ab":"new"}'>MySQL的安装（详细教程）</a>
+                <p class="comment ellipsis">
+                    <a href="https://blog.csdn.net/qq_51247028" class="user-name" target="_blank">阿 湫: </a>
+                    <span class="code-comments">感谢博主详细教学！</span>
+                </p>
+            </li>
+            <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/xhmico/article/details/122520138#comments_24560970" data-report-click='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/xhmico/article/details/122520138#comments_24560970","ab":"new"}' data-report-view='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/xhmico/article/details/122520138#comments_24560970","ab":"new"}'>VMware-安装 CentOs-Linux 操作系统</a>
+                <p class="comment ellipsis">
+                    <a href="https://blog.csdn.net/m0_67795674" class="user-name" target="_blank">m0_67795674: </a>
+                    <span class="code-comments">设置root密码之后安装卡住了该怎么办<img src="https://g.csdnimg.cn/static/face/emoji/054.png" alt='表情包' ></span>
+                </p>
+            </li>
+            <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/xhmico/article/details/125029286#comments_24360931" data-report-click='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/xhmico/article/details/125029286#comments_24360931","ab":"new"}' data-report-view='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/xhmico/article/details/125029286#comments_24360931","ab":"new"}'>MySQL的安装（详细教程）</a>
+                <p class="comment ellipsis">
+                    <a href="https://blog.csdn.net/m0_74849643" class="user-name" target="_blank">一勺辣椒油: </a>
+                    <span class="code-comments">真的很棒！！</span>
+                </p>
+            </li>
+            <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/xhmico/article/details/122443660#comments_24334358" data-report-click='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/xhmico/article/details/122443660#comments_24334358","ab":"new"}' data-report-view='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/xhmico/article/details/122443660#comments_24334358","ab":"new"}'>R 语言的安装（详细教程）</a>
+                <p class="comment ellipsis">
+                    <a href="https://blog.csdn.net/weixin_50860899" class="user-name" target="_blank">weixin_50860899: </a>
+                    <span class="code-comments">&gt; BiocManager::install()
+Error in loadNamespace(x) : 不存在叫&lsquo;BiocManager&rsquo;这个名字的程辑包
+&gt;
+&gt; if(!require(&quot;DESeq2&quot;)) BiocManager::install(&quot;DESeq2&quot;)
+载入需要的程辑包：DESeq2
+Error in loadNamespace(x) : 不存在叫&lsquo;BiocManager&rsquo;这个名字的程辑包
+In addition: Warning message:
+In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  不存在叫&lsquo;DESeq2&rsquo;这个名字的程辑包
+&gt; if(!require(&quot;clusterProfiler&quot;)) BiocManager::install(&quot;clusterProfiler&quot;)
+载入需要的程辑包：clusterProfiler
+Error in loadNamespace(x) : 不存在叫&lsquo;BiocManager&rsquo;这个名字的程辑包
+In addition: Warning message:
+In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  不存在叫&lsquo;clusterProfiler&rsquo;这个名字的程辑包
+&gt; 怎么回事</span>
+                </p>
+            </li>
+            <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/xhmico/article/details/125029286#comments_24271228" data-report-click='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/xhmico/article/details/125029286#comments_24271228","ab":"new"}' data-report-view='{"mod":"popu_542","spm":"1001.2101.3001.4231","dest":"https://blog.csdn.net/xhmico/article/details/125029286#comments_24271228","ab":"new"}'>MySQL的安装（详细教程）</a>
+                <p class="comment ellipsis">
+                    <a href="https://blog.csdn.net/qq_45547094" class="user-name" target="_blank">object not found: </a>
+                    <span class="code-comments">真保姆级教学</span>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="asideNewNps" class="aside-box common-nps-box">
+    <h3 class="aside-title">您愿意向朋友推荐“博客详情页”吗？</h3>
+    <div class="aside-content">
+        <ul class="newnps-list">
+            <li class="newnps-item" data-type="强烈不推荐">
+                <div class="newnps-img-box">
+                    <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel1.png" alt="">
+                    <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey1.png" alt="">
+                </div>
+                <div class="newnps-text">强烈不推荐</div>
+            </li>
+            <li class="newnps-item" data-type="不推荐">
+                <div class="newnps-img-box">
+                    <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel2.png" alt="">
+                    <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey2.png" alt="">
+                </div>
+                <div class="newnps-text">不推荐</div>
+            </li>
+            <li class="newnps-item" data-type="一般般">
+                <div class="newnps-img-box">
+                    <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel3.png" alt="">
+                    <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey3.png" alt="">
+                </div>
+                <div class="newnps-text">一般般</div>
+            </li>
+            <li class="newnps-item" data-type="推荐">
+                <div class="newnps-img-box">
+                    <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel4.png" alt="">
+                    <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey4.png" alt="">
+                </div>
+                <div class="newnps-text">推荐</div>
+            </li>
+            <li class="newnps-item" data-type="强烈推荐">
+                <div class="newnps-img-box">
+                    <img class="newnps-img active" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeel5.png" alt="">
+                    <img class="newnps-img default" src="https://csdnimg.cn/release/blogv2/dist/pc/img/npsFeelGrey5.png" alt="">
+                </div>
+                <div class="newnps-text">强烈推荐</div>
+            </li>
+        </ul>
+        <div class="newnps-form-box">
+        <div class="newnps-form">
+            <input type="text" placeholder="请输入建议或反馈后点击提交" class="newnps-input">
+            <span class="newnps-btn">提交</span>
+        </div>
+        </div>
+    </div>
+</div>
+<div id="asideArchive" class="aside-box" style="display:block!important; width:300px;">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix">
+            <li class="clearfix">
+            <a href="https://blog.csdn.net/xhmico/article/details/127545955" target="_blank" data-report-click='{"mod":"popu_382","spm":"1001.2101.3001.4136","dest":"https://blog.csdn.net/xhmico/article/details/127545955","ab":"new"}' data-report-view='{"mod":"popu_382","dest":"https://blog.csdn.net/xhmico/article/details/127545955","ab":"new"}'>FFmpeg 的简介与安装</a>
+            </li>
+            <li class="clearfix">
+            <a href="https://blog.csdn.net/xhmico/article/details/125805711" target="_blank" data-report-click='{"mod":"popu_382","spm":"1001.2101.3001.4136","dest":"https://blog.csdn.net/xhmico/article/details/125805711","ab":"new"}' data-report-view='{"mod":"popu_382","dest":"https://blog.csdn.net/xhmico/article/details/125805711","ab":"new"}'>MySQL 常用函数的使用</a>
+            </li>
+            <li class="clearfix">
+            <a href="https://blog.csdn.net/xhmico/article/details/126729869" target="_blank" data-report-click='{"mod":"popu_382","spm":"1001.2101.3001.4136","dest":"https://blog.csdn.net/xhmico/article/details/126729869","ab":"new"}' data-report-view='{"mod":"popu_382","dest":"https://blog.csdn.net/xhmico/article/details/126729869","ab":"new"}'>正则表达式-基础教程</a>
+            </li>
+        </ul>
+        <div class="archive-bar"></div>
+        <div class="archive-box">
+                <div class="archive-list-item"><a href="https://blog.csdn.net/xhmico?type=blog&amp;year=2022&amp;month=10" target="_blank" data-report-click='{"mod":"popu_538","spm":"1001.2101.3001.4138","ab":"new","dest":"https://blog.csdn.net/xhmico?type=blog&amp;year=2022&amp;month=10"}'><span class="year">2022年</span><span class="num">33篇</span></a></div>
+        </div>
+    </div>
+</div>
+	<div id="footerRightAds" class="isShowFooterAds">
+		<div class="aside-box">
+			<div id="kp_box_57" data-pid="57"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1076724771190722"
+     crossorigin="anonymous"></script>
+<!-- PC-博客-详情页-左下视窗-0-79 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1076724771190722"
+     data-ad-slot="4787882818"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script><img class="pre-img-lasy" data-src="https://kunyu.csdn.net/1.png?p=57&adId=1015190&a=1015190&c=0&k=Linux-安装MySQL（详细教程）&spm=1001.2101.3001.5001&articleId=125197747&d=1&t=3&u=5b5fe3c2580e46ed9b826b7da0679c06" style="display: block;width: 0px;height: 0px;"></div>
+		</div>
+	</div>
+    <!-- 详情页显示目录 -->
+<!--文章目录-->
+<div id="asidedirectory" class="aside-box">
+    <div class='groupfile' id="directory">
+        <h3 class="aside-title">目录</h3>
+        <div class="align-items-stretch group_item">
+            <div class="pos-box">
+            <div class="scroll-box">
+                <div class="toc-box"></div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</aside>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).parents("p.text-center").remove();
+	})
+</script>
+<script type="text/javascript"  src="https://g.csdnimg.cn/user-tooltip/2.7/user-tooltip.js"></script>
+<script type="text/javascript"  src="https://g.csdnimg.cn/user-medal/2.0.0/user-medal.js"></script>    </div>
+<div class="recommend-right align-items-stretch clearfix" id="rightAside" data-type="recommend">
+    <aside class="recommend-right_aside">
+        <div id="recommend-right" >
+                                <div class="programmer1Box">
+                        <div id="kp_box_530" data-pid="530"><iframe  src="https://kunpeng-sc.csdnimg.cn/?timestamp=1645783940/#/preview/1000479?positionId=530&adId=1019587&queryWord=Linux-安装MySQL（详细教程）&spm=1001.2101.3001.4647&articleId=125197747&hk=1" frameborder="0" width= "300px"  height= "600px" scrolling="no" ></iframe><img class="pre-img-lasy"  data-src="https://kunyu.csdn.net/1.png?p=530&adId=1019587&a=1019587&c=1000479&k=Linux-安装MySQL（详细教程）&spm=1001.2101.3001.4647&articleId=125197747&hk=1&d=1&t=3&u=43751d8717ee49a9994204e8337e21f2" style="display: block;width: 0px;height: 0px;"></div>
+                    </div>
+            <div class='flex-column aside-box groupfile' id="groupfile">
+                <div class="groupfile-div">
+                <h3 class="aside-title">目录</h3>
+                <div class="align-items-stretch group_item">
+                    <div class="pos-box">
+                        <div class="scroll-box">
+                            <div class="toc-box"></div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+                <div id="recommendAdBox">
+                    <div id="kp_box_479" data-pid="479"><div class="_gnumici5vli"></div>
+    <script type="text/javascript">
+        (window.slotbydup = window.slotbydup || []).push({
+            id: "u5883818",
+            container: "_gnumici5vli",
+            async: true
+        });
+    </script>
+    <!-- 多条广告如下脚本只需引入一次 -->
+    <script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/cm.js" async="async" defer="defer" >
+    </script><img class="pre-img-lasy" data-src="https://kunyu.csdn.net/1.png?p=479&adId=1015221&a=1015221&c=0&k=Linux-安装MySQL（详细教程）&spm=1001.2101.3001.4834&articleId=125197747&d=1&t=3&u=fd4a7f33f60245d5809dbd5115ec5bd9" style="display: block;width: 0px;height: 0px;"></div>
+                </div>
+            <div class='aside-box kind_person d-flex flex-column'>
+                    <h3 class="aside-title">分类专栏</h3>
+                    <div class="align-items-stretch kindof_item" id="kind_person_column">
+                        <div class="aside-content">
+                            <ul>
+                                <li>
+                                    <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11575146.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11575146.html","ab":"new"}'>
+                                        <div class="special-column-bar "></div>
+                                        <img src="https://img-blog.csdnimg.cn/20190927151132530.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="">
+                                            入门教程
+                                        </span>
+                                    </a>
+                                    <span class="special-column-num">12篇</span>
+                                </li>
+                                <li>
+                                    <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11583061.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11583061.html","ab":"new"}'>
+                                        <div class="special-column-bar "></div>
+                                        <img src="https://img-blog.csdnimg.cn/20190927151026427.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="">
+                                            安装教程
+                                        </span>
+                                    </a>
+                                    <span class="special-column-num">12篇</span>
+                                </li>
+                                <li>
+                                    <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11684243.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11684243.html","ab":"new"}'>
+                                        <div class="special-column-bar "></div>
+                                        <img src="https://img-blog.csdnimg.cn/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="">
+                                            运维相关
+                                        </span>
+                                    </a>
+                                    <span class="special-column-num">3篇</span>
+                                </li>
+                                <li>
+                                    <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11919197.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11919197.html","ab":"new"}'>
+                                        <div class="special-column-bar "></div>
+                                        <img src="https://img-blog.csdnimg.cn/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="">
+                                            前端学习
+                                        </span>
+                                    </a>
+                                    <span class="special-column-num">1篇</span>
+                                </li>
+                                <li>
+                                    <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11576386.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11576386.html","ab":"new"}'>
+                                        <div class="special-column-bar "></div>
+                                        <img src="https://img-blog.csdnimg.cn/20190927151124774.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="">
+                                            踩坑系列
+                                        </span>
+                                    </a>
+                                    <span class="special-column-num">6篇</span>
+                                </li>
+                                <li>
+                                    <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11674963.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11674963.html","ab":"new"}'>
+                                        <div class="special-column-bar "></div>
+                                        <img src="https://img-blog.csdnimg.cn/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="">
+                                            算法学习
+                                        </span>
+                                    </a>
+                                    <span class="special-column-num">2篇</span>
+                                </li>
+                                <li>
+                                    <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11815242.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11815242.html","ab":"new"}'>
+                                        <div class="special-column-bar "></div>
+                                        <img src="https://img-blog.csdnimg.cn/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="">
+                                            高级教程
+                                        </span>
+                                    </a>
+                                    <span class="special-column-num">1篇</span>
+                                </li>
+                                <li>
+                                    <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11581876.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11581876.html","ab":"new"}'>
+                                        <div class="special-column-bar "></div>
+                                        <img src="https://img-blog.csdnimg.cn/20201014180756757.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="">
+                                            环境配置
+                                        </span>
+                                    </a>
+                                    <span class="special-column-num">2篇</span>
+                                </li>
+                                <li>
+                                    <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/xhmico/category_11572673.html" data-report-click='{"mod":"popu_537","spm":"1001.2101.3001.4137","strategy":"pc付费专栏左侧入口","dest":"https://blog.csdn.net/xhmico/category_11572673.html","ab":"new"}'>
+                                        <div class="special-column-bar "></div>
+                                        <img src="https://img-blog.csdnimg.cn/20201014180756916.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'">
+                                        <span class="">
+                                            系统集成
+                                        </span>
+                                    </a>
+                                    <span class="special-column-num">1篇</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<div class="recommend-right1  align-items-stretch clearfix" id="rightAsideConcision" data-type="recommend">
+    <aside class="recommend-right_aside">
+        <div id="recommend-right-concision" >
+            <div class='flex-column aside-box groupfile' id="groupfileConcision">
+                <div class="groupfile-div1">
+                <h3 class="aside-title">目录</h3>
+                <div class="align-items-stretch group_item">
+                    <div class="pos-box">
+                        <div class="scroll-box">
+                            <div class="toc-box"></div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>
+
+</div>
+<div class="mask-dark"></div>
+<script src="https://csdnimg.cn/public/sandalstrap/1.4/js/sandalstrap.min.js"></script>
+<div class="skin-boxshadow"></div>
+<div class="directory-boxshadow"></div>
+<div class="comment-side-box-shadow comment-side-tit-close" id="commentSideBoxshadow">
+<div class="comment-side-content">
+	<div class="comment-side-tit">
+	<div class="comment-side-tit-count">评论&nbsp;<span class="count">14</span></div>
+	<img class="comment-side-tit-close" src="https://csdnimg.cn/release/blogv2/dist/pc/img/closeBt.png"></div>
+	<div id="pcCommentSideBox" class="comment-box comment-box-new2 " style="display:block">
+		<div class="comment-edit-box d-flex">
+			<div class="user-img">
+				<a href="https://blog.csdn.net/weixin_45872192" target="_blank">
+					<img src="https://profile.csdnimg.cn/5/F/2/3_weixin_45872192">
+				</a>
+			</div>
+			<form id="commentform">
+				<textarea class="comment-content" name="comment_content" id="comment_content" placeholder="欢迎高质量的评论，低质的评论会被折叠" maxlength="1000"></textarea>
+				<div class="comment-operate-box">
+					<div class="comment-operate-l">
+						<span id="tip_comment" class="tip">还能输入<em>1000</em>个字符</span>
+					</div>
+					<div class="comment-operate-c">
+						&nbsp;
+					</div>
+					<div class="comment-operate-r">
+						<div class="comment-operate-item comment-emoticon">
+							<img class="comment-operate-img" data-url="https://csdnimg.cn/release/blogv2/dist/pc/img/" src="https://csdnimg.cn/release/blogv2/dist/pc/img/commentEmotionIcon.png" alt="表情包">
+							<span class="comment-operate-tip">插入表情</span>
+							<div class="comment-emoticon-box comment-operate-isshow">
+								<div class="comment-emoticon-img-box"></div>
+							</div>
+						</div>
+						<div class="comment-operate-item comment-code">
+							<img class="comment-operate-img" data-url="https://csdnimg.cn/release/blogv2/dist/pc/img/" src="https://csdnimg.cn/release/blogv2/dist/pc/img/commentCodeIcon.png" alt="表情包">
+							<span class="comment-operate-tip">代码片</span>
+							<div class="comment-code-box comment-operate-isshow">
+								<ul id="commentCode">
+									<li><a data-code="html">HTML/XML</a></li>
+									<li><a data-code="objc">objective-c</a></li>
+									<li><a data-code="ruby">Ruby</a></li>
+									<li><a data-code="php">PHP</a></li>
+									<li><a data-code="csharp">C</a></li>
+									<li><a data-code="cpp">C++</a></li>
+									<li><a data-code="javascript">JavaScript</a></li>
+									<li><a data-code="python">Python</a></li>
+									<li><a data-code="java">Java</a></li>
+									<li><a data-code="css">CSS</a></li>
+									<li><a data-code="sql">SQL</a></li>
+									<li><a data-code="plain">其它</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="comment-operate-item">
+							<input type="hidden" id="comment_replyId" name="comment_replyId">
+							<input type="hidden" id="article_id" name="article_id" value="125197747">
+							<input type="hidden" id="comment_userId" name="comment_userId" value="">
+							<input type="hidden" id="commentId" name="commentId" value="">
+							<a data-report-click='{"mod":"1582594662_003","spm":"1001.2101.3001.4227","ab":"new"}'>
+							<input type="submit" class="btn-comment btn-comment-input" value="评论">
+							</a>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="comment-list-container">
+			<div class="comment-list-box comment-operate-item">
+			</div>
+			<div id="lookGoodComment" class="look-good-comment side-look-comment">
+				<a class="look-more-comment">查看更多评论<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/commentArrowDownWhite.png" alt=""></a>
+			</div>
+			<div id="lookFlodComment" class="look-flod-comment">
+					<span class="count"></span>&nbsp;条评论被折叠&nbsp;<a class="look-more-flodcomment">查看</a>
+			</div>
+			<div class="opt-box text-center">
+				<div class="btn btn-sm btn-link-blue" id="btnMoreComment"></div>
+			</div>
+		</div>
+	</div>
+	<div id="pcFlodCommentSideBox" class="pc-flodcomment-sidebox">
+		<div class="comment-fold-tit"><span id="lookUnFlodComment" class="back"><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/commentArrowLeftWhite.png" alt=""></span>被折叠的&nbsp;<span class="count"></span>&nbsp;条评论
+		 <a href="https://blogdev.blog.csdn.net/article/details/122245662" class="tip" target="_blank">为什么被折叠?</a>
+		 <a href="https://bbs.csdn.net/forums/FreeZone" class="park" target="_blank">
+		 <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/iconPark.png">到【灌水乐园】发言</a>
+		</div>
+		<div class="comment-fold-content"></div>
+		<div id="lookBadComment" class="look-bad-comment side-look-comment">
+			<a class="look-more-comment">查看更多评论<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/commentArrowDownWhite.png" alt=""></a>
+		</div>
+	</div>
+</div>
+</div>
+<div id="rewardNew" class="reward-popupbox-new">
+	<p class="rewad-title">打赏作者<span class="reward-close"><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/closeBt.png"></span></p>
+	<dl class="profile-box">
+		<dd>
+		<a href="https://blog.csdn.net/xhmico" data-report-click='{"mod":"popu_379","dest":"https://blog.csdn.net/xhmico","ab":"new"}'>
+			<img src="https://profile.csdnimg.cn/A/8/4/3_xhmico" class="avatar_pic">
+		</a>
+		</dd>
+		<dt>
+			<p class="blog-name">多加点辣也没关系</p>
+			<p class="blog-discript">你的鼓励将是我创作的最大动力</p>
+		</dt>
+	</dl>
+	<div class="reward-box-new">
+			<div class="reward-content"><div class="reward-right"></div></div>
+	</div>
+	<div class="money-box">
+				<span class="choose-money choosed" data-id="2">¥2</span>
+				<span class="choose-money " data-id="4">¥4</span>
+				<span class="choose-money " data-id="6">¥6</span>
+				<span class="choose-money " data-id="10">¥10</span>
+				<span class="choose-money " data-id="20">¥20</span>
+				<input id="customizeMoney" class="customize-money" name="" type="" value="" placeholder="自定义"/>
+				<div class="customize-tip">输入1-500的整数</div>
+	</div>
+	<div class="pay-box">
+		<div class="pay-type-blance pay-type active" data-type="blance">
+			<img class="unchoose" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newUnChoose.png" alt="">
+			<img class="choose"src="https://csdnimg.cn/release/blogv2/dist/pc/img/newChoose.png" alt="">
+			<span class="pay-type-name">余额支付</span>
+			<span class="pay-type-num">(余额：-- )</span>
+		</div>
+		<div class="pay-type-money pay-type" data-type="money">
+			<img class="unchoose" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newUnChoose.png" alt="">
+			<img class="choose"src="https://csdnimg.cn/release/blogv2/dist/pc/img/newChoose.png" alt="">
+			<span class="pay-type-name">扫码支付</span>
+		</div>
+	</div>
+	<div class="sure-box">
+		<div class="sure-box-money">
+			<div class="code-box">
+				<div class="code-num-box">
+					<span class="code-name">扫码支付：</span><span class="code-num">¥2</span>
+				</div>
+				<div class="code-img-box">
+					<div class="renovate">
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/pay-time-out.png">
+					<span>获取中</span>
+					</div>
+				</div>
+				<div class="code-pay-box">
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/newWeiXin.png" alt="">
+					<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/newZhiFuBao.png" alt="">
+					<span>扫码支付</span>
+				</div>
+			</div>
+		</div>
+		<div class="sure-box-blance">
+			<p class="tip">您的余额不足，请更换扫码支付或<a target="_blank" data-report-click='{"mod":"1597646289_003","spm":"1001.2101.3001.4302"}' href="https://i.csdn.net/#/wallet/balance/recharge?utm_source=RewardVip" class="go-invest">充值</a></p>
+			<p class="is-have-money"><a class="reward-sure">打赏作者</a></p>
+		</div>
+	</div>
+</div>
+<div class="pay-code">
+    <div class="pay-money">实付<span class="pay-money-span" data-nowprice='' data-oldprice=''>元</span></div>
+    <div class="content-blance"><a class="blance-bt" href="javascript:;">使用余额支付</a></div>
+    <div class="content-code">
+    <div id="payCode" data-id="">
+            <div class="renovate">
+                <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/pay-time-out.png">
+                <span>点击重新获取</span>
+            </div>
+        </div>
+        <div class="pay-style"><span><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/weixin.png"></span><span><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/zhifubao.png"></span><span><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/jingdong.png"></span><span class="text">扫码支付</span></div>
+    </div>
+    <div class="bt-close"><svg t="1567152543821" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10924" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12"><defs><style type="text/css"></style></defs><path d="M512 438.378667L806.506667 143.893333a52.032 52.032 0 1 1 73.6 73.621334L585.621333 512l294.485334 294.485333a52.074667 52.074667 0 0 1-73.6 73.642667L512 585.621333 217.514667 880.128a52.053333 52.053333 0 1 1-73.621334-73.642667L438.378667 512 143.893333 217.514667a52.053333 52.053333 0 1 1 73.621334-73.621334L512 438.378667z" fill="" p-id="10925"></path></svg></div>
+    <!-- <p style="margin-top: 8px;font-size: 14px;" class="text-center">支付成功即可阅读</p> -->
+    <div class="pay-balance">
+    <input type="radio" class="pay-code-radio" data-type="details">
+    <span class="span">钱包余额</span>
+    <span class="balance" style="color:#FC5531;font-size:14px;">0</span>
+    <div class="pay-code-tile">
+        <img src="https://csdnimg.cn/release/blogv2/dist/pc/img/pay-help.png" alt="">
+        <div class="pay-code-content">
+            <div class="span">
+                <p class="title">抵扣说明：</p>
+                <p> 1.余额是钱包充值的虚拟货币，按照1:1的比例进行支付金额的抵扣。<br> 2.余额无法直接购买下载，可以购买VIP、C币套餐、付费专栏及课程。</p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <a class="pay-balance-con" href="https://i.csdn.net/#/wallet/balance/recharge" target="_blank"><img src="https://csdnimg.cn/release/blogv2/dist/pc/img/recharge.png" alt=""><span  >余额充值</span></a>
+</div>
+<div style="display:none;">
+	<img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+</div>
+<div class="keyword-dec-box" id="keywordDecBox"></div>
+</body>
+<script src="https://csdnimg.cn/release/blogv2/dist/components/js/pc_wap_highlight-2a2586c533.min.js" type="text/javascript"></script>
+<script src="https://csdnimg.cn/release/blogv2/dist/components/js/pc_wap_common-fbcbe8567e.min.js" type="text/javascript"></script>
+<script src="https://csdnimg.cn/release/blogv2/dist/components/js/edit_copy_code-f2c107abdd.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-light.css">
+<script src="https://g.csdnimg.cn/user-accusation/1.0.5/user-accusation.js" type="text/javascript" ></script>
+<script>
+ // 全局声明
+ if (window.csdn === undefined) {
+      window.csdn = {};
+    }
+    window.csdn.sideToolbar = {
+        options: {
+            report:{
+                isShow: true,
+            },
+            qr: {
+                isShow: false,
+            },
+            guide: {
+                isShow: true
+            }
+        }
+    }
+    $(function(){
+        $(document).on('click',"a.option-box[data-type='report']",function() {
+            window.csdn.loginBox.key({
+              biz: 'blog',
+              subBiz: 'other_service',
+              cb: function(){
+                window.csdn.feedback({
+                  "type":'blog',
+                  "rtype":'article',
+                  "rid":articleId,
+                  "reportedName":username,
+                  "submitOptions":{
+                    "title":articleTitle,
+                    "contentUrl":articleDetailUrl
+                  },
+                  "callback":function(){
+                    showToast({
+                      text: "感谢您的举报，我们会尽快审核！",
+                      bottom: '10%',
+                      zindex: 9000,
+                      speed: 500,
+                      time: 1500
+                    })
+                  }
+                })
+              }
+            })
+        });
+    })
+</script>
+    <script src="https://g.csdnimg.cn/baidu-search/1.0.12/baidu-search.js"  type="text/javascript"></script>
+<script src="https://csdnimg.cn/release/download/old_static/js/qrcode.js"></script>
+<script src="https://g.csdnimg.cn/lib/qrcode/1.0.0/qrcode.min.js"></script>
+<script src="https://g.csdnimg.cn/user-ordercart/3.0.1/user-ordercart.js" type="text/javascript"></script>
+<script src="https://g.csdnimg.cn/user-ordertip/5.0.1/user-ordertip.js" type="text/javascript" ></script>
+<script src="https://g.csdnimg.cn/order-payment/4.0.1/order-payment.js" type="text/javascript" ></script>
+<script src="https://csdnimg.cn/release/blogv2/dist/pc/js/common-063b84f165.min.js" type="text/javascript"></script>
+<script src="https://csdnimg.cn/release/blogv2/dist/pc/js/detail-6ba3a38d3d.min.js" type="text/javascript"></script>
+<script src="https://csdnimg.cn/release/blogv2/dist/pc/js/column-2e5cf567c5.min.js" type="text/javascript"></script>
+<script src="https://g.csdnimg.cn/side-toolbar/3.4/side-toolbar.js" type="text/javascript"></script>
+<script src="https://g.csdnimg.cn/copyright/1.0.4/copyright.js" type="text/javascript"></script>
+<script>
+    $(".MathJax").remove();
+    if ($('div.markdown_views pre.prettyprint code.hljs').length > 0) {
+        $('div.markdown_views')[0].className = 'markdown_views';
+    }
+</script>
+<script type="text/javascript" src="https://csdnimg.cn/release/blog_mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            "HTML-CSS": {
+                    linebreaks: { automatic: true, width: "94%container" },
+                    imageFont: null
+            },
+            tex2jax: {
+                preview: "none",
+                ignoreClass:"title-article"
+            },
+            mml2jax: {
+                preview: 'none'
+            }
+    });
+</script>
+<script type="text/javascript" crossorigin src="https://g.csdnimg.cn/common/csdn-login-box/csdn-login-box.js"></script></html>
