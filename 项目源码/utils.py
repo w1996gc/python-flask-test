@@ -117,7 +117,7 @@ def create_date():
         conn.close()
 
 def test():
-    sql = "select * from details"
+    sql = "select * from details order by `update_time` asc"
     res = query(sql)
     return res[0]
 
@@ -141,13 +141,13 @@ def get_c2_data():
 
 
 def get_l1_data():
-    sql = "select ds,confirm,suspect,heal,dead from history"
+    sql = "select ds,confirm,suspect,heal,dead from history order by `ds` asc"
     res = query(sql)
     return res
 
 
 def get_l2_data():
-    sql = "select ds,confirm_add,suspect_add from history"
+    sql = "select ds,confirm_add,suspect_add from history order by `ds` asc"
     res = query(sql)
     return res
 
@@ -289,7 +289,7 @@ def get_left_list(page_size, page_no, param):
     count_res = query_no(count_sql)[0][0]
     start = page_size * (page_no - 1)
     start = 0 if start < 0 else start
-    sql = "select * from maintenance where " + param + " order by id desc limit " + str(start) + "," + str(page_size)
+    sql = "select * from maintenance where " + param + " order by id asc limit " + str(start) + "," + str(page_size)
     res = query(sql)
     data_page = []
     page_list = []
