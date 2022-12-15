@@ -3,6 +3,7 @@
 import random
 import re
 import traceback
+import datetime
 
 import pymysql
 from flask import Flask as _Flask, jsonify, flash
@@ -154,6 +155,22 @@ get_name_file("myvideo", video_name_file)
 # -------------前台页面相关服务接口start----------------
 # -------------前台页面相关服务接口start----------------
 
+# test
+# 获取日期和倒计时
+def my_get_time():
+    a = datetime.datetime.now()  # 实施时间
+    # y = str(a.year)
+    # m = str(a.month)
+    # d = str(a.day)  # 转换为字符串，便于打印
+    # time = y + '年' + m + '月' + d + '日' + '\n'
+    file = open('auto.json', 'rb')
+    jsonData = json.load(file)
+    year = jsonData['year']
+    month = jsonData['month']
+    day = jsonData['day']
+    b = datetime.datetime(year,month,day)  # 自己设置的保养电梯时间
+    count_down = (b - a).days  # 保养电梯倒计时
+    return count_down
 
 # -------------前台页面相关服务接口start----------------
 # 系统默认路径前台跳转
@@ -903,7 +920,8 @@ def my_left():
         labels,content,sql = get_sql(left, number)
         return render_template('html/index.html', labels=labels, content=content,sql=sql)
     labels,content,sql = _get_sql()
-    return render_template('html/index.html', labels=labels, content=content,sql=sql)
+    time=my_get_time()
+    return render_template('html/index.html', labels=labels, content=content,sql=sql,time=time)
 def _get_sql():
     if not os.path.exists("auto.json"):
         setting()
